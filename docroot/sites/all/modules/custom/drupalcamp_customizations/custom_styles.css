@@ -1,0 +1,10 @@
+
+.page-node-23 div[class*="form-item-ticket-quantity-"],
+.page-node-23 form .form-item-ticket-quantity-1,
+.page-node-23 form .entity-ticket-type {
+  display:none;
+}
+
+.page-node-23.not-logged-in #content-wrapper .tabs.primary{
+  display:none;
+}

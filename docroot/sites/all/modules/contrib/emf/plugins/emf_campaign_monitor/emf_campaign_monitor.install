@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Installation
+ */
+
+/**
+ * Implements hook_install().
+ */
+function emf_campaign_monitor_install() {
+  $ret = array();
+
+  // renaming variable to reflect module name change
+  db_query("UPDATE {variable} SET name = 'emf_campaign_monitor_api_key' WHERE name = 'campaign_monitor_api_key'");
+
+  cache_clear_all('variables', 'cache');
+
+  $link = array('!link' => l(st('Home » Administration » Configuration » E-mail Marketing Framework » Campaign Monitor'), 'admin/config/emf/emf_campaign_monitor'));
+  drupal_set_message(st("Campaign Monitor module settings are available under !link", $link));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function emf_campaign_monitor_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'emf_campaign_monitor_%'");
+  cache_clear_all('variables', 'cache');
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function emf_campaign_monitor_requirements($phase) {
+  $requirements = array();
+
+  $t = get_t();
+
+  if ($phase == 'runtime') {
+
+    // Raise warning if Campaign Monitor API key has not been set yet.
+    if (trim(variable_get('emf_campaign_monitor_api_key', '')) == '') {
+      $requirements['emf_campaign_monitor_api_key'] = array(
+        'title' => $t('Campaign Monitor API key'),
+        'description' => $t('Your Campaign Monitor API key has not been set yet. Please specify it on the <a href="@url">Campaign Monitor settings page</a>.', array('@url' => url('admin/settings/emf_campaign_monitor'))),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => $t('Not configured'),
+      );
+    }
+
+    // Raise warning if Campaign Monitor Client ID has not been set yet.
+    if (trim(variable_get('emf_campaign_monitor_client_id', '')) == '') {
+      $requirements['emf_campaign_monitor_client_id'] = array(
+        'title' => $t('Campaign Monitor Client ID'),
+        'description' => $t('Your Campaign Monitor Client ID has not been set yet. Please specifiy it on the <a href="@url">Campaign Monitor settings page</a>.', array('@url' => url('admin/settings/emf_campaign_monitor'))),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => $t('Not configured'),
+      );
+    }
+  }
+
+  return $requirements;
+}

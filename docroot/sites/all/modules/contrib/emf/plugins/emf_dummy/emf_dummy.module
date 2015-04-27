@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Drupal hooks
+ */
+
+/**
+ * Implements hook_emf_info().
+ */
+function emf_dummy_emf_info() {
+  return array(
+    'name' => 'Dummy',
+    'file' => 'emf_dummy.api.inc',
+  );
+}

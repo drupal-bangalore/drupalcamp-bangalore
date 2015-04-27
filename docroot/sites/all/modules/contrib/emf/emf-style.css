@@ -1,0 +1,9 @@
+/* $Id$ */
+
+.emf-lists-table tr.list-error {
+  background-color: #ffc9c9;
+}
+
+.block-emf .form-text {
+  width: 100%;
+}

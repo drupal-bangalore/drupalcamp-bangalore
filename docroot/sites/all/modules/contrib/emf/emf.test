@@ -1,0 +1,517 @@
+<?php
+
+/**
+ * @file emf.test
+ * Test cases for the Email Marketing Framework
+ *
+ */
+
+class AbstractEmfTestCase extends DrupalWebTestCase {
+
+  function __construct($test_id = NULL) {
+    parent::__construct($test_id);
+    $this->skipClasses[__CLASS__] = TRUE;
+  }
+
+  public function setUp($modules = array()) {
+    if (!is_array($modules)) {
+      $modules = func_get_args();
+    }
+    array_push($modules, 'emf', 'emf_dummy');
+    parent::setUp($modules);
+  }
+
+  public function serviceAddList($lid = NULL, $api_name = NULL) {
+    $lists = variable_get('emf_dummy_lists', array());
+    $list = new stdClass();
+    $list->lid = empty($lid) ? mt_rand(1, 100) : $lid;
+    $list->name_api = empty($api_name) ? $this->randomName(12) : $api_name;
+    $lists[$list->lid] = $list;
+    variable_set('emf_dummy_lists', $lists);
+    return $list;
+  }
+
+  public function drupalCron($destination = 'admin/structure/emf') {
+     foreach (array('structure', 'requests', 'subscriptions') as $type) {
+       variable_set('emf_last_sync_' . $type, variable_get('emf_last_sync_' . $type, 1) - 1);
+     }
+     $this->drupalGet('admin/reports/status/run-cron', array('query' => array('destination' => $destination)));
+  }
+
+  public function assertServiceSubscribed($lid, $mail, $fields = array()) {
+    $subscriptions = variable_get('emf_dummy_subscriptions_' . $lid, array());
+    $this->assertTrue(isset($subscriptions[$mail]), "$mail is subscribed to list $lid");
+    foreach ($fields as $field => $value) {
+      $this->assertEqual($subscriptions['mail'][$field], $value);
+    }
+  }
+
+  public function assertServiceUnsubscribed($lid, $mail) {
+    $subscriptions = variable_get('emf_dummy_subscriptions_' . $lid, array());
+    $this->assertFalse(isset($subscriptions[$mail]), "$mail is unsubscribed from list $lid");
+  }
+
+  public function assertEmfSubscribed($lid, $mail) {
+    $this->assertTrue(in_array($lid, emf_db_get_subscriptions($mail)), "$mail is subscribed to list $lid in EMF's DB");
+  }
+
+  public function assertEmfUnsubscribed($lid, $mail) {
+    $this->assertFalse(in_array($lid, emf_db_get_subscriptions($mail)), "$mail is unsubscribed from list $lid in EMF's DB");
+  }
+
+  public function serviceSubscribe($lid, $mail, $fields = array()) {
+    $subscriptions = variable_get('emf_dummy_subscriptions_' . $lid, array());
+    $subscribed = variable_get('emf_dummy_subscribed_' . $lid, array());
+    $subscriptions[$mail] = $fields;
+    $subscribed[] = $mail;
+    variable_set('emf_dummy_subscriptions_' . $lid, $subscriptions);
+    variable_set('emf_dummy_subscribed_' . $lid, $subscribed);
+  }
+
+  public function serviceUnsubscribe($lid, $mail) {
+    $subscriptions = variable_get('emf_dummy_subscriptions_ ' . $lid, array());
+    $unsubscribed = variable_get('emf_dummy_unsubscribed_' . $lid, array());
+    unset($subscriptions[$mail]);
+    $unsubscribed[] = $mail;
+    variable_set('emf_dummy_subscriptions_' . $lid, $subscriptions);
+    variable_set('emf_dummy_unsubscribed_' . $lid, $unsubscribed);
+  }
+}
+
+class EmfTestCase extends AbstractEmfTestCase {
+  public function getInfo() {
+    return array(
+      'name' => 'E-mail Marketing Framework',
+      'group' => 'E-mail Marketing Framework',
+      'description' => 'Tests EMF features and behaviors.'
+    );
+  }
+
+  public function setUp() {
+    parent::setUp(array('token', 'profile'));
+    $this->admin_user = $this->drupalCreateUser(array_keys(array_merge(system_permission(), emf_permission(), user_permission())));
+  }
+
+  public function tearDown() {
+    parent::tearDown();
+    unset($this->admin_user);
+  }
+
+  public function testListManagement() {
+    $this->drupalLogin($this->admin_user);
+
+    $api_list = $this->serviceAddList();
+
+    // Run cron and go to the lists list page
+    $this->drupalCron('admin/structure/emf');
+
+    $this->assertText($api_list->name_api, 'The page should contains the list API name.');
+    $this->assertText((string)$api_list->lid, 'The page should contains the list ID.');
+
+    // Define a second list and remove first
+    $api_list2 = $this->serviceAddList();
+    $lists = variable_get('emf_dummy_lists', array());
+    unset($lists[$api_list->lid]);
+    variable_set('emf_dummy_lists', $lists);
+
+    $fields = array();
+    $fields['first_name'] = new stdClass();
+    $fields['first_name']->name = 'First name';
+    $fields['first_name']->key = 'first_name';
+    $fields['first_name']->type = 'text';
+    variable_set('emf_dummy_custom_fields', $fields);
+
+    // Run cron and go to the lists list page
+    $this->drupalGet('admin/reports/status/run-cron', array('query' => array('destination' => 'admin/structure/emf')));
+
+    $this->assertText($api_list->name_api, 'The page should contains the first list API name.');
+    $this->assertText((string)$api_list->lid, 'The page should contains the s list ID.');
+    $this->assertText($api_list2->name_api, 'The page should contains the second list API name.');
+    $this->assertText((string)$api_list2->lid, 'The page should contains the second list ID.');
+
+    $this->assertTrue($this->clickLink('Delete'), 'A delete list link for the first link should be displayed on the page.');
+    $this->assertText("Are you sure you want to delete {$api_list->name_api}?", 'The link should point to the a confirmation page for the first list.');
+    $this->drupalPost(NULL, array(), 'Delete');
+    $this->assertText("List has been successfully deleted.", "The first list has been successfully deleted.");
+
+    $this->assertTrue($this->clickLink('Manage'), 'After deletion, the user ends up in the lists list page where a Managed link for the second list is displayed.');
+
+    $this->clickLink('Field mapping');
+    $edit = array(
+      'first_name[account_field]' => 'return $account->name',
+      'first_name[anonymous_field]' => TRUE,
+      'first_name[common_form_show]' => TRUE,
+    );
+    $this->drupalPost(NULL, $edit, 'Save');
+    $this->assertText('Mapping modifications have been successfully saved.');
+
+    $this->clickLink('Roles');
+    foreach (user_roles() as $rid => $role_name) {
+      $this->assertText($role_name, "The role $role_name is available in the roles list");
+    }
+  }
+
+
+  public function testListfPage() {
+    $this->drupalLogin($this->admin_user);
+
+    $api_list = $this->serviceAddList();
+    $api_list2 = $this->serviceAddList();
+
+    // Run cron and go to the lists list page
+    $this->drupalCron('admin/structure/emf');
+    $this->drupalPost('admin/structure/emf/' . $api_list->lid . '/roles', array('roles[1]' => TRUE, 'roles[2]' => TRUE, ), 'Save');
+    $this->drupalPost('admin/structure/emf/' . $api_list2->lid . '/roles', array('roles[1]' => TRUE, 'roles[2]' => TRUE, ), 'Save');
+
+    // Subscribe logged user
+    $this->drupalPost('emf/' . $api_list->lid, array('lists[' . $api_list->lid . ']' => TRUE), 'Subscribe');
+    $this->assertText("You have now been subscribed to the mailing list $api_list->name_api");
+
+    // Logout and subscribe anonymous user
+    $this->drupalLogout();
+    $anonymous_mail = $this->randomName() . '@example.com';
+    $this->drupalPost('emf/' . $api_list->lid, array('fields[mail]' => $anonymous_mail), 'Subscribe');
+    $this->assertText("You have now been subscribed to the mailing list $api_list->name_api");
+
+    // Log back
+    $this->drupalLogin($this->admin_user);
+
+    // Run cron and go to the EMF report page
+    $this->drupalCron('admin/reports/emf');
+    $this->assertRaw($api_list->name_api . '</a></td><td>2</td>', 'The page should report 2 subscriptions.');
+
+    // Check subscriptions in DB
+    $this->assertEmfSubscribed($api_list->lid, $this->admin_user->mail);
+    $this->assertEmfSubscribed($api_list->lid, $anonymous_mail);
+
+    // Check subscriptions on the _service_ side
+    $this->assertServiceSubscribed($api_list->lid, $this->admin_user->mail);
+    $this->assertServiceSubscribed($api_list->lid, $anonymous_mail);
+
+    // Unsubscribe logged user (using API)
+    emf_helpers_unsubscribe($this->admin_user->mail, $api_list->lid);
+    $this->drupalGet('emf/' . $api_list->lid);
+    $this->assertFieldByName('lists[' . $api_list->lid . ']', NULL, 'Subscription field found');
+
+    // Check subscriptions in DB
+    $this->assertEmfUnsubscribed($api_list->lid, $this->admin_user->mail);
+    $this->assertEmfSubscribed($api_list->lid, $anonymous_mail);
+
+    // Run cron and go to the EMF report page
+    $this->drupalCron('admin/reports/emf');
+    $this->assertRaw($api_list->name_api . '</a></td><td>1</td>', 'The page should report a single subscription.');
+
+    // Check subscriptions on the _service_ side
+    $this->assertServiceUnsubscribed($api_list->lid, $this->admin_user->mail);
+    $this->assertServiceSubscribed($api_list->lid, $anonymous_mail);
+  }
+
+  public function testReports() {
+    $this->drupalLogin($this->admin_user);
+    // Define a first list
+    $api_lists = array();
+    $api_list = new stdClass();
+    $api_list->lid = mt_rand(1, 100);
+    $api_list->name_api = $this->randomName(12);
+    $api_lists[] = $api_list;
+    variable_set('emf_dummy_lists', $api_lists);
+
+    // Run cron and go the to rhe subscriptions report page
+    $this->drupalCron('admin/reports');
+
+    $this->assertTrue($this->clickLink('E-mail Marketing Framework'), 'The EMF report pages should be linked from the main report page.');
+
+    // Check subscribers count
+    $this->assertText('No lists synchronised yet or no lists available in your account. Run cron to synchronise your lists.', 'The page should not report any subscription.');
+
+    // Subscribe a few anonymous user
+    $subscribers = array();
+    for ($i = 0; $i < 20; $i++) {
+      $subscriber = $this->randomName() . '@example.com';
+      $subscribers[$i] = $subscriber;
+      emf_helpers_subscribe($subscriber, $api_list->lid, array());
+    }
+
+    // Go to the pendign request report
+    $this->clickLink('Pending requests');
+
+    // Check pending subscriptions
+    foreach ($subscribers as $i => $subscriber) {
+      if ($i >= 10) {
+        $this->assertText($subscriber, 'The second half of the subscription requests should not be listed on the second page of pending requests.');
+      }
+      else {
+        $this->assertNoText($subscriber, 'The first half of the subscription requests should be listed on the first page of pending requests.');
+      }
+    }
+
+    //Go to page 2
+    $this->clickLink('next ›');
+    foreach ($subscribers as $i => $subscriber) {
+      if ($i < 10) {
+        $this->assertText($subscriber, 'The first half of the subscription requests should not be listed on the second page of pending requests.');
+      }
+      else {
+        $this->assertNoText($subscriber, 'The second half of the subscription requests should be listed on the second page of pending requests.');
+      }
+    }
+
+    // Run cron and go the to the subscriptions report page
+    $this->drupalCron('admin/reports/emf');
+
+    //Check subscribers count
+    $this->assertRaw($api_list->name_api . '</a></td><td>20</td>', 'The page should report 20 subscriptions.');
+
+    // Go to the pendign request report
+    $this->clickLink('Pending requests');
+
+    $this->assertText('No requests pending.', 'Right after cron, there should be no pending request.');
+  }
+
+  public function testFields() {
+    $this->drupalLogin($this->admin_user);
+
+    // Create profile fields
+    $profile = array();
+    $category = $this->randomName();
+    $profile['first_name'] = array(
+      'category' => $category,
+      'title' => 'First name',
+      'name' => 'profile_first_name',
+    );
+    $profile['color'] = array(
+      'category' => $category,
+      'title' => 'Favorite color',
+      'name' => 'profile_favorite_color',
+      'options' => "Blue\nRed\nGreen",
+    );
+    $this->drupalPost('admin/config/people/profile/add/textfield', $profile['first_name'], 'Save field');
+    $this->drupalPost('admin/config/people/profile/add/selection', $profile['color'], 'Save field');
+
+    // Edit user profile
+    $profile = array(
+      'profile_first_name' => $this->randomString(),
+      'profile_favorite_color' => 'Red',
+    );
+    $this->drupalPost('user/' . $this->admin_user->uid . '/edit/' . $category, $profile, 'Save');
+
+    // Define a first list
+    $api_list = $this->serviceAddList();
+
+    $fields = array();
+    $fields['first_name'] = new stdClass();
+    $fields['first_name']->name = 'First name';
+    $fields['first_name']->key = 'first_name';
+    $fields['first_name']->type = 'text';
+    $fields['uid'] = new stdClass();
+    $fields['uid']->name = 'User ID';
+    $fields['uid']->key = 'uid';
+    $fields['uid']->type = 'text';
+    $fields['last_name'] = new stdClass();
+    $fields['last_name']->name = 'Last name';
+    $fields['last_name']->key = 'last_name';
+    $fields['last_name']->type = 'text';
+    $fields['color'] = new stdClass();
+    $fields['color']->name = 'Favorite color';
+    $fields['color']->key = 'color';
+    $fields['color']->type = 'select_one';
+    $fields['color']->options = array('Red', 'Blue', 'Green');
+    $fields['foobar'] = new stdClass();
+    $fields['foobar']->name = 'Foo Bar';
+    $fields['foobar']->key = 'foobar';
+    $fields['foobar']->type = 'select_many';
+    $fields['foobar']->options = array('Foo', 'Bar');
+    variable_set('emf_dummy_custom_fields', $fields);
+
+    // Run cron and go the to the list's roles page
+    $this->drupalCron('admin/structure/emf/' . $api_list->lid . '/roles');
+
+    // Allow authenticated and anonymous user to subscribe
+    $this->drupalPost(NULL, array('roles[1]' => TRUE, 'roles[2]' => TRUE, ), 'Save');
+
+    // Define mapping
+    $edit = array(
+      // Map first name to profile field
+      'first_name[account_field_type]' => 'profile',
+      'first_name[account_field_profile]' => 'profile_first_name',
+      'first_name[anonymous_field]' => TRUE,
+      'first_name[common_form_show]' => TRUE,
+      // Map favorite color to profile field
+      'color[account_field_type]' => 'profile',
+      'color[account_field_profile]' => 'profile_favorite_color',
+      'color[anonymous_field]' => TRUE,
+      'color[common_form_show]' => TRUE,
+      // Map last name to username
+      'last_name[account_field_type]' => 'php',
+      'last_name[account_field]' => 'return $account->name;',
+      'last_name[anonymous_field]' => TRUE,
+      'last_name[common_form_show]' => TRUE,
+      // Map UID
+      'uid[account_field_type]' => 'token',
+      'uid[account_field_token]' => '[user:uid]',
+      'uid[anonymous_field]' => TRUE,
+      'uid[common_form_show]' => TRUE,
+      // Ask for Foo Bar
+      'foobar[anonymous_field]' => TRUE,
+      'foobar[common_form_show]' => TRUE,
+    );
+    $this->drupalPost('admin/structure/emf/' . $api_list->lid . '/field_mapping', $edit, 'Save');
+    $this->assertText('Mapping modifications have been successfully saved.');
+
+    // Check for token replcements patterns
+    $this->assertText('[user:created]', 'User created token should be documented on the page.');
+    $this->assertText('[user:mail]', 'User mail token should be documented on the page.');
+
+    // Subscribe logged user
+    $this->drupalPost('emf/' . $api_list->lid, array('lists[' . $api_list->lid . ']' => TRUE), 'Subscribe');
+    $this->assertText("You have now been subscribed to the mailing list $api_list->name_api");
+
+    // Logout and subscribe anonymous user
+    $this->drupalLogout();
+    // Submit without using allowed value for color and foobar
+    $anonymous_subscriber = array(
+      'fields[mail]' => $this->randomName() . '@example.com',
+      'fields[first_name]' => $this->randomString(),
+      'fields[last_name]' => $this->randomString(),
+      'fields[uid]' => $this->randomString(),
+      'fields[color]' => array('Red'),
+      'fields[foobar][]' => array('Foo')  ,
+    );
+    $this->drupalPost('emf/' . $api_list->lid, $anonymous_subscriber , 'Subscribe');
+    $this->assertText("You have now been subscribed to the mailing list $api_list->name_api");
+
+    // Run cron to synchronize subscription with the _service_
+    $this->drupalLogin($this->admin_user);
+    $this->drupalCron('admin/reports/emf');
+    $this->assertRaw($api_list->name_api . '</a></td><td>2</td>', 'The page should report two subscriptions.');
+
+    // Check subscriptions on the _service_ side
+    $subscribers = variable_get('emf_dummy_subscriptions_' . $api_list->lid, array());
+    $this->pass(var_export($subscribers, TRUE));
+    $this->assertTrue(in_array($this->admin_user->mail, array_keys($subscribers)), 'Authenticated user is subscribed on the service side');
+    // Check field mapping
+    $subscriber = $subscribers[$this->admin_user->mail];
+    $this->assertEqual($subscriber['first_name'], $profile['profile_first_name']);
+    $this->assertEqual($subscriber['color'], $profile['profile_favorite_color']);
+    $this->assertEqual($subscriber['last_name'], $this->admin_user->name);
+    $this->assertEqual($subscriber['uid'], $this->admin_user->uid);
+    $this->assertFalse($subscriber['foobar'], 'Not value should be provided for foobar');
+    $this->assertTrue(in_array($anonymous_subscriber['fields[mail]'], array_keys($subscribers)), 'Anonymous user is still subscribed on the service side');
+    // Check field from subscription form
+    $subscriber = $subscribers[$anonymous_subscriber['fields[mail]']];
+    $this->assertEqual($subscriber['first_name'], $anonymous_subscriber['fields[first_name]']);
+    $this->assertEqual($subscriber['color'], $anonymous_subscriber['fields[color]']);
+    $this->assertEqual($subscriber['last_name'], $anonymous_subscriber['fields[last_name]']);
+    $this->assertEqual($subscriber['uid'], $anonymous_subscriber['fields[uid]']);
+    $this->assertEqual($subscriber['foobar'], array('Foo' => 'Foo'));
+  }
+
+  public function testSynchronisation() {
+    $this->drupalLogin($this->admin_user);
+    $lid = $this->serviceAddList()->lid;
+    $this->drupalCron('admin/structure/emf/' . $lid . '/manage');
+    $fields = array(
+      $this->randomName() => $this->randomName(),
+      $this->randomName() => $this->randomName(),
+      $this->randomName() => $this->randomName(),
+    );
+
+    // Test subscription via EMF
+    emf_helpers_subscribe($this->admin_user->mail, $lid, $fields);
+    $this->drupalCron('admin/structure/emf/' . $lid . '/manage');
+    $this->assertEmfSubscribed($lid, $this->admin_user->mail);
+    $this->assertServiceSubscribed($lid, $this->admin_user->mail);
+
+    // Test unsubscription via EMF
+    emf_helpers_unsubscribe($this->admin_user->mail, $lid);
+    $this->drupalCron('admin/structure/emf/' . $lid . '/manage');
+    $this->assertEmfUnsubscribed($lid, $this->admin_user->mail);
+    $this->assertServiceUnsubscribed($lid, $this->admin_user->mail);
+
+     // Test subscription via service
+    $this->serviceSubscribe($lid, $this->admin_user->mail, $fields);
+    $this->drupalCron('admin/structure/emf/' . $lid . '/manage');
+    $this->assertEmfSubscribed($lid, $this->admin_user->mail);
+    $this->assertServiceSubscribed($lid, $this->admin_user->mail);
+
+     // Test unsubscription via service
+    $this->serviceUnsubscribe($lid, $this->admin_user->mail);
+    $this->drupalCron('admin/structure/emf/' . $lid . '/manage');
+    $this->assertEmfUnsubscribed($lid, $this->admin_user->mail);
+    $this->assertServiceUnsubscribed($lid, $this->admin_user->mail);
+  }
+}
+
+/*
+ * TODO: Test node and comment triggered actions
+ */
+class EmfActionsTestCase extends AbstractEmfTestCase {
+
+  public function getInfo() {
+    return array(
+      'name' => 'Actions',
+      'group' => 'E-mail Marketing Framework',
+      'description' => 'Tests EMF Actions.'
+    );
+  }
+
+  public function setUp() {
+    parent::setUp(array('trigger'));
+    $this->admin_user = $this->drupalCreateUser(array_keys(array_merge(system_permission(), emf_permission(), user_permission())));
+    $this->drupalLogin($this->admin_user);
+    // Define two dummy list
+    $this->lids = array($this->serviceAddList(), $this->serviceAddList(), $this->serviceAddList());
+    // Run the cron and go to the manage actions page
+    $this->drupalCron('admin/config/system/actions');
+
+    // Create a subscribe action
+    $key = drupal_hash_base64('emf_subscribe_action');
+    $this->drupalPost(NULL, array('action' => $key), 'Create');
+    $this->drupalPost(NULL, array('lists[' . $this->lids[0]->lid . ']' => 1), 'Save');
+
+    // Create an unsubscribe action
+    $key = drupal_hash_base64('emf_unsubscribe_action');
+    $this->drupalPost(NULL, array('action' => $key), 'Create');
+    $this->drupalPost(NULL, array('lists[' . $this->lids[0]->lid . ']' => 1), 'Save');
+  }
+
+  public function tearDown() {
+    parent::tearDown();
+    unset($this->admin_user);
+  }
+
+  public function testUserActions() {
+    // Assign subscribe action to user login trigger
+    $aid = drupal_hash_base64(3);
+    $this->drupalPost('admin/structure/trigger/user', array('aid' => $aid), 'Assign', array(), array(), 'trigger-user-insert-assign-form');
+    $this->assertRaw('<td>Subscribe a user to certain EMF lists</td>', 'User insert registred as trigger for EMF subscribe action');
+
+    // Assign unsubscribe action to user logout trigger
+    $aid = drupal_hash_base64(4);
+    $this->drupalPost('admin/structure/trigger/user', array('aid' => $aid), 'Assign', array(), array(), 'trigger-user-delete-assign-form');
+    $this->assertRaw('<td>Unsubscribe a user from certain EMF lists</td>', 'User delete registred as trigger for EMF unsubscribe action');
+
+    // Create user
+    $edit = array();
+    $edit['name']   = $this->randomName();
+    $edit['mail']   = $edit['name'] . '@example.com';
+    $edit['pass[pass1]'] = $edit['pass[pass2]']  = user_password();
+    $edit['status'] = 1;
+    $this->drupalPost('admin/people/create', $edit, 'Create new account');
+
+    // Assert subscription
+    $this->assertEmfSubscribed($this->lids[0]->lid, $edit['mail']);
+    $this->assertEmfUnsubscribed($this->lids[1]->lid, $edit['mail']);
+
+    // Delete the user
+    $this->drupalGet('admin/people/');
+    $this->clickLink($edit['name']);
+    $this->clickLink('Edit');
+    $this->drupalPost(NULL, array(), 'Cancel account');
+    $this->drupalPost(NULL, array('user_cancel_method' => 'user_cancel_delete'), 'Cancel account');
+
+    // Assert unsubscription
+    $this->assertEmfUnsubscribed($this->lids[0]->lid, $edit['mail']);
+    $this->assertEmfUnsubscribed($this->lids[1]->lid, $edit['mail']);
+  }
+}

@@ -1,0 +1,368 @@
+<?php
+
+/**
+ * @file
+ * Drupal hooks
+ */
+
+@require_once(drupal_get_path('module', 'emf') . '/emf.actions.inc');
+@require_once(drupal_get_path('module', 'emf') . '/emf.db.inc');
+@require_once(drupal_get_path('module', 'emf') . '/emf.helpers.inc');
+
+/**
+ * Implements hook_permission().
+ */
+function emf_permission() {
+  return array(
+    'administer lists' => array(
+      'title' => t('Administer lists'),
+    ),
+    'view reports' => array(
+      'title' => t('View reports'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function emf_menu() {
+
+  // settings
+  $items['admin/config/emf'] = array(
+    'title' => 'E-mail Marketing Framework',
+    'description' => 'Configure E-mail Marketing Framework.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => '/system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'position' => 'left',
+  );
+  $items['admin/config/emf/emf'] = array(
+    'title' => 'E-mail Marketing Framework',
+    'description' => 'Configure E-mail Marketing Framework settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('emf_settings_defaults'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'emf.settings.inc',
+    'weight' => -1,
+  );
+  $items['admin/config/emf/emf/defaults'] = array(
+    'title' => 'Defaults',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/config/emf/emf/advanced'] = array(
+    'title' => 'Advanced',
+    'description' => 'Configure E-mail Marketing Framework advanced settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('emf_settings_advanced'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+    'access arguments' => array('administer site configuration'),
+    'file' => 'emf.settings.inc',
+  );
+  $items['admin/config/emf/emf/tools'] = array(
+    'title' => 'Tools',
+    'description' => 'Configure E-mail Marketing Framework tools.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('emf_settings_tools'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+    'access arguments' => array('administer site configuration'),
+    'file' => 'emf.settings.inc',
+  );
+
+  // lists
+  $items['admin/structure/emf'] = array(
+    'title' => 'E-mail Marketing Framework',
+    'description' => 'Configure E-mail Marketing Framework lists.',
+    'page callback' => 'emf_admin_lists',
+    'access arguments' => array('administer lists'),
+    'file' => 'emf.admin.inc',
+  );
+  $items['admin/structure/emf/list'] = array(
+    'title' => 'List',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/structure/emf/%emf_list'] = array(
+    'title' => 'Edit',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('emf_admin_list_info_form', 3),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+    'access arguments' => array('administer lists'),
+    'file' => 'emf.admin.inc',
+  );
+  $items['admin/structure/emf/%emf_list/info'] = array(
+    'title' => 'Info',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/structure/emf/%emf_list/field_mapping'] = array(
+    'title' => 'Field mapping',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('emf_admin_field_mapping_form', 3),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+    'access arguments' => array('administer lists'),
+    'file' => 'emf.admin.inc',
+  );
+  $items['admin/structure/emf/%emf_list/roles'] = array(
+    'title' => 'Roles',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('emf_admin_roles_form', 3),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+    'access arguments' => array('administer lists'),
+    'file' => 'emf.admin.inc',
+  );
+  $items['admin/structure/emf/%emf_list/delete'] = array(
+    'title' => 'Delete',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('emf_admin_delete_confirm_form', 3),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer lists'),
+    'file' => 'emf.admin.inc',
+  );
+
+  // reports
+  $items['admin/reports/emf'] = array(
+    'title' => 'E-mail Marketing Framework',
+    'description' => 'View your e-mail marketing service subscriber and request reports.',
+    'page callback' => 'emf_reports_subscriptions',
+    'access arguments' => array('view reports'),
+    'file' => 'emf.reports.inc',
+  );
+  $items['admin/reports/emf/subscriptions'] = array(
+    'title' => 'Subscriptions',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/reports/emf/requests'] = array(
+    'title' => 'Pending requests',
+    'page callback' => 'emf_reports_requests',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+    'access arguments' => array('view reports'),
+    'file' => 'emf.reports.inc',
+  );
+
+  // pages
+  $items['emf/%emf_list'] = array(
+    'title' => 'Newsletters',
+    'title callback' => 'emf_page_title',
+    'title arguments' => array(1),
+    'page callback' => 'emf_page',
+    'page arguments' => array(1),
+    'access callback' => 'emf_page_access',
+    'access arguments' => array(1),
+    'file' => 'emf.page.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['emf/common'] = array(
+    'title' => 'Newsletters',
+    'page callback' => 'emf_page',
+    'page arguments' => NULL,
+    'access callback' => TRUE,
+    'file' => 'emf.page.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function emf_theme() {
+  return array(
+    'emf_admin_field_mapping_form' => array(
+      'render element' => 'form',
+      'file' => 'emf.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_load().
+ */
+function emf_list_load($lid = 0) {
+  return emf_db_get_list($lid);
+}
+
+/**
+ * Access callback for emf_page.
+ */
+function emf_page_access($list) {
+  return emf_user_access($list->lid);
+}
+
+/**
+ * Title callback for emf_page.
+ */
+function emf_page_title($list) {
+  return t($list->name_clean);
+}
+
+/**
+ * Implements hook_cron().
+ */
+function emf_cron() {
+  module_load_include('inc', 'emf', 'emf.sync');
+  emf_sync();
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function emf_block_info() {
+
+  $blocks = array();
+
+  // block per list
+  $lists = emf_db_get_lists(TRUE);
+  foreach ($lists as $list) {
+    $list = emf_db_get_list($list->lid);
+
+    $blocks[$list->lid] = array(
+      'info' => t('E-mail Marketing Framework : !name', array('!name' => t($list->name_clean))),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+  }
+
+  // common block for all lists
+  $blocks['common'] = array(
+    'info' => t('E-mail Marketing Framework : common subscription block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function emf_block_view($delta = '') {
+
+  $blocks = emf_block_info();
+  module_load_include('inc', 'emf', 'emf.form');
+
+  // by default block subject equals block info
+  $block['subject'] = $blocks[$delta]['info'];
+
+  $show_block = FALSE;
+
+  // commmon block
+  if ($delta == 'common') {
+    $lid = NULL;
+
+    $block['subject'] = t('Newsletters');
+
+    $show_block = TRUE;
+  }
+
+  // block per list
+  else {
+    $lid = $delta;
+    $list = emf_db_get_list($lid);
+
+    $block['subject'] = t($list->name_clean);
+
+    if (emf_list_visibile($list->lid)) {
+      $show_block = TRUE;
+    }
+  }
+
+  if ($show_block) {
+    // fetch form
+    $form = emf_subscription_list_form(array(), $lid);
+
+    // check if form is empty
+    if (!empty($form)) {
+      $block['content'] = drupal_get_form('emf_subscription_list_form', $lid);
+    }
+  }
+
+  return $block;
+}
+
+// todo : hook_user : tab for subscription checkboxes
+
+/**
+ * Implements hook_user_delete().
+ */
+function emf_user_delete($account) {
+  $mail = $account->mail;
+
+  // deleting all pending requests
+  db_query("DELETE FROM {emf_request} WHERE mail = :mail", array(':mail' => $mail));
+
+  // unsubscribe from all known lists
+  $lists = emf_db_get_lists();
+  foreach ($lists as $list) {
+    emf_helpers_unsubscribe($mail, $list->lid);
+  }
+}
+
+/**
+ * Invokes the given method using the currently selected plugin.
+ *
+ * @param $method
+ *   A string containing the method to invoke.
+ * @param $params
+ *   An optional array of parameters to pass to the plugin method.
+ * @return
+ *   Mixed values (typically Boolean indicating successful operation).
+ */
+function emf_plugin_invoke($method, $params = array()) {
+  if ($plugin = emf_get_plugin()) {
+    $function = $plugin->module . '_api_' . $method;
+
+    // load api file
+    if ($plugin->file) {
+      require_once(drupal_get_path('module', $plugin->module) . '/' . $plugin->file);
+    }
+
+    // do invoke
+    if (function_exists($function)) {
+      return call_user_func_array($function, $params);
+    }
+    else {
+      watchdog('php', 'The installed Mailing Service plugin %plugin can not correctly process %function.', array('%plugin' => $plugin->name, '%function' => $function), WATCHDOG_ERROR);
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Fetch a list of plugins installed by plugin modules.
+ *
+ * @return
+ *   Array of plugin objects.
+ */
+function emf_get_plugins() {
+  $plugins = array();
+  foreach (module_implements('emf_info', TRUE) as $module) {
+    $plugin = module_invoke($module, 'emf_info');
+    $plugin['module'] = $module;
+    $plugins[] = (object)$plugin;
+  }
+  return $plugins;
+}
+
+/**
+ * Fetch the active plugin.
+ *
+ * @return
+ *   Active plugin object.
+ */
+function emf_get_plugin() {
+  $plugins = emf_get_plugins();
+  if (count($plugins) > 0) {
+    return $plugins[0];
+  }
+  return FALSE;
+}
