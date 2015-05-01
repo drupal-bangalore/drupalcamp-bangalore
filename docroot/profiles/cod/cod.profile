@@ -6,9 +6,9 @@
 define('DRUPAL_MINIMUM_MAX_EXECUTION_TIME', 120);
 
 /*
- * Define commons minimum APC cache required to operate.
+ * Define commons minimum opcode cache required to operate.
  */
-define('COD_MINIMUM_APC_CACHE', 96);
+define('COD_MINIMUM_OPCODE_CACHE', 96);
 
 /**
  * Implements hook_form_alter().

@@ -21,22 +21,44 @@ function cod_requirements($phase) {
       $requirements['php_max_execution_time']['severity'] = REQUIREMENT_ERROR;
     }
 
-    if(ini_get('apc.shm_size') != NULL) {
-      // Check for apc.shm_size = 96mb
-      $requirements['apc_shm_size'] = array(
-        'title' => $t('APC shim size'),
-        'value' => ini_get('apc.shm_size'),
-      );
+    // Check for APC / OPcache memory size.
+    if (($opcache_mem = ini_get('opcache.memory_consumption')) != NULL || ($apc_mem = ini_get('apc.shm_size')) != NULL) {
+      // Check for OPcache first, as APCu could be in use in addition to
+      // OPcache, in which case apc.shm_size can be ignored.
+      $ext_name = '';
+      $ini_name = '';
+      $ini_suffix = '';
+      if (!empty($opcache_mem)) {
+        $requirements['opcode_cache_size'] = array(
+          'title' => $t('OPcache memory'),
+          'value' => $opcache_mem,
+        );
+        $ext_name = 'OPcache';
+        $ini_name = 'opcache.memory_consumption';
+        $ini_suffix = '';
+      }
+      elseif (!empty($apc_mem)) {
+        $requirements['opcode_cache_size'] = array(
+          'title' => $t('APC shim size'),
+          'value' => $apc_mem,
+        );
+        $ext_name = 'APC';
+        $ini_name = 'apc.shm_size';
+        $ini_suffix = 'M';
+      }
 
-      $shm_size = preg_split('/[a-zA-Z]/', ini_get('apc.shm_size'));
-      $shm_size = $shm_size[0];
+      $mem_size = intval(ini_get($ini_name));
 
-      // only check if APC var is being set somewhere (usually apc.ini).
-      // throw error if there is less than 96MB available
-      if ($shm_size && $shm_size < COD_MINIMUM_APC_CACHE) {
-        $requirements['apc_shm_size']['description'] = $t('APC is installed but %shm_size is not enough APC cache to successfully install COD.
-           Find your <em>apc.ini</em> file and change the <em>apc.shm_size</em> value to at least <em>%min_shm_size</em>.', array('%shm_size' => $shm_size . 'M', '%min_shm_size' => COD_MINIMUM_APC_CACHE . 'M'));
-        $requirements['apc_shm_size']['severity'] = REQUIREMENT_ERROR;
+      if ($mem_size && $mem_size < COD_MINIMUM_OPCODE_CACHE) {
+        $requirements['opcode_cache_size']['description'] = $t('%ext_name is installed but %mem_size is not enough opcode cache to successfully install COD.
+          Find your php configuration file(s) and change the <em>%ini_name</em> value to at least <em>%min_mem_size</em>.',
+          array(
+            '%ext_name' => $ext_name,
+            '%mem_size' => $mem_size . 'M',
+            '%ini_name' => $ini_name,
+            '%min_mem_size' => COD_MINIMUM_OPCODE_CACHE . $ini_suffix,
+          ));
+        $requirements['opcode_cache_size']['severity'] = REQUIREMENT_ERROR;
       }
     }
   }
