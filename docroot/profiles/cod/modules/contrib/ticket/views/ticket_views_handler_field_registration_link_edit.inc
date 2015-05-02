@@ -12,6 +12,10 @@
  */
 class ticket_views_handler_field_registration_link_edit extends ticket_views_handler_field_registration_link {
   function render_link($data, $values) {
+    if (!entity_access('update', 'ticket_registration', $data)) {
+      return;
+    }
+
     $text = !empty($this->options['text']) ? $this->options['text'] : t('Edit');
 
     $this->options['alter']['make_link'] = TRUE;

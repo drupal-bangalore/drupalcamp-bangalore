@@ -85,7 +85,7 @@ function commerce_discount_commerce_cart_order_refresh($wrapper) {
  *   Wrapped commerce price.
  */
 function commerce_discount_remove_discount_components($price_wrapper) {
-  $data = $price_wrapper->data->value();
+  $data = (array) $price_wrapper->data->value() + array('components' => array());
   $component_removed = FALSE;
   // Remove price components belonging to order discounts.
   foreach ($data['components'] as $key => $component) {
@@ -121,6 +121,24 @@ function commerce_discount_remove_discount_components($price_wrapper) {
   // Re-set the total price.
   $total = commerce_price_component_total($price_wrapper->value());
   $price_wrapper->amount->set($total['amount']);
+}
+
+/**
+ * Implements hook_commerce_cart_order_empty().
+ */
+function commerce_discount_commerce_cart_order_empty($order) {
+  // Clean-up task to remove commerce_discount line items when cart is emptied.
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  $line_items_to_delete = array();
+  foreach ($order_wrapper->commerce_line_items as $delta => $line_item_wrapper) {
+    if ($line_item_wrapper->getBundle() == 'commerce_discount') {
+      $line_items_to_delete[] = $line_item_wrapper->getIdentifier();
+      $order_wrapper->commerce_line_items->offsetUnset($delta);
+    }
+  }
+
+  // Delete line items.
+  commerce_line_item_delete_multiple($line_items_to_delete);
 }
 
 /**
@@ -283,7 +301,7 @@ function commerce_discount_commerce_price_formatted_components_alter(&$component
 function commerce_discount_form_commerce_discount_form_alter(&$form, $form_state) {
   // Add clearfix to the discount type container.
   $form['commerce_discount_type']['#attributes']['class'][] = 'clearfix';
-  $form['commerce_discount_fields']['commerce_discount_offer']['und']['form']['type']['#attributes']['class'][] = 'clearfix';
+  $form['commerce_discount_fields']['commerce_discount_offer'][LANGUAGE_NONE]['form']['type']['#attributes']['class'][] = 'clearfix';
 
   if (empty($form_state['commerce_discount']->discount_id)) {
     // Entity is new.

@@ -228,7 +228,7 @@ function cod_schedule_update_session() {
   }
 
   $session_nid = check_plain($_POST['session']);
-  $timeslot_id = check_plain($_POST['timeslot']);
+  $timeslot_id = isset($_POST['timeslot']) ? check_plain($_POST['timeslot']) : NULL;
 
   $session = node_load($session_nid);
   $wrapper = entity_metadata_wrapper('node', $session);
@@ -259,13 +259,13 @@ function cod_schedule_update_session() {
     $fc_wrapper->save();
 
     $wrapper->field_session_timeslot->offsetSet(0, intval($timeslot_id));
-    $wrapper->field_accepted->set(1);
+    $wrapper->field_accepted->set('accepted');
   }
 
   $wrapper->save();
 
   // @TODO Just returning post for testing but we likely will return error messages 'n stuff
-  drupal_json_output("Updated!");
+  drupal_json_output($timeslot_id);
 }
 
 /**

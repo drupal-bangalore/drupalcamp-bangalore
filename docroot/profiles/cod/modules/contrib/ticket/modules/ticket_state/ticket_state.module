@@ -20,6 +20,16 @@ function ticket_state_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
+* Implements hook_views_api().
+*/
+function ticket_state_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'ticket_state') . '/views',
+  );
+}
+
+/**
  * Implements hook_entity_info().
  */
 function ticket_state_entity_info() {
@@ -120,6 +130,19 @@ function ticket_state_entity_property_info() {
     ),
   );
 
+  return $info;
+}
+
+/**
+ * Alter the ticket_registration entity properties
+ */
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function ticket_state_entity_property_info_alter(&$info) {
+  $properties = &$info['ticket_registration'];
+  $properties['properties']['state']['getter callback'] = 'entity_property_verbatim_get';
+  $properties['properties']['state']['setter callback'] = 'entity_property_verbatim_set';
   return $info;
 }
 
@@ -311,4 +334,15 @@ function ticket_state_field_extra_fields() {
   }
 
   return $extra;
+}
+
+/**
+ * Implements hook_form_alter().
+ * Alter the ticket registration edit form to hide the ticket state from regular
+ * Users.
+ */
+function ticket_state_form_alter(&$form, &$form_state, $form_id) {
+  if (strpos($form_id, "ticket_registration_edit") === 0 && !user_access('administer ticket states')) {
+    $form['state']['#access'] = FALSE;
+  }
 }

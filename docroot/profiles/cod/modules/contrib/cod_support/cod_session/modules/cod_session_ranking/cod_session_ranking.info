@@ -17,9 +17,9 @@ features[user_permission][] = view field_session_ranking
 features[user_permission][] = view own field_session_ranking
 install_option = cod
 
-; Information added by Drupal.org packaging script on 2015-03-18
-version = "7.x-1.0-beta8"
+; Information added by Drupal.org packaging script on 2015-05-01
+version = "7.x-1.0-beta9"
 core = "7.x"
 project = "cod_support"
-datestamp = "1426715316"
+datestamp = "1430468586"
 

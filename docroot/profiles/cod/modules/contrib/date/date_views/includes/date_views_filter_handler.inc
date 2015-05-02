@@ -3,9 +3,11 @@
  * @file
  * A flexible, configurable date filter.
  * This filter combines multiple date filters into a single filter
- * where all fields are controlled by the same date and can be combined with either AND or OR.
+ * where all fields are controlled by the same date and can be combined
+ * with either AND or OR.
  */
 
+// @codingStandardsIgnoreStart
 class date_views_filter_handler extends date_views_filter_handler_simple {
   function init(&$view, &$options) {
     parent::init($view, $options);
@@ -173,9 +175,18 @@ class date_views_filter_handler extends date_views_filter_handler_simple {
         $date_handler = new date_sql_handler($field['sql_type'], date_default_timezone());
         $date_handler->granularity = $this->options['granularity'];
         $date_handler->db_timezone = date_get_timezone_db($field['tz_handling']);
-        $date_handler->local_timezone = date_get_timezone($field['tz_handling']);
+        if (empty($this->options['timezone']) || $this->options['timezone'] == 'date') {
+          $date_handler->local_timezone = date_get_timezone($field['tz_handling']);
+        }
+        else if ($this->options['timezone'] == 'user') {
+          $date_handler->local_timezone = date_default_timezone();
+        }
+        else {
+          $date_handler->local_timezone = $this->options['timezone'];
+        }
         $this->query_fields[] = array('field' => $field, 'date_handler' => $date_handler);
       }
     }
   }
 }
+// @codingStandardsIgnoreEnd

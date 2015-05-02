@@ -14,6 +14,7 @@ class TicketRegistration extends Entity {
   public $revision_id;
   // Essentially ttid is the bundle.
   public $bundle;
+  public $label;
   public $user_uid;
   public $author_uid;
   public $created;
@@ -26,6 +27,12 @@ class TicketRegistration extends Entity {
     parent::__construct($values, 'ticket_registration');
   }
 
+  /**
+   * Helper function get the registrations label
+   */
+  public function label() {
+    return ticket_registration_label($this, 'entity_registration');
+  }
   /**
    * A helper function to get a registration's ticket type entity.
    */
@@ -141,6 +148,35 @@ class TicketRegistrationUIController extends EntityContentUIController {
  * Contains the controller for ticket_registration entities.
  */
 class TicketRegistrationController extends EntityAPIController {
+
+  public function create(array $values = array()) {
+    global $user;
+    $values['uid'] = $user->uid;
+    return parent::create($values);
+  }
+
+  public function load($registrations = array(), $conditions = array()) {
+    global $user;
+
+    $entities = parent::load($registrations, $conditions);
+    foreach ($entities AS $entity_id => $entity) {
+      // When loading an entity, we default the author uid, unless there is an
+      // Overriding user_uid for the current user, then override.
+      if ($entity->user_uid == $user->uid) {
+        $uid = $user->uid;
+      }
+      // Is the registration empty? if its not owned by anyone, current user can
+      // take control of it.
+      else if ($entity->author_uid == 0) {
+        $uid = $user->uid;
+      }
+      else {
+        $uid = $entity->author_uid;
+      }
+      $entities[$entity_id]->uid = $uid;
+    }
+    return $entities;
+  }
 
   /**
    * Saves a ticket registration entity.

@@ -463,6 +463,7 @@ function og_vocab_field_widget_form(&$form, &$form_state, $field, $instance, $la
   foreach ($vids as $vid) {
     $og_vocab = og_vocab_load_og_vocab($vid, $entity_type, $bundle);
     $element[$vid] = $og_vocab->getFormElement($entity_type, $entity, $form, $form_state);
+    $element[$vid]['#gid'] = og_vocab_relation_get($vid);
   }
 
   return $element;
@@ -1371,10 +1372,20 @@ function og_vocab_get_accessible_vocabs($entity_type, $bundle, $field_name, $acc
   $context = FALSE;
   $gids = array();
 
-  if (in_array($use_context, array('force', 'yes')) && module_exists('og_context') && $context = og_context()) {
+  if (in_array($use_context, array('force', 'yes', 'all')) && module_exists('og_context') && $context = og_context()) {
     $gids[$context['group_type']][$context['gid']] = array($context['gid']);
   }
+  elseif (in_array($use_context, array('all')) && !$gids) {
+    // These are groups you have access to
+    $field = field_info_field(OG_AUDIENCE_FIELD);
+    $field_instance = field_info_instance($entity_type, OG_AUDIENCE_FIELD, $bundle);
+    $handler = EntityReference_SelectionHandler_Generic::getInstance($field, $field_instance, $entity_type);
+    $result = $handler->getReferencableEntities();
+    $group_bundle = key($result);
+    $gids = array($entity_type => array_keys($result[$group_bundle]));
+  }
   elseif (in_array($use_context, array('yes', 'no')) && !$gids) {
+    // These are groups you belong to
     $gids = og_get_entity_groups('user', $account);
   }
 

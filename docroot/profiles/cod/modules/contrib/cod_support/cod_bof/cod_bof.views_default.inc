@@ -58,6 +58,14 @@ function cod_bof_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No Schedule has been configured yet to show BoFs';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_timeslot_time_field_collection_item']['id'] = 'reverse_field_timeslot_time_field_collection_item';
+  $handler->display->display_options['relationships']['reverse_field_timeslot_time_field_collection_item']['table'] = 'cod_event_time';
+  $handler->display->display_options['relationships']['reverse_field_timeslot_time_field_collection_item']['field'] = 'reverse_field_timeslot_time_field_collection_item';
+  /* Relationship: OG membership: OG membership from Time */
+  $handler->display->display_options['relationships']['og_membership_rel']['id'] = 'og_membership_rel';
+  $handler->display->display_options['relationships']['og_membership_rel']['table'] = 'cod_event_time';
+  $handler->display->display_options['relationships']['og_membership_rel']['field'] = 'og_membership_rel';
   /* Field: Time: Date and time */
   $handler->display->display_options['fields']['field_evttime_date']['id'] = 'field_evttime_date';
   $handler->display->display_options['fields']['field_evttime_date']['table'] = 'field_data_field_evttime_date';
@@ -103,43 +111,34 @@ function cod_bof_views_default_views() {
   $handler->display->display_options['sorts']['field_evttime_date_value']['id'] = 'field_evttime_date_value';
   $handler->display->display_options['sorts']['field_evttime_date_value']['table'] = 'field_data_field_evttime_date';
   $handler->display->display_options['sorts']['field_evttime_date_value']['field'] = 'field_evttime_date_value';
-  /* Contextual filter: Field: Conference (og_group_ref) */
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['table'] = 'og_membership';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['field'] = 'og_group_ref_target_id';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['validate']['type'] = 'node';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['validate_options']['types'] = array(
-    'event' => 'event',
-  );
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['validate_options']['access'] = TRUE;
-  /* Filter criterion: Field collection item: Allowed Types (field_timeslot_allowed_types) */
-  $handler->display->display_options['filters']['field_timeslot_allowed_types_value']['id'] = 'field_timeslot_allowed_types_value';
-  $handler->display->display_options['filters']['field_timeslot_allowed_types_value']['table'] = 'field_data_field_timeslot_allowed_types';
-  $handler->display->display_options['filters']['field_timeslot_allowed_types_value']['field'] = 'field_timeslot_allowed_types_value';
-  $handler->display->display_options['filters']['field_timeslot_allowed_types_value']['relationship'] = 'reverse_field_timeslot_time_field_collection_item';
-  $handler->display->display_options['filters']['field_timeslot_allowed_types_value']['value'] = 'bof_session';
+  /* Contextual filter: OG membership: Group ID */
+  $handler->display->display_options['arguments']['gid']['id'] = 'gid';
+  $handler->display->display_options['arguments']['gid']['table'] = 'og_membership';
+  $handler->display->display_options['arguments']['gid']['field'] = 'gid';
+  $handler->display->display_options['arguments']['gid']['relationship'] = 'og_membership_rel';
+  $handler->display->display_options['arguments']['gid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['gid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['gid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['gid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['gid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['gid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['gid']['validate']['type'] = 'og';
+  $handler->display->display_options['arguments']['gid']['validate']['fail'] = 'empty';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Entity Reference: Referencing entity */
-  $handler->display->display_options['relationships']['reverse_field_timeslot_time_field_collection_item']['id'] = 'reverse_field_timeslot_time_field_collection_item';
-  $handler->display->display_options['relationships']['reverse_field_timeslot_time_field_collection_item']['table'] = 'cod_event_time';
-  $handler->display->display_options['relationships']['reverse_field_timeslot_time_field_collection_item']['field'] = 'reverse_field_timeslot_time_field_collection_item';
-  $handler->display->display_options['relationships']['reverse_field_timeslot_time_field_collection_item']['required'] = TRUE;
-  $handler->display->display_options['path'] = 'node/%/bofs';
-  $handler->display->display_options['menu']['title'] = 'BoFs';
-  $handler->display->display_options['menu']['description'] = 'Birds of a Feather Sessions';
-  $handler->display->display_options['menu']['weight'] = '4';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['argument_input'] = array(
+    'gid' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Conference',
+    ),
+  );
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['cod_bof_schedule'] = $view;
 
   $view = new view();

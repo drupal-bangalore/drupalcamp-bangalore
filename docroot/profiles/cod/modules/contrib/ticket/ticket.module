@@ -3,6 +3,18 @@
  * @file
  * Ticket module file.
  */
+/**
+* Modules should return this value from hook_ticket_registration_access() to allow access to a registration.
+*/
+define('TICKET_REGISTRATION_ACCESS_ALLOW', 'allow');
+/**
+* Modules should return this value from hook_ticket_registration_access() to deny access to a registration.
+*/
+define('TICKET_REGISTRATION_ACCESS_DENY', 'deny');
+/**
+* Modules should return this value from hook_ticket_registration_access() to not affect ticket registration access.
+*/
+define('TICKET_REGISTRATION_ACCESS_IGNORE', NULL);
 
 // Include the field definition.
 require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ticket') . '/includes/ticket.field.inc';
@@ -315,14 +327,24 @@ function ticket_type_access($op, $item = NULL, $account = NULL) {
   return FALSE;
 }
 
+function ticket_ticket_registration_access($registration, $op, $account) {
+  // The ticket user (user_uid) should have access to view/edit their ticket
+  if (isset($registration->user_uid) && $registration->user_uid == $account->uid) {
+    return TICKET_REGISTRATION_ACCESS_ALLOW;
+  }
+
+  // If user has access to globally view.
+  if ($op == 'view' && user_access('view all ticket registrations', $account)) {
+    return TICKET_REGISTRATION_ACCESS_ALLOW;
+  }
+
+  return TICKET_REGISTRATION_ACCESS_IGNORE;
+}
+
 /**
  * Ticket registration entity access callback.
  */
 function ticket_registration_access($op, $item = NULL, $account = NULL) {
-  if (empty($item)) {
-    return FALSE;
-  }
-
   // Get an object if item is an int.
   if (is_numeric($item)) {
     $item = ticket_registration_load($item);
@@ -333,21 +355,31 @@ function ticket_registration_access($op, $item = NULL, $account = NULL) {
     $account = $GLOBALS['user'];
   }
 
-  // The registration owner should always have access.
-  if (isset($item->author_uid) && $item->author_uid == $account->uid) {
+  // If user has access to globally edit return TRUE.
+  if (in_array($op, array('edit', 'update', 'delete')) && user_access('edit all ticket registrations', $account)) {
     return TRUE;
   }
 
-  // If user has access to globally view.
-  if ($op == 'view' && user_access('view all ticket registrations', $account)) {
+  $access = module_invoke_all('ticket_registration_access', $item, $op, $account);
+
+  // Allow other tickets to alter the access
+  // We grant access to the ticket registration if both of the following conditions are met:
+  // - No modules say to deny access.
+  // - At least one module says to grant access.
+  // If no module specified either allow or deny, we fall back to the
+  // ticket type access below.
+  if (in_array(TICKET_REGISTRATION_ACCESS_DENY, $access, TRUE)) {
+    return FALSE;
+  }
+  elseif (in_array(TICKET_REGISTRATION_ACCESS_ALLOW, $access, TRUE)) {
     return TRUE;
   }
 
-  // If user has access to globally edit.
-  if (in_array($op, array('update', 'delete')) && user_access('edit all ticket registrations', $account)) {
-    return TRUE;
+  // If you haven't gotten access yet (global registration access), and the item
+  // is null, stop now. There is no specific registrations to check access on.
+  if (empty($item)) {
+    return FALSE;
   }
-
   // Cascade back to the ticket type - anyone who can admin the type
   // has access to registratons.
   return ticket_type_access('update', $item->ticket_type());
@@ -568,8 +600,6 @@ function ticket_get_admin_path($type) {
  */
 function ticket_admin_paths() {
   $paths = array(
-    '*/*/tickets' => TRUE,
-    '*/*/tickets/*' => TRUE,
     'ticket_registration/manage/*' => TRUE,
   );
   return $paths;
@@ -728,6 +758,9 @@ function ticket_registration_get_properties($entity, array $options, $name, $typ
 
     case 'author':
       return $entity->registrant();
+
+    case 'label':
+      return $entity->label();
 
   }
 }

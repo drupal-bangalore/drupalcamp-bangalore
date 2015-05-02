@@ -168,6 +168,15 @@ function cod_paid_events_form_event_node_form_alter(&$form, &$form_state) {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function cod_paid_events_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['field_ticket_order']) && !user_access('administer orders')) {
+    $form['field_ticket_order']['#access'] = FALSE;
+  }
+}
+
+/**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function cod_paid_events_form_ticket_register_form_alter(&$form, &$form_state, $form_id) {

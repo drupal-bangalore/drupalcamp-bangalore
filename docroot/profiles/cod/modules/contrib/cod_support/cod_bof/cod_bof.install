@@ -33,3 +33,18 @@ function cod_bof_update_7003() {
 
   return array();
 }
+
+/**
+ * Revert cod_bof view feature to convert to the panel if the page is enabled.
+ */
+function cod_bof_update_7004() {
+  if (module_exists('cod_bof_pages')){
+    $revert = array(
+      'cod_bof' => array('views_view'),
+      'cod_bof_pages' => array('page_manager_pages'),
+    );
+    features_revert($revert);
+  }
+
+  return array();
+}

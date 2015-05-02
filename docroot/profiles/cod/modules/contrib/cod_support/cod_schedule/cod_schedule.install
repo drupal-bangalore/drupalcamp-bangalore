@@ -59,3 +59,29 @@ function cod_schedule_update_7005() {
   );
   features_revert($revert);
 }
+
+/**
+ * Update add the duplicate timeslots view.
+ */
+function cod_schedule_update_7006() {
+
+  $revert = array(
+    'cod_schedule' => array('views_view'),
+  );
+  features_revert($revert);
+}
+
+/**
+ * Revert cod_bof view feature to convert to the panel if the page is enabled.
+ */
+function cod_schedule_update_7007() {
+  if (module_exists('cod_schedule_pages')){
+    $revert = array(
+      'cod_schedule' => array('views_view'),
+      'cod_schedule_pages' => array('page_manager_pages'),
+    );
+    features_revert($revert);
+  }
+
+  return array();
+}

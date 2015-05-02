@@ -48,6 +48,10 @@ function cod_schedule_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'The schedule has not been configured yet.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: OG membership: OG membership from Time */
+  $handler->display->display_options['relationships']['og_membership_rel']['id'] = 'og_membership_rel';
+  $handler->display->display_options['relationships']['og_membership_rel']['table'] = 'cod_event_time';
+  $handler->display->display_options['relationships']['og_membership_rel']['field'] = 'og_membership_rel';
   /* Field: Time: Time ID */
   $handler->display->display_options['fields']['evttid']['id'] = 'evttid';
   $handler->display->display_options['fields']['evttid']['table'] = 'cod_event_time';
@@ -80,18 +84,6 @@ function cod_schedule_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
-  /* Field: Field: Conference */
-  $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
-  $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
-  $handler->display->display_options['fields']['og_group_ref']['field'] = 'og_group_ref';
-  $handler->display->display_options['fields']['og_group_ref']['label'] = '';
-  $handler->display->display_options['fields']['og_group_ref']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['og_group_ref']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['og_group_ref']['type'] = 'entityreference_entity_id';
-  $handler->display->display_options['fields']['og_group_ref']['settings'] = array(
-    'link' => 0,
-  );
-  $handler->display->display_options['fields']['og_group_ref']['delta_offset'] = '0';
   /* Field: Global: View */
   $handler->display->display_options['fields']['view']['id'] = 'view';
   $handler->display->display_options['fields']['view']['table'] = 'views';
@@ -105,26 +97,18 @@ function cod_schedule_views_default_views() {
   $handler->display->display_options['sorts']['field_evttime_date_value']['id'] = 'field_evttime_date_value';
   $handler->display->display_options['sorts']['field_evttime_date_value']['table'] = 'field_data_field_evttime_date';
   $handler->display->display_options['sorts']['field_evttime_date_value']['field'] = 'field_evttime_date_value';
-  /* Contextual filter: Field: Conference (og_group_ref) */
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['table'] = 'og_membership';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['field'] = 'og_group_ref_target_id';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'node/%/schedule';
-  $handler->display->display_options['menu']['title'] = 'Schedule';
-  $handler->display->display_options['menu']['weight'] = '-10';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['type'] = 'normal';
-  $handler->display->display_options['tab_options']['title'] = 'Schedule';
-  $handler->display->display_options['tab_options']['weight'] = '0';
+  /* Contextual filter: OG membership: Group ID */
+  $handler->display->display_options['arguments']['gid']['id'] = 'gid';
+  $handler->display->display_options['arguments']['gid']['table'] = 'og_membership';
+  $handler->display->display_options['arguments']['gid']['field'] = 'gid';
+  $handler->display->display_options['arguments']['gid']['relationship'] = 'og_membership_rel';
+  $handler->display->display_options['arguments']['gid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['gid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['gid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['gid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['gid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['gid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['gid']['validate']['type'] = 'og';
 
   /* Display: Schedule Sign */
   $handler = $view->new_display('page', 'Schedule Sign', 'page_1');
@@ -209,6 +193,21 @@ function cod_schedule_views_default_views() {
   $handler->display->display_options['filters']['field_evttime_date_value2']['default_date'] = '10 minutes';
   $handler->display->display_options['filters']['field_evttime_date_value2']['year_range'] = '-1:+1';
   $handler->display->display_options['path'] = 'node/%/program/schedule/sessions/sign';
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['argument_input'] = array(
+    'gid' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Conference',
+    ),
+  );
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['cod_schedule'] = $view;
 
   $view = new view();
@@ -284,11 +283,11 @@ function cod_schedule_views_default_views() {
     'link' => 1,
   );
   $handler->display->display_options['fields']['field_speakers']['delta_offset'] = '0';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Room: Label */
+  $handler->display->display_options['sorts']['name']['id'] = 'name';
+  $handler->display->display_options['sorts']['name']['table'] = 'cod_event_room';
+  $handler->display->display_options['sorts']['name']['field'] = 'name';
+  $handler->display->display_options['sorts']['name']['relationship'] = 'field_timeslot_room_target_id';
   /* Sort criterion: Field collection item: Room (field_timeslot_room) */
   $handler->display->display_options['sorts']['field_timeslot_room_target_id']['id'] = 'field_timeslot_room_target_id';
   $handler->display->display_options['sorts']['field_timeslot_room_target_id']['table'] = 'field_data_field_timeslot_room';
@@ -426,16 +425,6 @@ function cod_schedule_views_default_views() {
   $handler->display->display_options['sorts']['field_timeslot_room_target_id']['field'] = 'field_timeslot_room_target_id';
   $handler->display->display_options['sorts']['field_timeslot_room_target_id']['relationship'] = 'field_session_timeslot_target_id';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Field: Conference (og_group_ref) */
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['table'] = 'og_membership';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['field'] = 'og_group_ref_target_id';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['relationship'] = 'field_timeslot_time_target_id';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['default_argument_type'] = 'cod_events_default_event';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -464,6 +453,215 @@ function cod_schedule_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $export['cod_schedule_content'] = $view;
+
+  $view = new view();
+  $view->name = 'cod_schedule_duplicate_timeslots';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'field_collection_item';
+  $view->human_name = 'Duplicate Timeslots';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Duplicate Timeslots';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'administer schedule';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'item_id' => 'item_id',
+    'field_timeslot_allowed_types' => 'field_timeslot_allowed_types',
+    'field_timeslot_room' => 'field_timeslot_room',
+    'field_evttime_date' => 'field_evttime_date',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'item_id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_timeslot_allowed_types' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_timeslot_room' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_evttime_date' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = 'Versions of COD before Beta 9 contained a bug where timeslots could be created in duplicate. You can use the following table to detect duplicate rows and delete timeslots that do not contain sessions.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  /* Relationship: Field collection item: Entity with the Scheduler (Time Slots) (field_event_timeslots) */
+  $handler->display->display_options['relationships']['field_event_timeslots_node']['id'] = 'field_event_timeslots_node';
+  $handler->display->display_options['relationships']['field_event_timeslots_node']['table'] = 'field_collection_item';
+  $handler->display->display_options['relationships']['field_event_timeslots_node']['field'] = 'field_event_timeslots_node';
+  $handler->display->display_options['relationships']['field_event_timeslots_node']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_timeslot_room_target_id']['id'] = 'field_timeslot_room_target_id';
+  $handler->display->display_options['relationships']['field_timeslot_room_target_id']['table'] = 'field_data_field_timeslot_room';
+  $handler->display->display_options['relationships']['field_timeslot_room_target_id']['field'] = 'field_timeslot_room_target_id';
+  $handler->display->display_options['relationships']['field_timeslot_room_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_timeslot_time_target_id']['id'] = 'field_timeslot_time_target_id';
+  $handler->display->display_options['relationships']['field_timeslot_time_target_id']['table'] = 'field_data_field_timeslot_time';
+  $handler->display->display_options['relationships']['field_timeslot_time_target_id']['field'] = 'field_timeslot_time_target_id';
+  $handler->display->display_options['relationships']['field_timeslot_time_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_session_timeslot_node']['id'] = 'reverse_field_session_timeslot_node';
+  $handler->display->display_options['relationships']['reverse_field_session_timeslot_node']['table'] = 'field_collection_item';
+  $handler->display->display_options['relationships']['reverse_field_session_timeslot_node']['field'] = 'reverse_field_session_timeslot_node';
+  /* Field: Bulk operations: Field collection item */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'field_collection_item';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 1,
+      'override_label' => 1,
+      'label' => 'Remove Timeslot',
+    ),
+    'action::views_bulk_operations_delete_revision' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_script_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          '_all_' => '_all_',
+        ),
+      ),
+    ),
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'url' => '',
+      ),
+    ),
+    'action::system_send_email_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::panelizer_set_status_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Field: Field collection item: Field collection item ID */
+  $handler->display->display_options['fields']['item_id']['id'] = 'item_id';
+  $handler->display->display_options['fields']['item_id']['table'] = 'field_collection_item';
+  $handler->display->display_options['fields']['item_id']['field'] = 'item_id';
+  $handler->display->display_options['fields']['item_id']['separator'] = '';
+  /* Field: Field collection item: Allowed Types */
+  $handler->display->display_options['fields']['field_timeslot_allowed_types']['id'] = 'field_timeslot_allowed_types';
+  $handler->display->display_options['fields']['field_timeslot_allowed_types']['table'] = 'field_data_field_timeslot_allowed_types';
+  $handler->display->display_options['fields']['field_timeslot_allowed_types']['field'] = 'field_timeslot_allowed_types';
+  $handler->display->display_options['fields']['field_timeslot_allowed_types']['delta_offset'] = '0';
+  /* Field: Field collection item: Room */
+  $handler->display->display_options['fields']['field_timeslot_room']['id'] = 'field_timeslot_room';
+  $handler->display->display_options['fields']['field_timeslot_room']['table'] = 'field_data_field_timeslot_room';
+  $handler->display->display_options['fields']['field_timeslot_room']['field'] = 'field_timeslot_room';
+  $handler->display->display_options['fields']['field_timeslot_room']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['field_timeslot_room']['delta_offset'] = '0';
+  /* Field: Time: Date and time */
+  $handler->display->display_options['fields']['field_evttime_date']['id'] = 'field_evttime_date';
+  $handler->display->display_options['fields']['field_evttime_date']['table'] = 'field_data_field_evttime_date';
+  $handler->display->display_options['fields']['field_evttime_date']['field'] = 'field_evttime_date';
+  $handler->display->display_options['fields']['field_evttime_date']['relationship'] = 'field_timeslot_time_target_id';
+  $handler->display->display_options['fields']['field_evttime_date']['label'] = 'Time';
+  $handler->display->display_options['fields']['field_evttime_date']['settings'] = array(
+    'format_type' => 'medium',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'reverse_field_session_timeslot_node';
+  $handler->display->display_options['fields']['nid']['label'] = 'Session(s)/Schedule Item(s)';
+  /* Sort criterion: Time: Date and time -  start date (field_evttime_date) */
+  $handler->display->display_options['sorts']['field_evttime_date_value']['id'] = 'field_evttime_date_value';
+  $handler->display->display_options['sorts']['field_evttime_date_value']['table'] = 'field_data_field_evttime_date';
+  $handler->display->display_options['sorts']['field_evttime_date_value']['field'] = 'field_evttime_date_value';
+  $handler->display->display_options['sorts']['field_evttime_date_value']['relationship'] = 'field_timeslot_time_target_id';
+  /* Sort criterion: Room: Room ID */
+  $handler->display->display_options['sorts']['evtrid']['id'] = 'evtrid';
+  $handler->display->display_options['sorts']['evtrid']['table'] = 'cod_event_room';
+  $handler->display->display_options['sorts']['evtrid']['field'] = 'evtrid';
+  $handler->display->display_options['sorts']['evtrid']['relationship'] = 'field_timeslot_room_target_id';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_event_timeslots_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'admin/conference/%/schedule/duplicates';
+  $export['cod_schedule_duplicate_timeslots'] = $view;
 
   $view = new view();
   $view->name = 'cod_schedule_timeslot_widget';

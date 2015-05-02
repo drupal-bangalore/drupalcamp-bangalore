@@ -42,12 +42,12 @@ class ticket_views_handler_field_registration_link extends views_handler_field {
   }
 
   function render_link($data, $values) {
-    $text = !empty($this->options['text']) ? $this->options['text'] : t('View');
-
-    $this->options['alter']['make_link'] = TRUE;
-    $this->options['alter']['path'] = 'ticket_registration/' . $data;
-
-    return $text;
+    if (entity_access('view', 'ticket_registration', $data)) {
+      $this->options['alter']['make_link'] = TRUE;
+      $this->options['alter']['path'] = 'ticket_registration/' . $data;
+      $text = !empty($this->options['text']) ? $this->options['text'] : t('View');
+      return $text;
+    }
   }
 
 }

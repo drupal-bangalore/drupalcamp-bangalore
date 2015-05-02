@@ -10,7 +10,7 @@
 function panelizer_schema() {
   // This should always point to our 'current' schema. This makes it
   // relatively easy to keep a record of schema as we make changes to it.
-  return panelizer_schema_3();
+  return panelizer_schema_4();
 }
 
 /**
@@ -248,6 +248,13 @@ function panelizer_schema_3() {
   return $schema;
 }
 
+function panelizer_schema_4() {
+  $schema = panelizer_schema_3();
+  $schema['panelizer_entity']['fields']['view_mode']['not null'] = TRUE;
+
+  return $schema;
+}
+
 /**
  * Implements hook_install().
  */
@@ -265,12 +272,27 @@ function panelizer_install() {
  * Implements hook_uninstall().
  */
 function panelizer_uninstall() {
-  db_delete('variable')
-    ->condition('name', 'panelizer_defaults_%')
-    ->execute();
-  db_delete('variable')
-    ->condition('name', 'panelizer_node:%')
-    ->execute();
+  foreach (entity_get_info() as $entity_type => $entity_info) {
+    if (isset($entity_info['bundles'])) {
+      foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
+        // View mode variables.
+        if (!empty($entity_info['view modes'])) {
+          foreach ($entity_info['view modes'] as $view_mode => $view_info) {
+            variable_del('panelizer_' . $entity_type . ':' . $bundle_name . ':' . $view_mode . '_selection');
+          }
+        }
+        variable_del('panelizer_' . $entity_type . ':' . $bundle_name . ':default_selection');
+        variable_del('panelizer_' . $entity_type . ':' . $bundle_name . ':page_manager_selection');
+
+        // Other variables.
+        variable_del('panelizer_defaults_' . $entity_type . '_' . $bundle_name);
+        variable_del('panelizer_' . $entity_type . ':' . $bundle_name . '_allowed_layouts');
+        variable_del('panelizer_' . $entity_type . ':' . $bundle_name . '_allowed_layouts_default');
+        variable_del('panelizer_' . $entity_type . ':' . $bundle_name . '_allowed_types');
+        variable_del('panelizer_' . $entity_type . ':' . $bundle_name . '_default');
+      }
+    }
+  }
 }
 
 /**
@@ -398,16 +420,21 @@ function panelizer_update_7105() {
 }
 
 /**
- * Add the view mode to the primary key for the panelizer_entity table.
+ * Add the view_mode to the primary key for the {panelizer_entity} table.
  */
 function panelizer_update_7106() {
   // Remove the primary key.
   db_drop_primary_key('panelizer_entity');
 
-  // Add the new index
-  db_add_primary_key('panelizer_entity', array('entity_type', 'entity_id', 'revision_id', 'view_mode'));
+  // Add the new index.
+  $success = db_add_primary_key('panelizer_entity', array('entity_type', 'entity_id', 'revision_id', 'view_mode'));
 
-  return t('Added revision support.');
+  if (!$success) {
+    throw new DrupalUpdateException(t("There's a record in the panelizer_entity table which caused an update to fail. Please see <a href=\"https://www.drupal.org/node/2410251\">https://www.drupal.org/node/2410251</a> for details on fixing the problem."));
+  }
+  else {
+    return t('The Panelizer database schema has bee updated.');
+  }
 }
 
 /**
@@ -462,4 +489,162 @@ function panelizer_update_7110() {
     ),
     array('primary key' => array('entity_type', 'entity_id', 'revision_id', 'view_mode'))
   );
+}
+
+/**
+ * This update script was removed, nothing to see here.
+ */
+function panelizer_update_7111() {
+  // Nothing.
+}
+
+/**
+ * Fix Panelizer settings.
+ */
+function panelizer_update_7112() {
+  foreach (entity_get_info() as $entity_type => $entity_info) {
+    if (!empty($entity_info) && !empty($entity_info['bundles'])) {
+      foreach ($entity_info['bundles'] as $bundle => &$bundle_info) {
+        $var_name = 'panelizer_defaults_' . $entity_type . '_' . $bundle;
+        $settings = variable_get($var_name);
+        if (!empty($settings) && !empty($settings['view modes'])) {
+          foreach ($settings['view modes'] as $view_mode => &$config) {
+            // If the bundle itself or this view mode are disabled, make sure
+            // all settings are disabled.
+            if (empty($settings['status']) || empty($config['status'])) {
+              foreach ($config as $key => $val) {
+                $config[$key] = 0;
+              }
+            }
+          }
+          // Update the settings.
+          variable_set($var_name, $settings);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Make {panelizer_entity}.view_mode NOT NULL.
+ */
+function panelizer_update_7113() {
+  db_drop_primary_key('panelizer_entity');
+  db_change_field('panelizer_entity', 'view_mode', 'view_mode',
+    array(
+      'description' => 'Contains the view mode this panelizer is for.',
+      'type' => 'varchar',
+      'length' => '128',
+      'not null' => TRUE,
+    ),
+    array('primary key' => array('entity_type', 'entity_id', 'revision_id', 'view_mode'))
+  );
+}
+
+/**
+ * Clear the menu cache to fix the display actions page arguments.
+ */
+function panelizer_update_7114() {
+  variable_set('menu_rebuild_needed', TRUE);
+}
+
+/**
+ * Ensure there's one display for each revision.
+ */
+function panelizer_update_7115() {
+  // Load any 'did' values that are used in more than one revision.
+  $dids = db_query("SELECT did
+    FROM {panelizer_entity}
+    WHERE revision_id > 0 AND did <> 0 AND did IS NOT NULL
+    GROUP BY did
+    HAVING count(revision_id) > 1")->fetchCol();
+
+  // If there are no records, there's nothing to do.
+  if (empty($dids)) {
+    drupal_set_message(t('No Panelizer display records need fixing.'));
+  }
+
+  // Track the number of records fixed.
+  $fixed = 0;
+
+  // Track the entities that need to be reset.
+  $cache_clear = array();
+
+  // Load all of the requested displays.
+  foreach (panels_load_displays($dids) as $display) {
+    // Load each panelizer_entity record for this display.
+    $panelizers = db_query("SELECT * FROM {panelizer_entity} WHERE did=:did", array(':did' => $display->did));
+    $ctr = 0;
+    foreach ($panelizers as $panelizer) {
+      // Skip the first record.
+      if ($ctr === 0) {
+        $ctr++;
+        continue;
+      }
+      $ctr++;
+
+      // Reset the 'did' value, so it will then be saved as a new display.
+      $display->did = NULL;
+
+      // Save the display, thus creating a new 'did' value.
+      panels_save_display($display);
+
+      // Assign the new display to this Panelizer record.
+      $panelizer->did = $display->did;
+
+      // Update the {panelizer} record.
+      db_update('panelizer_entity')
+        ->fields((array) $panelizer)
+        ->condition('entity_type', $panelizer->entity_type)
+        ->condition('entity_id', $panelizer->entity_id)
+        ->condition('revision_id', $panelizer->revision_id)
+        ->condition('view_mode', $panelizer->view_mode)
+        ->execute();
+
+      // Clear this entity's cache.
+      $cache_clear[$panelizer->entity_type][] = $panelizer->entity_id;
+
+      $fixed++;
+    }
+  }
+
+  // Clear the caches for any entities that are updated.
+  foreach ($cache_clear as $entity_type => $entity_ids) {
+    entity_get_controller($entity_type)->resetCache($entity_ids);
+  }
+
+  drupal_set_message(t('Fixed @fixed Panelizer record(s) that were using the same display.', array('@fixed' => $fixed)));
+}
+
+/**
+ * Ensure there's one display for each revision.
+ */
+function panelizer_update_7116() {
+  drupal_set_message(t('Note: the "Panelizer" tabs on content, user, term pages, etc have been renamed to "Customize display".'));
+}
+
+/**
+ * Clear the menu cache to pull in the new menu paths.
+ */
+function panelizer_update_7117() {
+  variable_set('menu_rebuild_needed', TRUE);
+  drupal_set_message(t('Note: the main Panelizer configuration page has moved to the "Structure" menu instead of the "Config" menu.'));
+}
+
+/**
+ * Reload the menus to fix the 'content' default local tasks.
+ */
+function panelizer_update_7118() {
+  variable_set('menu_rebuild_needed', TRUE);
+}
+
+/**
+ * Update new variables to reflect the current panelizer behavior.
+ */
+function panelizer_update_7119() {
+  foreach (node_type_get_types() as $type) {
+    $options = variable_get('node_options_' . $type->type, array('status', 'promote'));
+    $options[] = 'panelizer';
+    variable_set('node_options_' . $type->type, $options);
+  }
 }

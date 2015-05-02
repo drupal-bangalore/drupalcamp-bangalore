@@ -513,3 +513,24 @@ function ticket_update_7003() {
   $view = views_get_view('ticket_registration');
   ctools_export_crud_delete('views_view', $view);
 }
+
+/**
+ * Reverted ticket_update 7004 -- do not use that.
+ * If you ran ticket_update 7004, this will revert it back.
+ */
+function ticket_update_7005() {
+  // Modify the description on uid to distinguish uid. There's no way
+  // to update the corresponding foreign key name, but the data stays the same.
+  if (db_field_exists('ticket_registration', 'uid')) {
+    $schema = ticket_schema();
+    db_change_field('ticket_registration', 'uid', 'author_uid', $schema['ticket_registration']['fields']['author_uid']);
+    db_add_index('ticket_registration', 'author_uid', array('author_uid'));
+
+    module_load_include('inc', 'ctools', 'includes/export');
+    $view = views_get_view('ticket_user');
+    ctools_export_crud_delete('views_view', $view);
+
+    $view = views_get_view('ticket_registration');
+    ctools_export_crud_delete('views_view', $view);
+  }
+}

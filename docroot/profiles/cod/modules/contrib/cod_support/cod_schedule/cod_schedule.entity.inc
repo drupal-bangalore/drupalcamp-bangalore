@@ -98,6 +98,8 @@ class CodEventTime extends Entity {
    * @var string
    */
   public $date_label;
+  public $timezone;
+  protected $offset;
 
   public function __construct($values = array()) {
     return parent::__construct($values, 'cod_event_time');
@@ -123,28 +125,18 @@ class CodEventTime extends Entity {
   }
 
   protected function setFullLabel() {
-
-    $timezone = $this->field_evttime_date[LANGUAGE_NONE][0]['timezone'];
-    $date_field1 = $this->field_evttime_date[LANGUAGE_NONE][0]['value'];
-    $date_field1 = new DateTime($date_field1, new DateTimeZone($timezone));
-    $date_field1 = format_date($date_field1->getTimestamp(), $type = 'short');
-    $date_field2 = $this->field_evttime_date[LANGUAGE_NONE][0]['value2'];
-    $date_field2 = new DateTime($date_field2, new DateTimeZone($timezone));
-    $date_field2 = format_date($date_field2->getTimestamp(), $type = 'short');
-    $date_label = $date_field1 . '-' . $date_field2;
-
+    $date_label = $this->getTimeLabel('short');
     return $date_label;
   }
 
-  public function getTimeLabel() {
-    $timezone = $this->field_evttime_date[LANGUAGE_NONE][0]['timezone'];
+  public function getTimeLabel($type = 'cod_time') {
     $date_field1 = $this->field_evttime_date[LANGUAGE_NONE][0]['value'];
-    $date_field1 = new DateTime($date_field1, new DateTimeZone($timezone));
-    $date_field1 = format_date($date_field1->getTimestamp(), $type = 'cod_time');
+    $date_field1 = new DateTime($date_field1);
+    $date_field1 = format_date(($date_field1->getTimestamp() + $this->field_evttime_date[LANGUAGE_NONE][0]['offset']), $type);
 
     $date_field2 = $this->field_evttime_date[LANGUAGE_NONE][0]['value2'];
-    $date_field2 = new DateTime($date_field2, new DateTimeZone($timezone));
-    $date_field2 = format_date($date_field2->getTimestamp(), $type = 'cod_time');
+    $date_field2 = new DateTime($date_field2);
+    $date_field2 = format_date(($date_field2->getTimestamp() + $this->field_evttime_date[LANGUAGE_NONE][0]['offset2']), $type);
 
     return $date_field1 . '-' . $date_field2;
   }

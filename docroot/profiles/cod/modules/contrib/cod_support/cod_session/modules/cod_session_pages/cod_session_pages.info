@@ -22,9 +22,9 @@ features[panelizer_defaults][] = node:session:default:default
 features[variable][] = panelizer_defaults_node_schedule_item
 features[variable][] = panelizer_defaults_node_session
 
-; Information added by Drupal.org packaging script on 2015-03-18
-version = "7.x-1.0-beta8"
+; Information added by Drupal.org packaging script on 2015-05-01
+version = "7.x-1.0-beta9"
 core = "7.x"
 project = "cod_support"
-datestamp = "1426715316"
+datestamp = "1430468586"
 

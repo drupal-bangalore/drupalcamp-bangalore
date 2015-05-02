@@ -30,6 +30,7 @@ class views_handler_field_taxonomy extends views_handler_field {
 
   function option_definition() {
     $options = parent::option_definition();
+    $options['case'] = array('default' => 'none');
     $options['link_to_taxonomy'] = array('default' => FALSE, 'bool' => TRUE);
     $options['convert_spaces'] = array('default' => FALSE, 'bool' => TRUE);
     return $options;
@@ -50,6 +51,20 @@ class views_handler_field_taxonomy extends views_handler_field {
       '#description' => t('This allows links to work with Views taxonomy term arguments.'),
       '#type' => 'checkbox',
       '#default_value' => !empty($this->options['convert_spaces']),
+    );
+    $form['case'] = array(
+      '#type' => 'select',
+      '#title' => t('Case'),
+      '#description' => t('When taxonomy term field, select how to transform the case of the filter value.'),
+      '#options' => array(
+        'none' => t('No transform'),
+        'upper' => t('Upper case'),
+        'lower' => t('Lower case'),
+        'ucfirst' => t('Capitalize first letter'),
+        'ucwords' => t('Capitalize each word'),
+      ),
+      '#default_value' => !empty($this->options['case']) ? $this->options['case'] : 'none',
+      '#fieldset' => 'more',
     );
     parent::options_form($form, $form_state);
   }
@@ -73,6 +88,10 @@ class views_handler_field_taxonomy extends views_handler_field {
 
     if (!empty($this->options['convert_spaces'])) {
       $data = str_replace(' ', '-', $data);
+    }
+
+    if (!empty($this->options['case']) && $this->options['case'] !== 'none') {
+      $data = $this->case_transform($data, $this->options['case']);
     }
 
     return $data;

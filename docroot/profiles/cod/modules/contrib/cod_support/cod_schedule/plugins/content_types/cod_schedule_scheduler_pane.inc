@@ -114,7 +114,7 @@ function cod_schedule_schedule_admin_page($node) {
         $time_edit_uri = 'admin/conference/config/times/manage/' . $evttid;
         $row = array(
           array(
-            'data' => l($time_label, $time_edit_uri, array('query' => array('destination' => 'node/'.$node->nid.'/event/schedule'))),
+            'data' => l($time_label, $time_edit_uri, array('query' => array('destination' => 'admin/conference/'.$node->nid.'/schedule'))),
             'class' => 'cod-schedule-time-column',
           )
         );
@@ -123,7 +123,7 @@ function cod_schedule_schedule_admin_page($node) {
           if (empty($rows)) {
             $room_label = $room->extraFields->name;
             $room_edit_uri = 'admin/conference/config/rooms/manage/' . $roomid;
-            $header[] = l($room_label, $room_edit_uri, array('query' => array('destination' => 'node/'.$node->nid.'/event/schedule')));
+            $header[] = l($room_label, $room_edit_uri, array('query' => array('destination' => 'admin/conference/'.$node->nid.'/schedule')));
           }
 
           // @TODO Cache reset var is manually set to TRUE until we invalidate the cache when a schedule item is updated

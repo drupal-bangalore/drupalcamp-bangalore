@@ -16,9 +16,9 @@ files[] = includes/views/handlers/og_context_plugin_access_og_perm.inc
 files[] = og_context.test
 
 
-; Information added by drush on 2015-03-18
-version = "7.x-2.7+26-dev"
+; Information added by drush on 2015-05-01
+version = "7.x-2.7+30-dev"
 core = "7.x"
 project = "og"
-datestamp = "1426719846"
+datestamp = "1430469495"
 

@@ -39,7 +39,7 @@ class TicketRegistrationMetadataController extends EntityDefaultMetadataControll
 
     $properties['ticket_type'] = array(
       'label' => t('Ticket type entity'),
-      'type' => 'entity',
+      'type' => 'ticket_type',
       'description' => t('The loaded ticket type entity.'),
       'getter callback' => 'ticket_registration_get_properties',
     );
@@ -68,7 +68,7 @@ class TicketRegistrationMetadataController extends EntityDefaultMetadataControll
 
     $properties['user'] = array(
       'label' => t('User entity'),
-      'type' => 'entity',
+      'type' => 'user',
       'schema field' => 'user_uid',
       'description' => t('The entity for which the registration belongs to. Usually a user.'),
       'getter callback' => 'ticket_registration_get_properties',
@@ -79,7 +79,14 @@ class TicketRegistrationMetadataController extends EntityDefaultMetadataControll
       'type' => 'user',
       'schema field' => 'author_uid',
       'description' => t('The user who created the registration.'),
-      'getter callback' => 'ticket_registration_property_author_get',
+      'getter callback' => 'ticket_registration_get_properties',
+    );
+
+    $properties['label'] = array(
+      'label' => t('Registration Label'),
+      'type' => 'text',
+      'description' => t('The user who created the registration.'),
+      'getter callback' => 'ticket_registration_get_properties',
     );
 
     $properties['created'] = array(

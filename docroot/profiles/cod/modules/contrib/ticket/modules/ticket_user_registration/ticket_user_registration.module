@@ -70,7 +70,6 @@ function ticket_user_registration_form_ticket_register_form_alter(&$form, &$form
       $parent_entity = $form[$field_name]['#entity']->ticket_type();
       $user_registration_added = TRUE;
 
-      $form[$field_name]['#description'] = t('Enter ticket specific details below.');
       $form[$field_name]['ticket_user_registration_email:' . $matches[1][0]] = array(
         '#type' => 'textfield',
         '#title' => t('Registered e-mail address'),
@@ -84,11 +83,11 @@ function ticket_user_registration_form_ticket_register_form_alter(&$form, &$form
       $first_registration = FALSE;
     }
   }
-  $return_url = $parent_entity->entity_type . '/' . $parent_entity->entity_id;
+  $return_url = $parent_entity->entity_type . '/' . $parent_entity->entity_id . '/registration';
   $form['ticket_registrant'] = array(
     '#type' => 'fieldset',
     '#title' => 'Ticket Registrant',
-    '#description' => $form['#user_category'] == 'account' ? t('"Hello %email. Not you? !signout', array('%email' => $form['#user']->mail, '!signout' => l(t('Start over'), 'user/logout', array('query' => array('destination' => $return_url))))) : t('Have an account already? !signin', array('!signin' => l(t('Sign-in'), 'user/login', array('query' => array('destination' => $return_url))))),
+    '#description' => $form['#user_category'] == 'account' ? t('Hello %email. Not you? !signout.', array('%email' => $form['#user']->mail, '!signout' => l(t('Start over'), 'user/logout', array('query' => array('destination' => $return_url))))) : t('Have an account already? !signin', array('!signin' => l(t('Sign-in'), 'user/login', array('query' => array('destination' => $return_url))))),
     '#weight' => -1000,
   );
   $form['ticket_registrant']['ticket_user_registrant_email'] = array(

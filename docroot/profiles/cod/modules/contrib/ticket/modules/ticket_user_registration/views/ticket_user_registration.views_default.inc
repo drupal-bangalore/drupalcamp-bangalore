@@ -120,12 +120,14 @@ function ticket_user_registration_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'author_uid';
-  $handler->display->display_options['fields']['name']['label'] = 'Registrant';
-  /* Field: Ticket registration: Date created */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'ticket_registration';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['name']['label'] = 'Registrar';
+  if (module_exists('ticket_state')) {
+    /* Field: Ticket registration: Order state */
+    $handler->display->display_options['fields']['state']['id'] = 'state';
+    $handler->display->display_options['fields']['state']['table'] = 'ticket_registration';
+    $handler->display->display_options['fields']['state']['field'] = 'state';
+    $handler->display->display_options['fields']['state']['label'] = 'Status';
+  }
   /* Field: Ticket registration: Link */
   $handler->display->display_options['fields']['view_registration']['id'] = 'view_registration';
   $handler->display->display_options['fields']['view_registration']['table'] = 'ticket_registration';
@@ -149,14 +151,12 @@ function ticket_user_registration_views_default_views() {
   $handler->display->display_options['arguments']['user_uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['user_uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['user_uid']['summary_options']['items_per_page'] = '25';
-  if (module_exists('ticket_state')) {
-    /* Filter criterion: Ticket registration: State */
-    $handler->display->display_options['filters']['state']['id'] = 'state';
-    $handler->display->display_options['filters']['state']['table'] = 'ticket_registration';
-    $handler->display->display_options['filters']['state']['field'] = 'state';
-    $handler->display->display_options['filters']['state']['value'] = 'completed';
-    $handler->display->display_options['filters']['state']['group'] = 1;
-  }
+  /* Filter criterion: Ticket registration: Author entity uid */
+  $handler->display->display_options['filters']['author_uid']['id'] = 'author_uid';
+  $handler->display->display_options['filters']['author_uid']['table'] = 'ticket_registration';
+  $handler->display->display_options['filters']['author_uid']['field'] = 'author_uid';
+  $handler->display->display_options['filters']['author_uid']['operator'] = '!=';
+  $handler->display->display_options['filters']['author_uid']['value']['value'] = '***!1***';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');

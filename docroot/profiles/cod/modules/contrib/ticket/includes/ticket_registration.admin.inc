@@ -63,7 +63,6 @@ function ticket_registration_view($entity_type, $entity) {
  * Implements ENTITY_TYPE_form().
  */
 function ticket_registration_form($form, &$form_state, $entity, $op = 'edit') {
-
   // Attach the fields for this ticket registration.
   field_attach_form('ticket_registration', $entity, $form, $form_state);
 
@@ -93,6 +92,7 @@ function ticket_registration_form($form, &$form_state, $entity, $op = 'edit') {
  * ENTITY_TYPE_form() submit callback.
  */
 function ticket_registration_form_submit($form, &$form_state) {
+  global $user;
   $ticket_registration = entity_ui_form_submit_build_entity($form, $form_state);
 
   // Set the properties.
@@ -119,7 +119,11 @@ function ticket_registration_form_submit($form, &$form_state) {
     $ticket_registration->is_new_revision = TRUE;
   }
 
+  $form_state['redirect'] = 'user/'. $user->uid .'/tickets';
+  drupal_set_message("Ticket Successfully Updated");
+
   $ticket_registration->save();
+  $form_state['ticket_registration'] = $ticket_registration;
 }
 
 /**
