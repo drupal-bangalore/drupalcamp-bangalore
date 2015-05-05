@@ -10,9 +10,9 @@ dependencies[] = commerce_discount
 files[] = includes/views/handlers/commerce_discount_usage_handler_field_commerce_discount_analytics.inc
 
 
-; Information added by drush on 2015-05-01
+; Information added by drush on 2015-05-05
 version = "7.x-1.0-alpha4+22-dev"
 core = "7.x"
 project = "commerce_discount"
-datestamp = "1430469500"
+datestamp = "1430784200"
 

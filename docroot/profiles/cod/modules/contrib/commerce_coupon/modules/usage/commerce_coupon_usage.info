@@ -13,9 +13,9 @@ files[] = includes/views/commerce_coupon_usage.views.inc
 files[] = includes/commerce_coupon_usage.controller.inc
 
 
-; Information added by drush on 2015-05-01
+; Information added by drush on 2015-05-05
 version = "7.x-2.0-beta4+13-dev"
 core = "7.x"
 project = "commerce_coupon"
-datestamp = "1430469500"
+datestamp = "1430784200"
 
