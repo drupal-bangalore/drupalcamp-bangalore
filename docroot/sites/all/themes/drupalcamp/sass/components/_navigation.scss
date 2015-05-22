@@ -1,0 +1,40 @@
+ul{
+	li{
+		list-style:none !important;
+	}
+}
+.navigation_wrapper{
+	@include breakpoint($mob){
+		display:none;
+	}
+	background: #3c9dfc;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+	 @include pie-element();
+	@include float(left);
+	width:100%;
+	ul.menu{
+		text-align: center;
+		li{
+			display:inline-block;
+			padding:15px 30px;
+			@include breakpoint($mob){
+				width:100%;
+				text-align:left;
+				padding: 3px 20px;
+			}
+			a{
+				text-decoration:none;
+				color:white;
+			}
+		}
+		li.expanded{
+			ul{
+				display:none
+			}
+		}
+	}
+}
+@media only screen  and (min-device-width: 320px)   and (max-device-width: 480px)
+  {
+
+}

@@ -1,0 +1,110 @@
+@mixin butsty{
+  @include border-radius(4px);
+  @include font-size(13px);
+  @include line-height(20px);
+  @include background(linear-gradient(#56c7ff 0%, #56c7ff 30%, #2f89b6 100%));
+  font-family: $Conv_lucida_grande_bold;
+  display: inline-block; 
+  min-width: 170px;
+  // -pie-background: linear-gradient(#56c7ff 0%, #56c7ff 30%, #2f89b6 100%);
+  padding:0;
+  @include pie-element;
+  
+  a{
+    padding:3px 25px 3px 20px;
+    color:#fff;
+    display: block;
+    background: url(../images/boxarrows.png) no-repeat 96% 10px;
+  }
+  &.imgcen a{
+    background-position:96% 20px;
+  }
+  @include breakpoint($mob-centxt){
+    &.mobcen a{
+      background-position:96% 20px;
+    }
+  }
+}
+
+@mixin butstyhover{
+  @include background(linear-gradient(#ffffff 0%, #d8d8d8 100%));
+  border:1px solid #f2f2f2;
+  // -pie-background: linear-gradient(#ffffff 0%, #d8d8d8 100%);
+  a{
+    background-position: 96% -35px;
+    color:#2f89b6;
+    text-decoration: none!important;
+    padding:2px 25px 2px 20px;
+  }
+  &.imgcen a{
+    background-position:96% -25px;
+  }
+  @include breakpoint($mob-centxt){
+    &.mobcen a{
+      background-position:96% -25px;
+    }
+  }
+}
+
+@mixin butstyblue($appr: "true"){
+  @include border-radius(4px);
+  @include font-size(13px);
+  @include line-height(20px);
+  @include background(linear-gradient(#ffffff 0%, #d8d8d8 100%));
+  font-family: $Conv_lucida_grande_bold;
+  border:1px solid #f2f2f2;
+  min-width: 165px;
+  display: inline-block; 
+  padding:0;
+  // -pie-background: linear-gradient(#ffffff 0%, #d8d8d8 100%);
+  @if $appr == "true" {
+    @include pie-element;
+  } @else {
+    @include pie-element(z-index);
+  }
+
+  a{
+    padding:2px 15px 2px 10px;
+    color:#2f89b6;
+    display: block;
+    background: url(../images/boxarrows.png) no-repeat 96% -35px;
+    text-decoration: none;
+  }
+  &.imgcen a{
+    background-position:96% -25px;
+  }
+  @include breakpoint($mob-centxt){
+    &.mobcen a{
+      background-position:96% -25px;
+    }
+  }
+}
+
+@mixin butstybluehover{
+  @include background(linear-gradient(#56c7ff 0%, #56c7ff 30%, #2f89b6 100%));
+  border:0 none;
+  // -pie-background: linear-gradient(#56c7ff 0%, #56c7ff 30%, #2f89b6 100%);
+  a{
+    background-position: 96% 10px;
+    color:#fff;
+    padding:3px 15px 3px 10px;
+  }
+   &.imgcen a{
+    background-position:96% 20px;
+  }
+  @include breakpoint($mob-centxt){
+    &.mobcen a{
+      background-position:96% 20px;
+    }
+  }
+}
+
+@mixin pie-element($approach: $pie-default-approach, $z-index: 0) {
+  behavior: $pie-behavior;
+  @if $approach == relative {
+    position: relative;
+  }
+  @else if $approach == z-index {
+    z-index: 999;
+  }
+}
