@@ -264,7 +264,7 @@ body {
   }
 }
 /* line 106, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 {
+.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 {
   margin-left: 25%;
   position: absolute;
   top: 100px;
@@ -273,7 +273,7 @@ body {
 }
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 106, ../sass/components/_maincontnt.scss */
-  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 {
+  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 {
     margin-left: 0;
     position: static;
     width: 100%;
@@ -284,30 +284,30 @@ body {
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   /* line 106, ../sass/components/_maincontnt.scss */
-  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 {
+  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 {
     top: 85px;
     margin-left: 30%;
   }
 }
 /* line 126, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 div.view-content .views-row-1, .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 div.view-content .views-row-2 {
+.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-1, .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
   display: inline-block;
 }
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 126, ../sass/components/_maincontnt.scss */
-  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 div.view-content .views-row-1, .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 div.view-content .views-row-2 {
+  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-1, .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
     padding: 0 20px;
     float: left;
     width: 50%;
   }
 }
 /* line 134, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 div.view-content .views-row-2 {
+.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
   float: right;
 }
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 134, ../sass/components/_maincontnt.scss */
-  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1 div.view-content .views-row-2 {
+  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
     background: #b2d9ff;
     float: none;
     clear: both;
@@ -366,7 +366,7 @@ body {
 }
 
 /* line 189, ../sass/components/_maincontnt.scss */
-.panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 {
+.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 {
   padding-bottom: 6%;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZlYjQ0OSIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZmVjYTdmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #feb449), color-stop(30%, #feca7f), color-stop(100%, #ffffff));
@@ -379,7 +379,7 @@ body {
   position: relative;
 }
 /* line 193, ../sass/components/_maincontnt.scss */
-.panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 .view-content {
+.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content {
   display: table;
   float: none;
   margin: 0 auto;
@@ -388,11 +388,11 @@ body {
 }
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 193, ../sass/components/_maincontnt.scss */
-  .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 .view-content {
+  .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content {
     width: 94%;
   }
   /* line 201, ../sass/components/_maincontnt.scss */
-  .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 .view-content .views-row {
+  .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content .views-row {
     float: left;
     width: 154px;
     margin-left: 15px;
@@ -400,23 +400,23 @@ body {
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   /* line 193, ../sass/components/_maincontnt.scss */
-  .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 .view-content {
+  .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content {
     width: 100%;
     padding-top: 4%;
     text-align: center;
   }
   /* line 211, ../sass/components/_maincontnt.scss */
-  .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 .view-content img {
+  .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content img {
     width: 75%;
   }
 }
 /* line 215, ../sass/components/_maincontnt.scss */
-.panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 .view-content .views-row {
+.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content .views-row {
   display: table-cell;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   /* line 215, ../sass/components/_maincontnt.scss */
-  .panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2 .view-content .views-row {
+  .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content .views-row {
     display: inline-block;
   }
 }
@@ -498,7 +498,7 @@ body {
   width: 100%;
 }
 /* line 287, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsers-panel-pane-3 {
+.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 {
   display: block;
   min-height: 150px;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZDJkMmQyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODQ4NDg0Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
@@ -513,26 +513,26 @@ body {
 }
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 287, ../sass/components/_maincontnt.scss */
-  .panel-panel.panel-col-bottom .pane-drupal-camp-sponsers-panel-pane-3 {
+  .panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 {
     background: none;
   }
 }
 /* line 297, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsers-panel-pane-3 .view-content {
+.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
   text-align: center;
 }
 /* line 299, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsers-panel-pane-3 .view-content .silverspon-wrap {
+.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap {
   padding: 12px;
 }
 /* line 301, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsers-panel-pane-3 .view-content .silverspon-wrap div {
+.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap div {
   display: inline-block;
   margin: 0 6px;
 }
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 301, ../sass/components/_maincontnt.scss */
-  .panel-panel.panel-col-bottom .pane-drupal-camp-sponsers-panel-pane-3 .view-content .silverspon-wrap div {
+  .panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap div {
     margin-top: 10px;
   }
 }
