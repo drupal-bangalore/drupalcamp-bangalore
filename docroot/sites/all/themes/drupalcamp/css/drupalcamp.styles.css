@@ -206,17 +206,15 @@ body {
 /* line 62, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-top .sponTxt {
   position: absolute;
-  top: 149px;
+  top: 45%;
   z-index: 67;
   color: #02698c;
-  left: 41%;
   font-weight: bold;
   font-size: 22px;
 }
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 62, ../sass/components/_maincontnt.scss */
   .panel-panel.panel-col-top .sponTxt {
-    left: 22%;
     top: 122px;
   }
 }
@@ -380,6 +378,7 @@ body {
 }
 /* line 193, ../sass/components/_maincontnt.scss */
 .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content {
+    text-align: center;
   display: table;
   float: none;
   margin: 0 auto;
@@ -519,7 +518,12 @@ body {
 }
 /* line 297, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
-  text-align: center;
+    text-align: center;
+    display: table;
+    float: none;
+    margin: 0 auto;
+    padding-top: 2%;
+    width: 75%;
 }
 /* line 299, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap {
@@ -536,6 +540,47 @@ body {
     margin-top: 10px;
   }
 }
+
+/* Silver Block */
+
+@media (min-width: 320px) and (max-width: 640px) {
+
+    .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-3 .view-content {
+        width: 94%;
+    }
+
+    .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
+        float: left;
+        width: 154px;
+        margin-left: 15px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-3 .view-content {
+        width: 100%;
+        padding-top: 4%;
+        text-align: center;
+    }
+
+    .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-3 .view-content img {
+        width: 75%;
+    }
+}
+
+.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
+    display: table-cell;
+    padding-left: 20px;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
+        display: inline-block;
+    }
+}
+
+/* ---- */
+
 /* line 313, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu {
   min-height: 100px;
@@ -634,6 +679,7 @@ body {
 
 /* line 388, ../sass/components/_maincontnt.scss */
 .silverspon-wrap {
+    padding-top: 20px;
   margin: 0 auto;
   text-align: center;
   width: 100%;

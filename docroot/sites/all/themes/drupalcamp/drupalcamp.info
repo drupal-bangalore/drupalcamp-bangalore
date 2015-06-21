@@ -12,6 +12,7 @@ stylesheets[all][] = css/drupalcamp.normalize.css
 stylesheets[all][] = css/drupalcamp.hacks.css
 stylesheets[all][] = css/drupalcamp.styles.css
 stylesheets[all][] = css/drupalcamp.no-query.css
+stylesheets[all][] = css/drupalcamp.forms.css
 
 ; ========================================
 ; Scripts

@@ -1,0 +1,190 @@
+.section-outer-wrapper h1{
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: 20px;
+    color: #606060;
+}
+
+.field--name-ticket-type-label{
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.form-item-ticket-quantity-1 label{
+    font-weight: 100;
+}
+
+.ticket-type-ticket-type{
+    text-align: center;
+}
+
+#ticket-field-formatter-view-form{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.panel-layout{
+    max-width: 100%;
+}
+
+input[type="submit"]{
+    background: none;
+    border: solid 2px #21a2e1;
+    color: #21a2e1;
+    padding: 15px 40px;
+    font-size: 18px;
+}
+
+input[type="submit"]:hover{
+    transition: all 0.5s ease;
+    background: #21a2e1;
+    border: solid 2px #21a2e1;
+    color: #ffffff;
+    padding: 15px 40px;
+    font-size: 18px;
+}
+
+.form-item-ticket-quantity-1 input[type="text"]{
+    width: 100px;
+    background: none;
+    border: solid 2px #21a2e1;
+    color: #21a2e1;
+    padding: 10px 20px;
+    font-size: 14px;
+    outline: none;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.form-item-ticket-quantity-1 input[type="text"]:focus{
+    width: 100px;
+    background: none;
+    border: solid 2px #21a2e1;
+    color: #21a2e1;
+    padding: 10px 20px;
+    font-size: 14px;
+    outline: none;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+.ticket-type-ticket-type .content label{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+form{
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+form label{
+    margin-left: 10%;
+    display: block;
+    text-align: justify;
+    padding-bottom: 5px;
+    color: #606060;
+    font-size: 16px;
+}
+
+input[type="text"]{
+    width: 80%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2e2e2;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus{
+    width: 80%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2583c;
+    border-radius: 5px;
+}
+
+input[type="password"]{
+    width: 80%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2e2e2;
+    border-radius: 5px;
+}
+
+input[type="password"]:focus{
+    width: 80%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2583c;
+    border-radius: 5px;
+}
+
+.form-type-select label{
+    margin-left: 10%;
+}
+
+select{
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2e2e2;
+    border-radius: 5px;
+}
+
+select:focus{
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2583c;
+    border-radius: 5px;
+}
+
+
+.form-wrapper{
+    border-style: none;
+}
+
+legend{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form-textarea-wrapper{
+    margin-left: 10%;
+    margin-right: 10%;
+    max-width: 80%;
+}
+
+.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1{
+    margin-right: 25%;
+}
+
+.sponTxt{
+    width: 100%;
+    text-align: center;
+    right: auto;
+}
+
+ul .breadcrumb{
+   margin-top: 10px;
+}
+
+.breadcrumb li{
+    display: inline;
+    padding-left: 30px;
+}
+
