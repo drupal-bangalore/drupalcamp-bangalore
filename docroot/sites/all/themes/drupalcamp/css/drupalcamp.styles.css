@@ -120,9 +120,14 @@ a {
 
 /* line 4, ../sass/components/_maincontnt.scss */
 body {
-  font-family: verdana, arial, sans-serif;
+  font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
   overflow-x: hidden;
 }
+
+.site-logo{
+    background-color: #ffffff;
+}
+
 
 /* line 9, ../sass/components/_maincontnt.scss */
 .panel-display > .center-wrapper {
@@ -136,7 +141,6 @@ body {
 
 /* line 11, ../sass/components/_maincontnt.scss */
 .panel-pane.pane-node-body {
-  background: #b2d9ff;
   margin-top: -13px;
 }
 /* line 15, ../sass/components/_maincontnt.scss */
@@ -379,6 +383,7 @@ body {
 /* line 193, ../sass/components/_maincontnt.scss */
 .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content {
     text-align: center;
+    table-layout: fixed;
   display: table;
   float: none;
   margin: 0 auto;
@@ -444,6 +449,7 @@ body {
 /* line 238, ../sass/components/_maincontnt.scss */
 .center-wrapper .panel-col-first .view-related-articles .view-content .views-row .views-field-title {
   text-align: center;
+    padding-bottom: 10px;
 }
 /* line 246, ../sass/components/_maincontnt.scss */
 .center-wrapper .panel-col-first .views-field.views-field-view-node .field-content a {
@@ -462,6 +468,19 @@ body {
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
 }
+
+/* Blog Article Image */
+
+.field-content p{
+    padding-top: 10px;
+    text-align: justify;
+}
+
+.field-content h3{
+    text-align: left;
+}
+
+
 /* line 260, ../sass/components/_maincontnt.scss */
 .center-wrapper .panel-col-last {
   width: 30%;
@@ -519,6 +538,7 @@ body {
 /* line 297, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
     text-align: center;
+    table-layout: fixed;
     display: table;
     float: none;
     margin: 0 auto;
