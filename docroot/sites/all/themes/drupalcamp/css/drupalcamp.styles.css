@@ -158,7 +158,7 @@ body {
 }
 /* line 28, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-top .bxslider-wrap .views-row {
-  opacity: 0.3;
+  opacity: 0.5;
   filter: alpha(opacity=30);
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
@@ -212,10 +212,15 @@ body {
   position: absolute;
   top: 45%;
   z-index: 67;
-  color: #02698c;
+  color: rgba(1,1,1,0.7);
   font-weight: bold;
   font-size: 22px;
 }
+
+.panel-panel.panel-col-top .sponTxt{
+    text-shadow: 0px 0 15px #fff;
+}
+
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 62, ../sass/components/_maincontnt.scss */
   .panel-panel.panel-col-top .sponTxt {
@@ -364,19 +369,19 @@ body {
 
 /* line 185, ../sass/components/_maincontnt.scss */
 .panels-ipe-paneid-8 {
-  background: #ffb54c;
+  background: #ffb90f;
 }
 
 /* line 189, ../sass/components/_maincontnt.scss */
 .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 {
   padding-bottom: 6%;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZlYjQ0OSIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZmVjYTdmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #feb449), color-stop(30%, #feca7f), color-stop(100%, #ffffff));
-  background: -webkit-linear-gradient(#feb449 0%, #feca7f 30%, #ffffff 100%);
-  background: -moz-linear-gradient(#feb449 0%, #feca7f 30%, #ffffff 100%);
-  background: -o-linear-gradient(#feb449 0%, #feca7f 30%, #ffffff 100%);
-  -pie-background: linear-gradient(#feb449 0%, #feca7f 30%, #ffffff 100%);
-  background: linear-gradient(#feb449 0%, #feca7f 30%, #ffffff 100%);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffb90f), color-stop(30%, #ffffff), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
+  background: -moz-linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
+  background: -o-linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
+  -pie-background: linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
+  background: linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
 }
@@ -604,13 +609,13 @@ body {
 /* line 313, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu {
   min-height: 100px;
-  background: #262c44;
+  background: #3c9dfc;
   float: left;
   width: 100%;
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
   behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc);
+    display: none;
 }
 /* line 322, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu {
@@ -624,16 +629,19 @@ body {
 }
 /* line 328, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu li a {
-  color: #4a6592;
-  font-weight: bold;
+  color: #ffffff;
+    letter-spacing: 2px;
 }
 
 /* line 336, ../sass/components/_maincontnt.scss */
 .footer_wrapper {
-  background: #496491;
+  background: #3c9dfc;
   padding-bottom: 5%;
   float: left;
   width: 100%;
+    color: #ffffff;
+    height: 125px;
+    letter-spacing: 1px;
 }
 /* line 341, ../sass/components/_maincontnt.scss */
 .footer_wrapper footer {
@@ -661,7 +669,7 @@ body {
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 347, ../sass/components/_maincontnt.scss */
   .panel-panel.panel-col-top .views-field.views-field-field-sponsor-logo {
-    height: 137px;
+
   }
 }
 @media (min-width: 320px) and (max-width: 640px) {
@@ -675,10 +683,6 @@ body {
   }
 }
 /* line 370, ../sass/components/_maincontnt.scss */
-.panel-panel.panel-col-top .views-field.views-field-field-sponsor-logo .field-content {
-  padding-left: 15px;
-  padding-top: 44px;
-}
 @media (min-width: 320px) and (max-width: 640px) {
   /* line 370, ../sass/components/_maincontnt.scss */
   .panel-panel.panel-col-top .views-field.views-field-field-sponsor-logo .field-content {
@@ -693,7 +697,7 @@ body {
 @media (min-width: 768px) and (max-width: 1023px) {
   /* line 370, ../sass/components/_maincontnt.scss */
   .panel-panel.panel-col-top .views-field.views-field-field-sponsor-logo .field-content {
-    padding-top: 30px;
+
   }
 }
 
@@ -704,6 +708,17 @@ body {
   text-align: center;
   width: 100%;
 }
+
+.silverspon-wrap.gold-header h3{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.silverspon-wrap.silver-header h3{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 /* line 392, ../sass/components/_maincontnt.scss */
 .silverspon-wrap .odd, .silverspon-wrap .even {
   width: 154px;
@@ -758,6 +773,20 @@ ul li {
   text-decoration: none;
   color: white;
 }
+
+a:hover{
+    transition: all 0.3s linear;
+    text-shadow: 0px 0 15px #fff;
+}
+
+.navigation_wrapper ul.menu li a:hover {
+    transition: all 0.3s linear;
+    opacity: 0.8;
+    text-decoration: none;
+    color: #ffffff;
+    text-shadow: 0px 0 15px #fff;
+}
+
 /* line 31, ../sass/components/_navigation.scss */
 .navigation_wrapper ul.menu li.expanded ul {
   display: none;

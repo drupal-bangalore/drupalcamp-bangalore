@@ -10,6 +10,25 @@
 
 
 /* Registration Form */
+
+#ticket-register-form #edit-ticket-registrant legend{
+    margin-left: 4%;
+}
+
+#ticket-register-form #fieldset-legend legend{
+    margin-left: 10%;
+}
+
+#edit-field-speakers{
+    margin-left: 10%;
+}
+
+#edit-field-speakers .description{
+    margin-left: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .field--name-ticket-type-label{
     font-size: 20px;
     font-weight: 100;
@@ -157,6 +176,18 @@ select:focus{
     border-style: none;
 }
 
+#edit-ticket-registrationnew-0 .fieldset-legend{
+    width: 100%;
+    margin-left: 50%;
+}
+
+.fieldset-legend{
+    width: 100%;
+    margin-left: 30%;
+    display: inline-block;
+    text-align: center;
+}
+
 legend{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -290,6 +321,10 @@ footer.node__submitted{
     padding-top: 20px;
 }
 
+.block-views-camp-sessions-block .views-row{
+    text-align: left;
+}
+
 /* Program Page */
 
 .node-23 h2{
@@ -297,9 +332,9 @@ footer.node__submitted{
 }
 
 /* Sessions page */
-.node-25 p{
+.node-25 .field__items p{
     font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
-    text-align: center;
+    margin-left: 7%;
 }
 
 .node-25 p a{
@@ -317,7 +352,8 @@ footer.node__submitted{
 }
 
 .block.block--views.block--views-camp-sessions-block{
-    text-align: center;
+    text-align: left;
+    margin-left: 10%;
 }
 
 .block.block--views.block--views-camp-sessions-block .view-content .field-content{
@@ -326,9 +362,19 @@ footer.node__submitted{
 
 .block.block--views.block--views-camp-sessions-block .view-content .field-content p{
     display: inherit;
-    margin-left: 10%;
     margin-right: 10%;
     text-align: justify;
+    font-size: 18px;
+    line-height: 175%;
+}
+
+.panel-pane.pane-entity-field.pane-node-body p{
+    display: inherit;
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 175%;
 }
 
 span.field-content{
@@ -467,7 +513,7 @@ input.form-submit{
 }
 
 .field.field--name-field-article-image.field--type-image.field--label-above .field__items{
-    margin-left: 10%;
+    text-align: center;
     padding-bottom: 20px;
 }
 
@@ -475,5 +521,153 @@ input.form-submit{
     .field.field--name-field-article-image.field--type-image.field--label-above .field__items{
         margin-left: 0;
     }
+}
+
+/* User Profile */
+.user-profile{
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 20px;
+    color: #27ae60;
+    letter-spacing: 2px;
+}
+
+/* User Menu */
+
+.block.block--menu.block--menu-menu-anonymous-user-menu{
+    display: inline;
+    position: absolute;
+    top: 40px;
+    right: 19%;
+    font-size: 14px;
+}
+
+.block.block--menu.block--menu-menu-anonymous-user-menu ul{
+    display: inline;
+    line-height: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.block.block--menu.block--menu-menu-anonymous-user-menu ul a{
+    color: #3c9dfc;
+}
+
+.block.block--system.block--menu.block--system-user-menu{
+    display: inline-block;
+    position: absolute;
+    top: 40px;
+    right: 9%;
+    font-size: 14px;
+}
+
+.block.block--system.block--menu.block--system-user-menu ul{
+    line-height: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.block.block--system.block--menu.block--system-user-menu ul a{
+    color: #3c9dfc;
+}
+
+
+/*Session Page Firefox Styles */
+.collapsible.required-fields .group-audience.field-group-fieldset.form-wrapper.collapse-processed{
+    text-align: center;
+}
+
+#edit-field-slides-und legend{
+    margin-left: 8%;
+    font-weight: bold;
+}
+
+.group-audience.field-group-fieldset.form-wrapper.collapse-processed legend{
+    margin-left: 8%;
+    font-weight: bold;
+}
+
+.group-audience.field-group-fieldset.form-wrapper.collapse-processed a{
+    color: #606060;
+}
+
+/* Camp Summary */
+.camp-summary p{
+    margin-right: 10%;
+    margin-left: 10% ;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 175%;
+}
+
+/* Articles on Front page */
+.views-field.views-field-field-article-image img:hover{
+    opacity: 0.8;
+}
+
+.panel-panel.panel-col-first p{
+    margin-right: 10%;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 175%;
+}
+
+/* Blog Page */
+.node.node--blog.node--full.node--blog--full .field__items{
+    margin-right: 10%;
+    margin-left: 10% ;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 175%;
+}
+
+.comments__form-title{
+    margin-right: 10%;
+    margin-left: 10% ;
+    text-align: justify;
+    padding-top: 20px;
+}
+
+.view.view-blogs.view-id-blogs.view-display-id-page {
+    margin-right: 10%;
+    margin-left: 10% ;
+    text-align: justify;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.view.view-blogs.view-id-blogs.view-display-id-page  p{
+    text-align: justify;
+    font-size: 18px;
+    line-height: 175%;
+}
+
+/* Individual Sponsor Page */
+
+.node.node--sponsor.node--full.node--sponsor--full{
+    text-align: center;
+}
+
+.node.node--sponsor.node--full.node--sponsor--full .field.field--name-field-sponsor-logo.field--type-image.field--label-above .field__label{
+    display: none;
+}
+
+.field.field--name-field-sponsor-body.field--type-text-with-summary.field--label-above p{
+    display: inherit;
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 175%;
+}
+
+.field.field--name-field-sponsor-body.field--type-text-with-summary.field--label-above .field__label{
+    display: none;
+}
+
+.field.field--name-og-group-ref.field--type-entityreference.field--label-above{
+    display: none;
 }
 
