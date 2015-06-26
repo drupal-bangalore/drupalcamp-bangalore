@@ -671,3 +671,79 @@ input.form-submit{
     display: none;
 }
 
+/* Table Listing for Blogs */
+.view.view-blogs.view-id-blogs.view-display-id-page{
+    text-align: center;
+}
+
+.view.view-blogs.view-id-blogs.view-display-id-page .view-content{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.view-content .views-field.views-field-title{
+    width: 80%;
+    text-align: center;  %;
+}
+
+.views-field.views-field-comment-count{
+    width: 20%;
+    text-align: center;
+}
+
+.views-table.cols-2{
+    width: 100%;
+}
+
+.views-table.cols-2 thead tr th{
+    padding: 1%;
+    background: linear-gradient(#33cfff 0%, #3392fe 100%);
+    opacity: 0.7;
+    color: #fff;
+    border: 1px solid white;
+    border-spacing: 0
+    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+}
+
+.views-table.cols-2 tbody tr td{
+    color: #33cfff;
+    background-color: white;
+    line-height: 400%;
+}
+
+.views-table.cols-2 tbody tr td a{
+    color: #1f1f1f;
+}
+
+.views-table.cols-2 tbody tr td a:hover{
+    color: #e2583c;
+    transition: all 0.5s ease;
+}
+
+
+.views-table.cols-2{
+    margin-bottom: 20px;
+    border: 1px solid white;
+}
+
+th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+th:only-child{
+    border-radius: 8px 8px 0 0;
+}
+
+
+/* Individual Blog Page */
+.comment-wrapper.comments{
+    margin-left: 10%;
+}
+
+.comment.comment--by-viewer{
+    margin-left: 10%;
+}
