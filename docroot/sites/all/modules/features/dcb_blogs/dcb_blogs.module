@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the DCB Blogs feature.
+ */
+
+include_once 'dcb_blogs.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the DCB Carousel feature.
+ */
+
+include_once 'dcb_carousel.features.inc';
