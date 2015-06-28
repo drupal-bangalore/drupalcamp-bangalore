@@ -36,44 +36,16 @@ header {
 /* line 9, ../sass/base/_header.scss */
 header .header-row .section-outer-wrapper .section-inner-wrapper .sharebuttons {
   float: right;
-  margin-right: 2%;
-  padding-top: 1%;
-}
-@media (min-width: 320px) and (max-width: 640px) {
-  /* line 9, ../sass/base/_header.scss */
-  header .header-row .section-outer-wrapper .section-inner-wrapper .sharebuttons {
-    display: none;
-  }
+  margin-right: 10%;
 }
 /* line 16, ../sass/base/_header.scss */
 header .header-row .section-outer-wrapper .section-inner-wrapper .sharebuttons div {
   display: inline-block;
   margin-left: 10px;
 }
-/* line 21, ../sass/base/_header.scss */
-header .header-row .section-outer-wrapper .section-inner-wrapper #block-menu-menu-header-highlight-menu {
-  margin-right: 2%;
-  clear: both;
-  float: right;
-}
-/* line 25, ../sass/base/_header.scss */
-header .header-row .section-outer-wrapper .section-inner-wrapper #block-menu-menu-header-highlight-menu ul {
-  margin-top: 0px;
-}
-/* line 27, ../sass/base/_header.scss */
-header .header-row .section-outer-wrapper .section-inner-wrapper #block-menu-menu-header-highlight-menu ul li {
-  display: inline-block;
-}
-/* line 29, ../sass/base/_header.scss */
-header .header-row .section-outer-wrapper .section-inner-wrapper #block-menu-menu-header-highlight-menu ul li a {
-  font-size: 12px;
-  color: black;
-  font-weight: bold;
-}
 /* line 37, ../sass/base/_header.scss */
-header .header-row .section-outer-wrapper .section-inner-wrapper .site-logo {
+header .header-row .section-outer-wrapper .section-inner-wrapper .site-logo a{
   display: block;
-  margin: auto;
 }
 /* line 40, ../sass/base/_header.scss */
 header .header-row .section-outer-wrapper .section-inner-wrapper .site-logo img {
@@ -126,6 +98,7 @@ body {
 
 .site-logo{
     background-color: #ffffff;
+    margin: auto auto;
 }
 
 
@@ -175,6 +148,7 @@ body {
 }
 /* line 41, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-top .btnWrap a {
+    text-align: center;
   padding: 1%;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzMzY2ZmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzMzOTJmZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #33cfff), color-stop(100%, #3392fe));
@@ -186,7 +160,8 @@ body {
   border-radius: 7px;
   color: #fff;
   font-size: 12px;
-  top: 66px;
+    width: 100px;
+  top: 56px;
   z-index: 67;
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
@@ -506,12 +481,13 @@ body {
 }
 /* line 268, ../sass/components/_maincontnt.scss */
 .center-wrapper .panel-col-last .sharebuttons {
-  float: none;
   margin-left: 2%;
   padding-top: 1%;
 }
 /* line 272, ../sass/components/_maincontnt.scss */
 .center-wrapper .panel-col-last .sharebuttons div {
+    float: left;
+    position: absolute;
   display: inline-block;
   margin-left: 10px;
 }
@@ -745,12 +721,6 @@ ul li {
   float: left;
   width: 100%;
 }
-@media (min-width: 320px) and (max-width: 640px) {
-  /* line 6, ../sass/components/_navigation.scss */
-  .navigation_wrapper {
-    display: none;
-  }
-}
 /* line 15, ../sass/components/_navigation.scss */
 .navigation_wrapper ul.menu {
   text-align: center;
@@ -760,14 +730,7 @@ ul li {
   display: inline-block;
   padding: 15px 30px;
 }
-@media (min-width: 320px) and (max-width: 640px) {
-  /* line 17, ../sass/components/_navigation.scss */
-  .navigation_wrapper ul.menu li {
-    width: 100%;
-    text-align: left;
-    padding: 3px 20px;
-  }
-}
+
 /* line 25, ../sass/components/_navigation.scss */
 .navigation_wrapper ul.menu li a {
   text-decoration: none;
@@ -791,3 +754,17 @@ a:hover{
 .navigation_wrapper ul.menu li.expanded ul {
   display: none;
 }
+
+.rm-removed-toggle span{
+    display: none;
+}
+
+
+/* Menu Styling */
+#block-superfish-1 { text-align: center; }
+ul#superfish-1 { display: inline-block; float: none; }
+.sf-sub-indicator{
+    display: none;
+}
+
+

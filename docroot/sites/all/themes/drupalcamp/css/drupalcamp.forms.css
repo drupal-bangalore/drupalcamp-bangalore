@@ -503,6 +503,12 @@ input.form-submit{
     border-radius: 10px;
 }
 
+.field.field--name-field-sponsor-sponsorship-level.field--type-taxonomy-term-reference.field--label-above{
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 /* Individual Article Page */
 .panelizer-view-mode.node.node-full.node-articles h2{
     display: none;
@@ -535,15 +541,14 @@ input.form-submit{
 /* User Menu */
 
 .block.block--menu.block--menu-menu-anonymous-user-menu{
-    display: inline;
-    position: absolute;
-    top: 40px;
-    right: 19%;
+    margin-left: 10%;
     font-size: 14px;
 }
 
+#block-system-user-menu ul li {display: inline; margin-right: 15px;}
+#block-menu-menu-anonymous-user-menu ul li {display: inline; margin-right: 15px;}
+
 .block.block--menu.block--menu-menu-anonymous-user-menu ul{
-    display: inline;
     line-height: 30px;
     text-transform: uppercase;
     font-weight: 600;
@@ -555,10 +560,7 @@ input.form-submit{
 }
 
 .block.block--system.block--menu.block--system-user-menu{
-    display: inline-block;
-    position: absolute;
-    top: 40px;
-    right: 9%;
+    margin-left: 10%;
     font-size: 14px;
 }
 
@@ -746,4 +748,64 @@ th:only-child{
 
 .comment.comment--by-viewer{
     margin-left: 10%;
+}
+
+/* User Information Form */
+.form-item.form-type-textfield.form-item-mail .description{
+    text-align: left;
+    margin-right: 10%;
+    margin-left: 10%;
+    padding-top: 5px;
+}
+
+.form-item.form-type-checkbox.form-item-contact{
+    text-align: left;
+    margin-right: 10%;
+    margin-left: 10%;
+    padding-top: 5px;
+}
+
+.form-checkbox .option label{
+    margin-left: 0;
+}
+
+#edit-field-profile-location-und-0 legend{
+    display: none;
+}
+
+#edit-picture legend{
+    display: none;
+}
+
+#edit-account .description{
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5px;
+}
+
+/* Header Styles */
+.row .highlighted-row{
+    display: none;
+}
+
+.nav-button{
+    display: none;
+}
+
+/* Contact Form */
+.block.block--block.block--block-6 .block__content{
+    margin-left: 10%;
+    padding-bottom: 10px;
+}
+.block.block--block.block--block-6 .block__content p{
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 175%;
+}
+
+.block.block--block.block--block-6 .block__content ul{
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 175%;
 }
