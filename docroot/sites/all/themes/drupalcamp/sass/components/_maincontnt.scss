@@ -1,15 +1,6 @@
-a{
-	text-decoration:none !important;
-}
-body{
-	font-family:verdana, arial, sans-serif;
-	overflow-x:hidden;
-
-}
 .panel-display > .center-wrapper {display: none;}
 .panel-display > .center-wrapper ~ .center-wrapper {display: block !important;}
 .panel-pane.pane-node-body{
-	background:#b2d9ff;
 	margin-top: -13px;
 
 	div.field{
@@ -24,12 +15,12 @@ body{
 }
 .panel-panel.panel-col-top{
 	position:relative;
-	.bxslider-wrap{
-		.views-row{
-			opacity:0.3;
-			filter: alpha(opacity=30);
+	.bxslider-wrap {
+		.views-row {
+			opacity: 0.2;
+			filter: alpha(opacity=20);
 			 @include pie-element();
-			 img{
+			 img {
 			 	display: block;
 			 }
 		}
@@ -37,14 +28,16 @@ body{
 			position: relative;
 		}
 	}
-	.btnWrap{
-		a{
+	.btnWrap {
+		a {
+		  	text-align: center;
 			padding: 1%;
   			@include background(linear-gradient(#33cfff 0% , #3392fe 100%));
 		  border-radius: 7px;
 		  color: #fff;
 		  font-size: 12px;
-		  top: 66px;
+		  width: 100px;
+		  top: 56px;
 		  z-index: 67;
 		 @include pie-element();
 		 position:absolute;
@@ -61,14 +54,13 @@ body{
 	}
 	.sponTxt{
 		position: absolute;
-		  top: 149px;
+		  top: 45%;
 		  @include breakpoint($mob){
 		  	left:22%;
 		  	top:122px;
 		  }
 		  z-index: 67;
-		  color: #02698c;
-		  left: 41%;
+		  color: rgba(1,1,1,0.7);
 		  font-weight: bold;
 		 font-size:22px;
 		 @include breakpoint($tab){
@@ -103,7 +95,7 @@ body{
 		  font-weight: bold;
 	}
 	
-	.panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-1{
+	.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1{
 		margin-left: 25%;
 		@include breakpoint($mob){
 			margin-left:0;
@@ -183,12 +175,12 @@ body{
 	}
 }
 .panels-ipe-paneid-8{
-	background:#ffb54c;
+	background:#ffb90f;
 	
 }
-.panel-pane.pane-views-panes.pane-drupal-camp-sponsers-panel-pane-2{
+.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2{
 	  padding-bottom: 6%;
-	  @include background(linear-gradient(#feb449 0%, #feca7f 30%, #fff 100%));
+	  @include background(linear-gradient(#ffb90f 0%, #ffffff 30%, #fff 100%));
 	  @include pie-element();
 	.view-content{
 		display: table;
@@ -237,6 +229,7 @@ body{
 					 behavior: url(/sites/all/themes/files/js/PIE.htc);
 					.views-field-title{
 						text-align:center;
+					    padding-bottom: 10px
 					}
 				}
 			}
@@ -266,10 +259,11 @@ body{
 			}
 		}
 		.sharebuttons{
-					float:none;
 					margin-left:2%;
 					padding-top: 1%;
-					div{
+					div {
+					  	float: left;
+					  	position: absolute;
 						display:inline-block;
 						margin-left:10px;
 					}
@@ -284,7 +278,7 @@ body{
 .panel-panel.panel-col-bottom{
 	width:100%;
 
-	.pane-drupal-camp-sponsers-panel-pane-3{
+	.pane-drupal-camp-sponsors-panel-pane-3{
 		display:block;
 		min-height:150px;
 		@include background(linear-gradient(#fff 0%, #d2d2d2 30%, #848484 100%));
@@ -296,8 +290,14 @@ body{
 		
 		.view-content{
 			text-align:center;
+			table-layout: fixed;
+			display: table;
+			float: none;
+			margin: 0 auto;
+			padding-top: 2%;
+			width: 75%;
 			.silverspon-wrap{
-				  padding: 12px;
+				padding: 12px;
 				div{
 					display:inline-block;
 					margin:0 6px;
@@ -312,12 +312,12 @@ body{
 	}
 	.panel-pane.pane-block.pane-menu-menu-footer-menu{
 		min-height:100px;
-	 	background: #262c44;
+	 	background: #3c9dfc;
 	 	float:left;
 	 	width:100%;
-	 	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 	 	@include pie-element();
 	 	behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc);
+	  	display: none;
 		
 	 	ul.menu{
 	 			padding-top:1%;
@@ -325,19 +325,22 @@ body{
 	 			li{
 					display:inline-block;
 					margin:0 20px;
-	 				a{
-	 					color:#4a6592;
-	 					font-weight:bold;
+	 				a {
+	 					color:#ffffff;
+					  	letter-spacing: 2px;
 	 				}
 	 			}
 	 	}
 	}
 }
 .footer_wrapper{
-	background:#496491;
+	background:#3c9dfc;
 	padding-bottom:5%;
 	float:left;
 	width:100%;
+	color: #ffffff;
+	height: 125px;
+	letter-spacing: 1px;
 	footer{
 		padding: 1%;
   		text-align: center;
@@ -355,9 +358,6 @@ body{
 				}
 			}
 			height:199px;
-			@include breakpoint($mob){
-				height:137px;
-			}
 			width:184px;
 			background-size:100% 100%;
 			@include breakpoint($mob){
@@ -368,8 +368,6 @@ body{
 			}
 			 
 			.field-content {
-				 padding-left: 15px;
-   				 padding-top: 44px;
    				 @include breakpoint($mob){
    				 	padding-left: 3px;
    				 	padding-top:32%;
@@ -385,7 +383,17 @@ body{
 			}
 	}
 }
+.field-content {
+  	p {
+	  	padding-top: 10px;
+	  	text-align: justify;
+	}
+  	h3 {
+	  	text-align: left;
+	}
+}
 .silverspon-wrap{
+  	padding-top: 20px;
     margin: 0 auto;
     text-align: center;
     width: 100%;
@@ -395,5 +403,11 @@ body{
 			float:left;
 		}
 		
+	}
+  	&.gold-header, &.silver-header {
+	  h3 {
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	  }
 	}
 }

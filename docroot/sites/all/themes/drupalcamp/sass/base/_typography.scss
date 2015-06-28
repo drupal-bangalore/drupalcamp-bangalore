@@ -1,10 +1,19 @@
-body{
-	font-family: Verdana, arial, sans-serif;
+body {
+	font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
+	overflow-x: hidden;
 	color: #25242a;
 	font-size: 16px;
 }
-p{
+p {
 	font-size: 16px;
 	line-height: 1.2em;
 	padding-bottom:10px;
+}
+
+a {
+	text-decoration: none !important;
+}
+a:hover {
+	transition: all 0.3s linear;
+	text-shadow: 0 0 15px #fff;
 }
