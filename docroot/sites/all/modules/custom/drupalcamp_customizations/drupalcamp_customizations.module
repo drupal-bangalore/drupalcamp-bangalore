@@ -1,78 +1,71 @@
 <?php
-
 /**
  * @file
  * Custom Module for minor customizations.
  */
 
-function drupalcamp_customizations_init() {
-  drupal_add_css(drupal_get_path('module', 'drupalcamp_customizations') . '/custom_styles.css');
-}
-
 /**
- * Implementation of hook_block_info()
+ * Implements hook_block_info().
  */
-
 function drupalcamp_customizations_block_info() {
   $blocks = array();
-  
+
   $blocks['twitter_feeds'] = array(
     'info' => t('Drupal Camp Twitter Feeds'),
     'cache' => DRUPAL_NO_CACHE,
   );
-  
+
   $blocks['social_media'] = array(
     'info' => t('Social share links (fb, twitter, g+)'),
     'cache' => DRUPAL_NO_CACHE,
   );
-  
+
   return $blocks;
 }
 
 /**
- * Implementation of hook_block_view()
+ * Implements hook_block_view().
  */
 
 function drupalcamp_customizations_block_view($delta = '') {
   $block = array();
-  
+
   switch ($delta) {
-    case 'twitter_feeds' :
+    case 'twitter_feeds':
       $block = array(
         'subject' => t('DrupalCamp Twitter Feeds'),
         'content' => get_twitter_feeds(),
       );
       break;
 
-    case 'social_media' :
+    case 'social_media':
       $block = array(
         'subject' => t('Social Share'),
         'content' => get_social_share_links(),
       );
       break;
   }
-  
+
   return $block;
 }
 
 /*
- * function to generate feeds and send to block view
+ * Generate Twitter feed code.
  */
-
 function get_twitter_feeds() {
-
   $feeds = '<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=BangaloreDrupal" data-widget-id="598449353133531136">Tweets about BangaloreDrupal</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
-  
   return $feeds;
 }
 
+/*
+ * Generate social share links.
+ */
 function get_social_share_links() {
-
   $current_path = token_replace('[current-page:url:absolute]');
   $current_path = urlencode($current_path);
   $current_title = token_replace('[current-page:title]');
 
   $social_share = '<div class="sharebuttons"><div class="sharebutton-fb"><a target="_blank" href="http://www.facebook.com/sharer.php?s=100&amp;p[title]=' . $current_title . '&amp;p[url]=' . $current_path . '" class="fbBtn"><img title="Facebook" src="/sites/default/files/images/social/icon_fb_small.png" alt="Facebook"></a></div><div class="sharebutton-twitter"><a target="_blank" href="http://www.twitter.com/share?url=' . $current_path . '" class="twitterBtn"><img title="Twitter" src="/sites/default/files/images/social/twitter_icon_small.png" alt="Twitter"></a></div><div class="sharebutton-gplus"><a target="_blank" href="https://plus.google.com/share?url=' . $current_path . '" class="gplusBtn"><img title="Gplus" src="/sites/default/files/images/social/google-plus-icon.png" alt="Gplus"></a></div></div>';
-  
+
   return $social_share;
 }
