@@ -8,196 +8,11 @@
     padding-top: 55px;
 }
 
-
-/* Registration Form */
-
-#ticket-register-form #edit-ticket-registrant legend{
-    margin-left: 4%;
-}
-
-#ticket-register-form #fieldset-legend legend{
-    margin-left: 10%;
-}
-
-#edit-field-speakers{
-    margin-left: 10%;
-}
-
-#edit-field-speakers .description{
-    margin-left: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.field--name-ticket-type-label{
-    font-size: 20px;
-    font-weight: 100;
-}
-
-.form-item-ticket-quantity-1 label{
-    font-weight: 100;
-}
-
-.ticket-type-ticket-type{
-    text-align: center;
-}
-
-#ticket-field-formatter-view-form{
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.panel-layout{
-    max-width: 100%;
-}
-
-input[type="submit"]{
-    padding: 1%;
-    background: linear-gradient(#33cfff 0%, #3392fe 100%);
-    border-radius: 7px;
-    color: #fff;
-    font-size: 14px;
-    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-    text-transform: uppercase;
-    border-style: none;
-}
-
-.form-item-ticket-quantity-1 input[type="text"]{
-    width: 100px;
-    background: none;
-    border: solid 2px #21a2e1;
-    color: #21a2e1;
-    padding: 10px 20px;
-    font-size: 14px;
-    outline: none;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.form-item-ticket-quantity-1 input[type="text"]:focus{
-    width: 100px;
-    background: none;
-    border: solid 2px #21a2e1;
-    color: #21a2e1;
-    padding: 10px 20px;
-    font-size: 14px;
-    outline: none;
-    text-align: center;
-    border-radius: 5px;
-}
-
-
-.ticket-type-ticket-type .content label{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    text-align: center;
-    margin: 0 auto;
-}
-
-form{
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    padding-bottom: 20px;
-}
-
-form label{
-    margin-left: 10%;
-    display: block;
-    text-align: justify;
-    padding-bottom: 5px;
-    color: #606060;
-    font-size: 16px;
-}
-
-input[type="text"]{
-    width: 80%;
-    color: #999999;
-    padding: 10px 20px;
-    font-size: 18px;
-    outline: none;
-    border: solid 2px #e2e2e2;
-    border-radius: 5px;
-}
-
-input[type="text"]:focus{
-    width: 80%;
-    color: #999999;
-    padding: 10px 20px;
-    font-size: 18px;
-    outline: none;
-    border: solid 2px #e2583c;
-    border-radius: 5px;
-}
-
-input[type="password"]{
-    width: 80%;
-    color: #999999;
-    padding: 10px 20px;
-    font-size: 18px;
-    outline: none;
-    border: solid 2px #e2e2e2;
-    border-radius: 5px;
-}
-
-input[type="password"]:focus{
-    width: 80%;
-    color: #999999;
-    padding: 10px 20px;
-    font-size: 18px;
-    outline: none;
-    border: solid 2px #e2583c;
-    border-radius: 5px;
-}
-
-.form-type-select label{
-    margin-left: 10%;
-}
-
-select{
-    color: #999999;
-    padding: 10px 20px;
-    font-size: 18px;
-    outline: none;
-    border: solid 2px #e2e2e2;
-    border-radius: 5px;
-}
-
-select:focus{
-    color: #999999;
-    padding: 10px 20px;
-    font-size: 18px;
-    outline: none;
-    border: solid 2px #e2583c;
-    border-radius: 5px;
-}
-
-
-.form-wrapper{
-    border-style: none;
-}
-
-#edit-ticket-registrationnew-0 .fieldset-legend{
-    width: 100%;
-    margin-left: 50%;
-}
-
 .fieldset-legend{
-    width: 100%;
-    margin-left: 30%;
     display: inline-block;
     text-align: center;
 }
 
-legend{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.form-textarea-wrapper{
-    margin-left: 10%;
-    margin-right: 10%;
-    max-width: 80%;
-}
 
 .field-speakers-add-more-wrapper--2 .form-item{
     text-align: center;
@@ -207,13 +22,6 @@ legend{
 .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1{
     margin-right: 25%;
 }
-
-.sponTxt{
-    width: 100%;
-    text-align: center;
-    right: auto;
-}
-
 
 /* Breadcrumbs */
 .breadcrumb{
@@ -300,26 +108,6 @@ footer.node__submitted{
     display: none;
 }
 
-.messages.messages--error{
-    text-align: center;
-    border-style: none;
-    color: #e74c3c;
-}
-
-.messages.messages--error ul li{
-    padding-top: 5px;
-}
-
-.messages.messages--status{
-    text-align: center;
-    border-style: none;
-    font-size: 24px;
-    color: #40d47e;
-}
-
-.messages.messages--status{
-    padding-top: 20px;
-}
 
 .block-views-camp-sessions-block .views-row{
     text-align: left;
@@ -332,30 +120,6 @@ footer.node__submitted{
 }
 
 /* Sessions page */
-.node-25 .field__items p{
-    font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
-    margin-left: 7%;
-}
-
-.node-25 p a{
-    color: #22A7F0;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.block__content{
-    font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
-}
-
-.node-25 h2{
-    display: none;
-}
-
-.block.block--views.block--views-camp-sessions-block{
-    text-align: left;
-    margin-left: 10%;
-}
-
 .block.block--views.block--views-camp-sessions-block .view-content .field-content{
     display: inline-block;
 }
@@ -370,8 +134,6 @@ footer.node__submitted{
 
 .panel-pane.pane-entity-field.pane-node-body p{
     display: inherit;
-    margin-right: 10%;
-    margin-left: 10%;
     text-align: justify;
     font-size: 18px;
     line-height: 175%;
@@ -431,22 +193,7 @@ span.views-label.views-label-field-experience{
     text-align: center;
 }
 
-.form-item.form-type-radio.form-item-field-experience-und{
-    margin-left: 20%;
-    margin-right: 20%;
-    text-align: left;
-}
-
-.form-item.form-type-radio.form-item-field-experience-und label{
-    text-align: left;
-    margin-left: 0;
-}
-
 /* Individual Session Page */
-.column-content-region-inner.left-content-inner.column-inner.panel-panel-inner{
-    margin-left: 10%;
-}
-
 .field.field--name-field-speakers{
     padding-bottom: 10px;
 }
@@ -459,20 +206,6 @@ form.node-form.node-session-form.session-node-form{
 .form-item.form-type-select.form-item-body-und-0-format{
     display: none;
 }
-
-.form-item.form-type-managed-file.form-item-field-news-image-und-0{
-    margin-left: 10%;
-}
-.form-item.form-type-managed-file.form-item-field-news-image-und-0 label{
-    margin-left: 0;
-    padding-bottom: 10px;
-}
-
-
-input.form-submit{
-    margin-left: 10px;
-}
-
 /* Sponsors Page */
 .view.view-cod-sponsors.view-id-cod_sponsors.view-display-id-page{
     background-color: #EEEEEE;
@@ -503,11 +236,6 @@ input.form-submit{
     border-radius: 10px;
 }
 
-.field.field--name-field-sponsor-sponsorship-level.field--type-taxonomy-term-reference.field--label-above{
-    text-align: left;
-    margin-left: 10%;
-    margin-right: 10%;
-}
 
 /* Individual Article Page */
 .panelizer-view-mode.node.node-full.node-articles h2{
@@ -523,12 +251,6 @@ input.form-submit{
     padding-bottom: 20px;
 }
 
-@media (min-width: 200px) and (max-width: 600px){
-    .field.field--name-field-article-image.field--type-image.field--label-above .field__items{
-        margin-left: 0;
-    }
-}
-
 /* User Profile */
 .user-profile{
     text-align: center;
@@ -538,70 +260,9 @@ input.form-submit{
     letter-spacing: 2px;
 }
 
-/* User Menu */
-
-.block.block--menu.block--menu-menu-anonymous-user-menu{
-    margin-left: 10%;
-    font-size: 14px;
-}
-
-#block-system-user-menu ul li {display: inline; margin-right: 15px;}
-#block-menu-menu-anonymous-user-menu ul li {display: inline; margin-right: 15px;}
-
-.block.block--menu.block--menu-menu-anonymous-user-menu ul{
-    line-height: 30px;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.block.block--menu.block--menu-menu-anonymous-user-menu ul a{
-    color: #3c9dfc;
-}
-
-.block.block--system.block--menu.block--system-user-menu{
-    margin-left: 10%;
-    font-size: 14px;
-}
-
-.block.block--system.block--menu.block--system-user-menu ul{
-    line-height: 30px;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.block.block--system.block--menu.block--system-user-menu ul a{
-    color: #3c9dfc;
-}
-
-
 /*Session Page Firefox Styles */
 .collapsible.required-fields .group-audience.field-group-fieldset.form-wrapper.collapse-processed{
     text-align: center;
-}
-
-#edit-field-slides-und legend{
-    margin-left: 8%;
-    font-weight: bold;
-}
-
-.group-audience.field-group-fieldset.form-wrapper.collapse-processed legend{
-    margin-left: 8%;
-    font-weight: bold;
-}
-
-.group-audience.field-group-fieldset.form-wrapper.collapse-processed a{
-    color: #606060;
-}
-
-/* Camp Summary */
-.camp-summary p{
-    margin-right: 10%;
-    margin-left: 10% ;
-    text-align: justify;
-    font-size: 18px;
-    line-height: 175%;
 }
 
 /* Articles on Front page */
@@ -618,23 +279,17 @@ input.form-submit{
 
 /* Blog Page */
 .node.node--blog.node--full.node--blog--full .field__items{
-    margin-right: 10%;
-    margin-left: 10% ;
     text-align: justify;
     font-size: 18px;
     line-height: 175%;
 }
 
 .comments__form-title{
-    margin-right: 10%;
-    margin-left: 10% ;
     text-align: justify;
     padding-top: 20px;
 }
 
 .view.view-blogs.view-id-blogs.view-display-id-page {
-    margin-right: 10%;
-    margin-left: 10% ;
     text-align: justify;
     padding-top: 20px;
     font-size: 20px;
@@ -658,8 +313,6 @@ input.form-submit{
 
 .field.field--name-field-sponsor-body.field--type-text-with-summary.field--label-above p{
     display: inherit;
-    margin-right: 10%;
-    margin-left: 10%;
     text-align: justify;
     font-size: 18px;
     line-height: 175%;
@@ -676,11 +329,6 @@ input.form-submit{
 /* Table Listing for Blogs */
 .view.view-blogs.view-id-blogs.view-display-id-page{
     text-align: center;
-}
-
-.view.view-blogs.view-id-blogs.view-display-id-page .view-content{
-    margin-left: 10%;
-    margin-right: 10%;
 }
 
 .view-content .views-field.views-field-title{
@@ -740,33 +388,15 @@ th:only-child{
     border-radius: 8px 8px 0 0;
 }
 
-
-/* Individual Blog Page */
-.comment-wrapper.comments{
-    margin-left: 10%;
-}
-
-.comment.comment--by-viewer{
-    margin-left: 10%;
-}
-
 /* User Information Form */
 .form-item.form-type-textfield.form-item-mail .description{
     text-align: left;
-    margin-right: 10%;
-    margin-left: 10%;
     padding-top: 5px;
 }
 
 .form-item.form-type-checkbox.form-item-contact{
     text-align: left;
-    margin-right: 10%;
-    margin-left: 10%;
     padding-top: 5px;
-}
-
-.form-checkbox .option label{
-    margin-left: 0;
 }
 
 #edit-field-profile-location-und-0 legend{
@@ -779,33 +409,5 @@ th:only-child{
 
 #edit-account .description{
     text-align: left;
-    margin-left: 10%;
-    margin-right: 10%;
     margin-top: 5px;
-}
-
-/* Header Styles */
-.row .highlighted-row{
-    display: none;
-}
-
-.nav-button{
-    display: none;
-}
-
-/* Contact Form */
-.block.block--block.block--block-6 .block__content{
-    margin-left: 10%;
-    padding-bottom: 10px;
-}
-.block.block--block.block--block-6 .block__content p{
-    font-size: 18px;
-    letter-spacing: 1px;
-    line-height: 175%;
-}
-
-.block.block--block.block--block-6 .block__content ul{
-    font-size: 18px;
-    letter-spacing: 1px;
-    line-height: 175%;
 }

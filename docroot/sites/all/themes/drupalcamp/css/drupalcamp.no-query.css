@@ -1,193 +1,332 @@
 /* No files to import found in abstractions/**\/* */
+/* line 1, ../sass/base/_forms.scss */
 * {
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
+/* line 7, ../sass/base/_forms.scss */
+input[type="submit"] {
+  padding: 1%;
+  background: linear-gradient(#33cfff 0%, #3392fe 100%);
+  border-radius: 7px;
+  color: #fff;
+  font-size: 14px;
+  behavior: url("/sites/all/themes/drupalcamp/js/PIE.htc");
+  text-transform: uppercase;
+  border-style: none;
+  margin-bottom: 10px; }
+
+/* line 21, ../sass/base/_forms.scss */
+input[type="text"] {
+  width: 50%;
+  color: #999999;
+  padding: 10px 20px;
+  font-size: 18px;
+  outline: none;
+  border: solid 2px #e2e2e2;
+  border-radius: 5px; }
+
+/* line 31, ../sass/base/_forms.scss */
+input[type="text"]:focus {
+  width: 50%;
+  color: #999999;
+  padding: 10px 20px;
+  font-size: 18px;
+  outline: none;
+  border: solid 2px #e2583c;
+  border-radius: 5px; }
+
+/* line 41, ../sass/base/_forms.scss */
+input[type="password"] {
+  width: 50%;
+  color: #999999;
+  padding: 10px 20px;
+  font-size: 18px;
+  outline: none;
+  border: solid 2px #e2e2e2;
+  border-radius: 5px; }
+
+/* line 51, ../sass/base/_forms.scss */
+input[type="password"]:focus {
+  width: 50%;
+  color: #999999;
+  padding: 10px 20px;
+  font-size: 18px;
+  outline: none;
+  border: solid 2px #e2583c;
+  border-radius: 5px; }
+
+/* line 61, ../sass/base/_forms.scss */
+select {
+  color: #999999;
+  padding: 10px 20px;
+  font-size: 18px;
+  outline: none;
+  border: solid 2px #e2e2e2;
+  border-radius: 5px; }
+
+/* line 70, ../sass/base/_forms.scss */
+select:focus {
+  color: #999999;
+  padding: 10px 20px;
+  font-size: 18px;
+  outline: none;
+  border: solid 2px #e2583c;
+  border-radius: 5px; }
+
+/* line 79, ../sass/base/_forms.scss */
+.ticket-register-form {
+  margin-left: 20%;
+  margin-right: 20%; }
+  /* line 84, ../sass/base/_forms.scss */
+  .ticket-register-form label {
+    padding-bottom: 10px;
+    color: rgba(1, 1, 1, 0.7); }
+  /* line 89, ../sass/base/_forms.scss */
+  .ticket-register-form .description {
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px; }
+  /* line 95, ../sass/base/_forms.scss */
+  .ticket-register-form #edit-field-speakers .description {
+    padding-top: 10px;
+    padding-bottom: 10px; }
+  /* line 100, ../sass/base/_forms.scss */
+  .ticket-register-form .field--name-ticket-type-label {
+    font-size: 20px;
+    font-weight: 100; }
+  /* line 105, ../sass/base/_forms.scss */
+  .ticket-register-form .form-item-ticket-quantity-1 label {
+    font-weight: 100; }
+  /* line 109, ../sass/base/_forms.scss */
+  .ticket-register-form .ticket-type-ticket-type {
+    text-align: center; }
+  /* line 113, ../sass/base/_forms.scss */
+  .ticket-register-form #ticket-field-formatter-view-form {
+    text-align: center;
+    margin-bottom: 30px; }
+
+/* line 120, ../sass/base/_forms.scss */
+legend {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+/* line 125, ../sass/base/_forms.scss */
+.form-wrapper {
+  border-style: none; }
+
+/* line 129, ../sass/base/_forms.scss */
+#user-login {
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%; }
+  /* line 133, ../sass/base/_forms.scss */
+  #user-login label {
+    padding-bottom: 10px;
+    color: rgba(1, 1, 1, 0.7); }
+
+/* line 139, ../sass/base/_forms.scss */
+.contact-site-form {
+  margin-right: 10%;
+  margin-left: 10%; }
+  /* line 142, ../sass/base/_forms.scss */
+  .contact-site-form label {
+    padding-bottom: 10px;
+    color: rgba(1, 1, 1, 0.7); }
+
+/* line 1, ../sass/base/_header.scss */
 header {
   position: relative;
   min-height: 170px;
-  text-align: center;
-}
-header .header-row .sharebuttons {
-  float: right;
-  margin-right: 10%;
-}
-header .header-row .sharebuttons div {
-  display: inline-block;
-  margin-left: 10px;
-}
-header .header-row .site-logo {
-  background-color: #ffffff;
-  margin: auto auto;
-}
-header .header-row .site-logo a {
-  display: block;
-}
-header .header-row .site-logo a img {
-  height: 150px;
-}
+  text-align: center; }
+  /* line 6, ../sass/base/_header.scss */
+  header .header-row .sharebuttons {
+    float: right;
+    margin-right: 10%; }
+    /* line 9, ../sass/base/_header.scss */
+    header .header-row .sharebuttons div {
+      display: inline-block;
+      margin-left: 10px; }
+  /* line 14, ../sass/base/_header.scss */
+  header .header-row .site-logo {
+    background-color: #ffffff;
+    margin: auto auto; }
+    /* line 17, ../sass/base/_header.scss */
+    header .header-row .site-logo a {
+      display: block; }
+      /* line 19, ../sass/base/_header.scss */
+      header .header-row .site-logo a img {
+        height: 150px; }
 
+/* line 26, ../sass/base/_header.scss */
 .social-links {
   text-align: left;
   float: right;
   width: 300px;
   position: absolute;
   right: 10px;
-  top: 5px;
-}
-.social-links .sharebuttons {
-  width: 41%;
-}
+  top: 5px; }
+  /* line 33, ../sass/base/_header.scss */
+  .social-links .sharebuttons {
+    width: 41%; }
 
+/* line 1, ../sass/base/_media.scss */
 img, media {
-  max-width: 100%;
-}
+  max-width: 100%; }
 
+/* line 1, ../sass/base/_messages.scss */
+.messages.messages--error {
+  text-align: center;
+  border-style: none;
+  color: #e74c3c; }
+
+/* line 7, ../sass/base/_messages.scss */
+.messages.messages--error ul li {
+  padding-top: 5px; }
+
+/* line 11, ../sass/base/_messages.scss */
+.messages.messages--status {
+  text-align: center;
+  border-style: none;
+  font-size: 24px;
+  color: #40d47e; }
+
+/* line 18, ../sass/base/_messages.scss */
+.messages.messages--status {
+  padding-top: 20px; }
+
+/* line 1, ../sass/base/_typography.scss */
 body {
   font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
   overflow-x: hidden;
   color: #25242a;
-  font-size: 16px;
-}
+  font-size: 16px; }
 
+/* line 7, ../sass/base/_typography.scss */
 p {
   font-size: 16px;
   line-height: 1.2em;
-  padding-bottom: 10px;
-}
+  padding-bottom: 10px; }
 
+/* line 13, ../sass/base/_typography.scss */
 a {
-  text-decoration: none !important;
-}
+  text-decoration: none !important; }
 
+/* line 16, ../sass/base/_typography.scss */
 a:hover {
   transition: all 0.3s linear;
-  text-shadow: 0 0 15px #fff;
-}
+  text-shadow: 0 0 15px #fff; }
 
+/* line 1, ../sass/components/_maincontnt.scss */
 .panel-display > .center-wrapper {
-  display: none;
-}
+  display: none; }
 
+/* line 2, ../sass/components/_maincontnt.scss */
 .panel-display > .center-wrapper ~ .center-wrapper {
-  display: block !important;
-}
+  display: block !important; }
 
+/* line 3, ../sass/components/_maincontnt.scss */
 .panel-pane.pane-node-body {
-  margin-top: -13px;
-}
-.panel-pane.pane-node-body div.field {
-  padding: 4%;
-}
-.panel-pane.pane-node-body div.field .camp-summary p {
-  text-indent: 2%;
-}
+  margin-top: -13px; }
+  /* line 6, ../sass/components/_maincontnt.scss */
+  .panel-pane.pane-node-body div.field {
+    padding: 4%; }
+    /* line 9, ../sass/components/_maincontnt.scss */
+    .panel-pane.pane-node-body div.field .camp-summary p {
+      text-indent: 2%; }
 
+/* line 17, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-top {
-  position: relative;
-}
-.panel-panel.panel-col-top .bxslider-wrap .views-row {
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-}
-.panel-panel.panel-col-top .bxslider-wrap .views-row img {
-  display: block;
-}
-.panel-panel.panel-col-top .btnWrap a {
-  text-align: center;
-  padding: 1%;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzMzY2ZmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzMzOTJmZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #33cfff), color-stop(100%, #3392fe));
-  background: -moz-linear-gradient(#33cfff 0%, #3392fe 100%);
-  background: -webkit-linear-gradient(#33cfff 0%, #3392fe 100%);
-  background: linear-gradient(#33cfff 0%, #3392fe 100%);
-  border-radius: 7px;
-  color: #fff;
-  font-size: 12px;
-  width: 100px;
-  top: 56px;
-  z-index: 67;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-  position: absolute;
-  left: 46%;
-}
-.panel-panel.panel-col-top .sponTxt {
-  position: absolute;
-  top: 45%;
-  z-index: 67;
-  color: rgba(1, 1, 1, 0.7);
-  font-weight: bold;
-  font-size: 22px;
-}
-.panel-panel.panel-col-top .sponTxt p {
-  font-variant: small-caps;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-}
-.panel-panel.panel-col-top .scrllbtnWrap {
-  position: absolute;
-  top: 349px;
-  z-index: 67;
-  color: white;
-  left: 48%;
-  font-weight: bold;
-}
-.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 {
-  margin-left: 25%;
-  position: absolute;
-  top: 100px;
-  width: 50%;
-  z-index: 99;
-}
-.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-1, .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
-  display: inline-block;
-}
-.panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
-  float: right;
-}
-.panel-panel.panel-col-top .bx-controls {
-  position: absolute;
-  bottom: 20px;
-  right: 0%;
-  z-index: 67;
-  width: 90px;
-  padding-left: 0;
-  margin-left: -30%;
-  text-align: center;
-  list-style: none;
-}
-.panel-panel.panel-col-top .bx-controls .bx-pager-item {
-  display: inline-block;
-}
-.panel-panel.panel-col-top .bx-controls .bx-pager-item .bx-pager-link {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 7px;
-  text-indent: -9999px;
-  font-size: 0px;
-  cursor: pointer;
-  background-color: #5e8c9b;
-  border: 1px solid #5e8c9b;
-  border-radius: 10px;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-}
-.panel-panel.panel-col-top .bx-controls .bx-pager-item .bx-pager-link.active {
-  background-color: #3592f9;
-}
-.panel-panel.panel-col-top .bx-controls .bx-controls-direction {
-  display: none;
-}
+  position: relative; }
+  /* line 20, ../sass/components/_maincontnt.scss */
+  .panel-panel.panel-col-top .bxslider-wrap .views-row {
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+    position: relative; }
+    /* line 24, ../sass/components/_maincontnt.scss */
+    .panel-panel.panel-col-top .bxslider-wrap .views-row img {
+      display: block; }
+  /* line 33, ../sass/components/_maincontnt.scss */
+  .panel-panel.panel-col-top .btnWrap a {
+    text-align: center;
+    padding: 1%;
+    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzMzY2ZmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzMzOTJmZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #33cfff), color-stop(100%, #3392fe));
+    background: -moz-linear-gradient(#33cfff 0%, #3392fe 100%);
+    background: -webkit-linear-gradient(#33cfff 0%, #3392fe 100%);
+    background: linear-gradient(#33cfff 0%, #3392fe 100%);
+    border-radius: 7px;
+    color: #fff;
+    font-size: 12px;
+    width: 100px;
+    top: 56px;
+    z-index: 67;
+    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+    position: relative;
+    position: absolute;
+    left: 46%; }
+  /* line 56, ../sass/components/_maincontnt.scss */
+  .panel-panel.panel-col-top .scrllbtnWrap {
+    position: absolute;
+    top: 349px;
+    z-index: 67;
+    color: white;
+    left: 48%;
+    font-weight: bold; }
+  /* line 79, ../sass/components/_maincontnt.scss */
+  .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 {
+    margin-left: 25%;
+    position: absolute;
+    top: 100px;
+    width: 50%;
+    z-index: 99; }
+    /* line 99, ../sass/components/_maincontnt.scss */
+    .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-1, .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
+      display: inline-block; }
+    /* line 107, ../sass/components/_maincontnt.scss */
+    .panel-panel.panel-col-top .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 div.view-content .views-row-2 {
+      float: right; }
+  /* line 120, ../sass/components/_maincontnt.scss */
+  .panel-panel.panel-col-top .bx-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 0%;
+    z-index: 67;
+    width: 90px;
+    padding-left: 0;
+    margin-left: -30%;
+    text-align: center;
+    list-style: none; }
+    /* line 134, ../sass/components/_maincontnt.scss */
+    .panel-panel.panel-col-top .bx-controls .bx-pager-item {
+      display: inline-block; }
+      /* line 136, ../sass/components/_maincontnt.scss */
+      .panel-panel.panel-col-top .bx-controls .bx-pager-item .bx-pager-link {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 7px;
+        text-indent: -9999px;
+        font-size: 0px;
+        cursor: pointer;
+        background-color: #5e8c9b;
+        border: 1px solid #5e8c9b;
+        border-radius: 10px;
+        behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+        position: relative; }
+      /* line 149, ../sass/components/_maincontnt.scss */
+      .panel-panel.panel-col-top .bx-controls .bx-pager-item .bx-pager-link.active {
+        background-color: #3592f9; }
+    /* line 153, ../sass/components/_maincontnt.scss */
+    .panel-panel.panel-col-top .bx-controls .bx-controls-direction {
+      display: none; }
 
+/* line 158, ../sass/components/_maincontnt.scss */
 .panels-ipe-paneid-8 {
-  background: #ffb90f;
-}
+  background: #ffb90f; }
 
+/* line 162, ../sass/components/_maincontnt.scss */
 .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 {
   padding-bottom: 6%;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmYjkwZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
@@ -196,120 +335,92 @@ a:hover {
   background: -webkit-linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
   background: linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-}
-.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content {
-  display: table;
-  float: none;
-  margin: 0 auto;
-  padding-top: 2%;
-  width: 75%;
-}
-.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content .views-row {
-  display: table-cell;
-}
+  position: relative; }
+  /* line 166, ../sass/components/_maincontnt.scss */
+  .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content {
+    display: table;
+    float: none;
+    margin: 0 auto;
+    padding-top: 2%;
+    width: 75%; }
+    /* line 188, ../sass/components/_maincontnt.scss */
+    .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content .views-row {
+      display: table-cell; }
 
+/* line 197, ../sass/components/_maincontnt.scss */
 .center-wrapper {
-  padding: 4%;
-}
-.center-wrapper .panel-col-first {
-  width: 70%;
-}
-.center-wrapper .panel-col-first .view-related-articles .view-content .views-row {
-  padding: 2%;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-  behavior: url(/sites/all/themes/files/js/PIE.htc);
-}
-.center-wrapper .panel-col-first .view-related-articles .view-content .views-row .views-field-title {
-  text-align: center;
-  padding-bottom: 10px;
-}
-.center-wrapper .panel-col-first .views-field.views-field-view-node .field-content a {
-  padding: 1%;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzMzY2ZmZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjMzNiMmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMzM5MmZlIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #33cfff), color-stop(30%, #33b2ff), color-stop(100%, #3392fe));
-  background: -moz-linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%);
-  background: -webkit-linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%);
-  background: linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%);
-  border-radius: 7px;
-  color: white;
-  font-size: 12px;
-  display: inline-block;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-}
-.center-wrapper .panel-col-last {
-  width: 30%;
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-  behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc);
-}
-.center-wrapper .panel-col-last .sharebuttons {
-  margin-left: 2%;
-  padding-top: 1%;
-}
-.center-wrapper .panel-col-last .sharebuttons div {
-  float: left;
-  position: absolute;
-  display: inline-block;
-  margin-left: 10px;
-}
+  padding: 4%; }
+  /* line 199, ../sass/components/_maincontnt.scss */
+  .center-wrapper .panel-col-first {
+    width: 70%; }
+    /* line 206, ../sass/components/_maincontnt.scss */
+    .center-wrapper .panel-col-first .view-related-articles .view-content .views-row {
+      padding: 2%;
+      behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+      position: relative;
+      behavior: url(/sites/all/themes/files/js/PIE.htc); }
+      /* line 211, ../sass/components/_maincontnt.scss */
+      .center-wrapper .panel-col-first .view-related-articles .view-content .views-row .views-field-title {
+        text-align: center;
+        padding-bottom: 10px; }
+    /* line 220, ../sass/components/_maincontnt.scss */
+    .center-wrapper .panel-col-first .views-field.views-field-view-node .field-content a {
+      padding: 1%;
+      background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzMzY2ZmZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjMzNiMmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMzM5MmZlIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+      background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #33cfff), color-stop(30%, #33b2ff), color-stop(100%, #3392fe));
+      background: -moz-linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%);
+      background: -webkit-linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%);
+      background: linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%);
+      border-radius: 7px;
+      color: white;
+      font-size: 12px;
+      display: inline-block;
+      behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+      position: relative; }
+  /* line 234, ../sass/components/_maincontnt.scss */
+  .center-wrapper .panel-col-last {
+    width: 30%;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+    position: relative;
+    behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc); }
+    /* line 242, ../sass/components/_maincontnt.scss */
+    .center-wrapper .panel-col-last .sharebuttons {
+      float: none;
+      margin-left: 2%;
+      padding-top: 1%; }
+      /* line 246, ../sass/components/_maincontnt.scss */
+      .center-wrapper .panel-col-last .sharebuttons div {
+        display: inline-block;
+        margin-left: 10px; }
 
+/* line 258, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-bottom {
-  width: 100%;
-}
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 {
-  display: block;
-  min-height: 150px;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZDJkMmQyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODQ4NDg0Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(30%, #d2d2d2), color-stop(100%, #848484));
-  background: -moz-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-  background: -webkit-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-  background: linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-}
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
-  text-align: center;
-  table-layout: fixed;
-  display: table;
-  float: none;
-  margin: 0 auto;
-  padding-top: 2%;
-  width: 75%;
-}
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap {
-  padding: 12px;
-}
-.panel-panel.panel-col-bottom .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap div {
-  display: inline-block;
-  margin: 0 6px;
-}
-.panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu {
-  min-height: 100px;
-  background: #3c9dfc;
-  float: left;
-  width: 100%;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  position: relative;
-  behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc);
-  display: none;
-}
-.panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu {
-  padding-top: 1%;
-  text-align: center;
-}
-.panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu li {
-  display: inline-block;
-  margin: 0 20px;
-}
-.panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu li a {
-  color: #ffffff;
-  letter-spacing: 2px;
-}
+  width: 100%; }
+  /* line 260, ../sass/components/_maincontnt.scss */
+  .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu {
+    min-height: 100px;
+    background: #3c9dfc;
+    float: left;
+    width: 100%;
+    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+    position: relative;
+    behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc);
+    display: none; }
+    /* line 269, ../sass/components/_maincontnt.scss */
+    .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu {
+      padding-top: 1%;
+      text-align: center; }
+      /* line 272, ../sass/components/_maincontnt.scss */
+      .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu li {
+        display: inline-block;
+        margin: 0 20px; }
+        /* line 275, ../sass/components/_maincontnt.scss */
+        .panel-panel.panel-col-bottom .panel-pane.pane-block.pane-menu-menu-footer-menu ul.menu li a {
+          color: #ffffff;
+          letter-spacing: 2px; }
 
+/* line 283, ../sass/components/_maincontnt.scss */
 .footer_wrapper {
   background: #3c9dfc;
   padding-bottom: 5%;
@@ -317,46 +428,172 @@ a:hover {
   width: 100%;
   color: #ffffff;
   height: 125px;
-  letter-spacing: 1px;
-}
-.footer_wrapper footer {
-  padding: 1%;
-  text-align: center;
-}
+  letter-spacing: 1px; }
+  /* line 291, ../sass/components/_maincontnt.scss */
+  .footer_wrapper footer {
+    padding: 1%;
+    text-align: center; }
 
+/* line 297, ../sass/components/_maincontnt.scss */
 .panel-panel.panel-col-top .views-field.views-field-field-sponsor-logo {
   background: url("/sites/default/files/images/hexagonal.png") no-repeat left top;
   height: 199px;
-  width: 184px;
-  background-size: 100% 100%;
-}
+  width: 184px; }
 
+/* line 304, ../sass/components/_maincontnt.scss */
 .field-content p {
   padding-top: 10px;
-  text-align: justify;
-}
+  text-align: justify; }
+/* line 308, ../sass/components/_maincontnt.scss */
 .field-content h3 {
-  text-align: left;
-}
+  text-align: left; }
 
+/* line 312, ../sass/components/_maincontnt.scss */
 .silverspon-wrap {
   padding-top: 20px;
   margin: 0 auto;
   text-align: center;
-  width: 100%;
-}
-.silverspon-wrap .odd, .silverspon-wrap .even {
-  width: 154px;
-}
-.silverspon-wrap.gold-header h3, .silverspon-wrap.silver-header h3 {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+  width: 100%; }
+  /* line 317, ../sass/components/_maincontnt.scss */
+  .silverspon-wrap .odd, .silverspon-wrap .even {
+    width: 154px; }
+  /* line 325, ../sass/components/_maincontnt.scss */
+  .silverspon-wrap.gold-header h3, .silverspon-wrap.silver-header h3 {
+    text-transform: uppercase;
+    letter-spacing: 1px; }
 
+/* line 344, ../sass/components/_maincontnt.scss */
+.pane-node-field-event-tickets .form-submit {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 100; }
+
+/* line 355, ../sass/components/_maincontnt.scss */
+.sponTxt {
+  position: absolute;
+  top: 30%;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto; }
+  /* line 363, ../sass/components/_maincontnt.scss */
+  .sponTxt p {
+    font-variant: small-caps;
+    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+    position: relative; }
+
+/* line 370, ../sass/components/_maincontnt.scss */
+.panel-col-middle .field--type-text-with-summary {
+  margin-left: 10%;
+  margin-right: 10%; }
+  /* line 373, ../sass/components/_maincontnt.scss */
+  .panel-col-middle .field--type-text-with-summary .camp-summary p {
+    text-align: justify;
+    font-size: 18px;
+    line-height: 175%; }
+
+/* line 382, ../sass/components/_maincontnt.scss */
+.social-links .block--menu {
+  padding-top: 5px; }
+  /* line 384, ../sass/components/_maincontnt.scss */
+  .social-links .block--menu ul li {
+    padding-right: 10px;
+    display: inline; }
+    /* line 387, ../sass/components/_maincontnt.scss */
+    .social-links .block--menu ul li a {
+      text-transform: uppercase;
+      color: rgba(1, 1, 1, 0.7); }
+
+/* line 398, ../sass/components/_maincontnt.scss */
+.view-blogs {
+  margin-left: 10%;
+  margin-right: 10%; }
+  /* line 401, ../sass/components/_maincontnt.scss */
+  .view-blogs img {
+    height: 400px;
+    border: solid 1px white;
+    border-radius: 10px; }
+
+/* line 408, ../sass/components/_maincontnt.scss */
+.node-page {
+  width: 1024px;
+  margin: 0 auto; }
+  /* line 409, ../sass/components/_maincontnt.scss */
+  .node-page h2 {
+    display: none; }
+
+/* line 416, ../sass/components/_maincontnt.scss */
+.block--superfish-1 li a ul li {
+  padding: 0; }
+
+/* Silver Sponsors */
+/* line 421, ../sass/components/_maincontnt.scss */
+.pane-drupal-camp-sponsors-panel-pane-3 {
+  display: block;
+  min-height: 150px;
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZDJkMmQyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODQ4NDg0Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g");
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(30%, #d2d2d2), color-stop(100%, #848484));
+  background: -webkit-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
+  background: -moz-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
+  background: -o-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
+  -pie-background: linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
+  background: linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
+  behavior: url("/sites/all/themes/drupalcamp/js/PIE.htc");
+  position: relative; }
+  @media (min-width: 320px) and (max-width: 640px) {
+    /* line 421, ../sass/components/_maincontnt.scss */
+    .pane-drupal-camp-sponsors-panel-pane-3 {
+      background: none; } }
+  /* line 436, ../sass/components/_maincontnt.scss */
+  .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
+    text-align: center;
+    table-layout: fixed;
+    display: table;
+    float: none;
+    margin: 0 auto;
+    padding-top: 2%;
+    width: 75%; }
+    @media (min-width: 320px) and (max-width: 640px) {
+      /* line 436, ../sass/components/_maincontnt.scss */
+      .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
+        width: 94%; } }
+    /* line 447, ../sass/components/_maincontnt.scss */
+    .pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
+      display: table-cell;
+      padding-left: 20px; }
+      @media (min-width: 320px) and (max-width: 640px) {
+        /* line 447, ../sass/components/_maincontnt.scss */
+        .pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
+          float: left;
+          width: 154px;
+          margin-left: 15px; } }
+      @media (min-width: 768px) and (max-width: 1023px) {
+        /* line 447, ../sass/components/_maincontnt.scss */
+        .pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
+          display: inline-block; } }
+    /* line 459, ../sass/components/_maincontnt.scss */
+    .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap {
+      padding: 12px; }
+      /* line 461, ../sass/components/_maincontnt.scss */
+      .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap div {
+        display: inline-block;
+        margin: 0 6px; }
+        @media (min-width: 320px) and (max-width: 640px) {
+          /* line 461, ../sass/components/_maincontnt.scss */
+          .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap div {
+            margin-top: 10px; } }
+
+/* --- End of Silver Sponsors  -- */
+/* line 2, ../sass/components/_navigation.scss */
 ul li {
-  list-style: none !important;
-}
+  list-style: none !important; }
 
+/* line 6, ../sass/components/_navigation.scss */
 .navigation_wrapper {
   background: #3c9dfc;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
@@ -364,40 +601,42 @@ ul li {
   position: relative;
   display: inline;
   float: left;
-  width: 100%;
-}
-.navigation_wrapper ul.menu {
-  text-align: center;
-}
-.navigation_wrapper ul.menu li {
-  display: inline-block;
-  padding: 15px 30px;
-}
-.navigation_wrapper ul.menu li a {
-  text-decoration: none;
-  color: white;
-}
-.navigation_wrapper ul.menu li a:hover {
-  transition: all 0.3s linear;
-  opacity: 0.8;
-  text-decoration: none;
-  color: #ffffff;
-  text-shadow: 0 0 15px #fff;
-}
-.navigation_wrapper ul.menu li.expanded ul {
-  display: none;
-}
+  width: 100%; }
+  /* line 13, ../sass/components/_navigation.scss */
+  .navigation_wrapper ul.menu {
+    text-align: center; }
+    /* line 15, ../sass/components/_navigation.scss */
+    .navigation_wrapper ul.menu li {
+      display: inline-block;
+      text-align: center;
+      padding: 15px 30px; }
+      /* line 19, ../sass/components/_navigation.scss */
+      .navigation_wrapper ul.menu li a {
+        text-decoration: none;
+        color: white; }
+        /* line 22, ../sass/components/_navigation.scss */
+        .navigation_wrapper ul.menu li a:hover {
+          transition: all 0.3s linear;
+          opacity: 0.8;
+          text-decoration: none;
+          color: #ffffff;
+          text-shadow: 0 0 15px #fff; }
+    /* line 32, ../sass/components/_navigation.scss */
+    .navigation_wrapper ul.menu li.expanded ul {
+      display: none; }
 
 /* Menu Styling */
-#block-superfish-1 {
-  text-align: center;
-}
+/* line 40, ../sass/components/_navigation.scss */
+#block-superfish-1 * {
+  text-align: center; }
 
+/* line 41, ../sass/components/_navigation.scss */
 ul#superfish-1 {
   display: inline-block;
-  float: none;
-}
+  float: none; }
 
+/* line 42, ../sass/components/_navigation.scss */
 .sf-sub-indicator {
-  display: none;
-}
+  display: none; }
+
+/*# sourceMappingURL=drupalcamp.no-query.css.map */

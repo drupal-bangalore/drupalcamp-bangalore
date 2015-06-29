@@ -14,6 +14,7 @@ ul{
 		text-align: center;
 		li{
 			display:inline-block;
+            text-align: center;
 			padding:15px 30px;
 			a{
 				text-decoration:none;
@@ -36,7 +37,7 @@ ul{
 }
 
 /* Menu Styling */
-#block-superfish-1 { text-align: center; }
+#block-superfish-1 *{ text-align: center; }
 ul#superfish-1 { display: inline-block; float: none; }
 .sf-sub-indicator{
   display: none;
