@@ -1,44 +1,52 @@
-ul{
-	li{
-		list-style:none !important;
-	}
+ul {
+    li {
+        list-style: none !important;
+    }
 }
-.navigation_wrapper{
-	background: #3c9dfc;
-	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-	 @include pie-element();
-  display: inline;
-	@include float(left);
-	width:100%;
-	ul.menu{
-		text-align: center;
-		li{
-			display:inline-block;
+
+.navigation_wrapper {
+    background: #3c9dfc;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    @include pie-element();
+    display: inline;
+    @include float(left);
+    width: 100%;
+    ul.menu {
+        text-align: center;
+        li {
+            display: inline-block;
             text-align: center;
-			padding:15px 30px;
-			a{
-				text-decoration:none;
-				color:white;
-			  	&:hover {
-					transition: all 0.3s linear;
-					opacity: 0.8;
-					text-decoration: none;
-					color: #ffffff;
-					text-shadow: 0 0 15px #fff;
-				}
-			}
-		}
-		li.expanded{
-			ul{
-				display:none
-			}
-		}
-	}
+            padding: 15px 30px;
+            a {
+                text-decoration: none;
+                color: white;
+                &:hover {
+                    transition: all 0.3s linear;
+                    opacity: 0.8;
+                    text-decoration: none;
+                    color: #ffffff;
+                    text-shadow: 0 0 15px #fff;
+                }
+            }
+        }
+        li.expanded {
+            ul {
+                display: none
+            }
+        }
+    }
 }
 
 /* Menu Styling */
-#block-superfish-1 *{ text-align: center; }
-ul#superfish-1 { display: inline-block; float: none; }
-.sf-sub-indicator{
-  display: none;
+#block-superfish-1 * {
+    text-align: center;
+}
+
+ul#superfish-1 {
+    display: inline-block;
+    float: none;
+}
+
+.sf-sub-indicator {
+    display: none;
 }

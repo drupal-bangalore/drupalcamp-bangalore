@@ -1,148 +1,143 @@
-*{
-	margin: 0;
-	padding: 0;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-
-input[type="submit"]{
-  padding: 1%;
-  background: linear-gradient(#33cfff 0%, #3392fe 100%);
-  border-radius: 7px;
-  color: #fff;
-  font-size: 14px;
-  behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-  text-transform: uppercase;
-  border-style: none;
-  margin-bottom: 10px;
+input[type="submit"] {
+    padding: 1%;
+    background: linear-gradient(#33cfff 0%, #3392fe 100%);
+    border-radius: 7px;
+    color: #fff;
+    font-size: 14px;
+    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
+    text-transform: uppercase;
+    border-style: none;
+    margin-bottom: 10px;
 }
 
-
-
-input[type="text"]{
-  width: 50%;
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2e2e2;
-  border-radius: 5px;
-}
-
-input[type="text"]:focus{
-  width: 50%;
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2583c;
-  border-radius: 5px;
-}
-
-input[type="password"]{
-  width: 50%;
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2e2e2;
-  border-radius: 5px;
-}
-
-input[type="password"]:focus{
-  width: 50%;
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2583c;
-  border-radius: 5px;
-}
-
-select{
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2e2e2;
-  border-radius: 5px;
-}
-
-select:focus{
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2583c;
-  border-radius: 5px;
-}
-
-.ticket-register-form{
-  margin-left: 20%;
-  margin-right: 20%;
-
-
-  label{
-    padding-bottom: 10px;
-    color: rgba(1,1,1,0.7);
-  }
-
-  .description{
+input[type="text"] {
     width: 50%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2e2e2;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus {
+    width: 50%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2583c;
+    border-radius: 5px;
+}
+
+input[type="password"] {
+    width: 50%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2e2e2;
+    border-radius: 5px;
+}
+
+input[type="password"]:focus {
+    width: 50%;
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2583c;
+    border-radius: 5px;
+}
+
+select {
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2e2e2;
+    border-radius: 5px;
+}
+
+select:focus {
+    color: #999999;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px #e2583c;
+    border-radius: 5px;
+}
+
+.ticket-register-form {
+    margin-left: 20%;
+    margin-right: 20%;
+
+    label {
+        padding-bottom: 10px;
+        color: rgba(1, 1, 1, 0.7);
+    }
+
+    .description {
+        width: 50%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    #edit-field-speakers .description {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .field--name-ticket-type-label {
+        font-size: 20px;
+        font-weight: 100;
+    }
+
+    .form-item-ticket-quantity-1 label {
+        font-weight: 100;
+    }
+
+    .ticket-type-ticket-type {
+        text-align: center;
+    }
+
+    #ticket-field-formatter-view-form {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+}
+
+legend {
     padding-top: 10px;
     padding-bottom: 10px;
-  }
-
-  #edit-field-speakers .description{
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .field--name-ticket-type-label{
-    font-size: 20px;
-    font-weight: 100;
-  }
-
-  .form-item-ticket-quantity-1 label{
-    font-weight: 100;
-  }
-
-  .ticket-type-ticket-type{
-    text-align: center;
-  }
-
-  #ticket-field-formatter-view-form{
-    text-align: center;
-    margin-bottom: 30px;
-  }
 }
 
-
-legend{
-  padding-top: 10px;
-  padding-bottom: 10px;
+.form-wrapper {
+    border-style: none;
 }
 
-.form-wrapper{
-  border-style: none;
+#user-login {
+    width: 100%;
+    margin-left: 25%;
+    margin-right: 25%;
+    label {
+        padding-bottom: 10px;
+        color: rgba(1, 1, 1, 0.7);
+    }
 }
 
-#user-login{
-  width: 100%;
-  margin-left: 25%;
-  margin-right: 25%;
-  label{
-    padding-bottom: 10px;
-    color: rgba(1,1,1,0.7);
-  }
-}
-
-.contact-site-form{
-  margin-right: 10%;
-  margin-left: 10%;
-  label{
-    padding-bottom: 10px;
-    color: rgba(1,1,1,0.7);
-  }
+.contact-site-form {
+    margin-right: 10%;
+    margin-left: 10%;
+    label {
+        padding-bottom: 10px;
+        color: rgba(1, 1, 1, 0.7);
+    }
 }
 
 

@@ -7,11 +7,10 @@ $pie-default-approach: relative !default;
 $pie-behavior: stylesheet-url("/sites/all/themes/drupalcamp/js/PIE.htc") !default;
 
 @mixin pie-element($approach: $pie-default-approach, $z-index: 0) {
-  behavior: $pie-behavior;
-  @if $approach == relative {
-    position: relative;
-  }
-  @else if $approach == z-index {
-    z-index: $z-index;
-  }
+    behavior: $pie-behavior;
+    @if $approach == relative {
+        position: relative;
+    } @else if $approach == z-index {
+        z-index: $z-index;
+    }
 }
