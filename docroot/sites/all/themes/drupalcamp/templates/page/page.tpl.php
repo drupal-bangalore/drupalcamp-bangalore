@@ -81,9 +81,9 @@
                     <?php if (isset($page['header_top'])) { ?>
                             <?php print render($page['header_top']); ?>
                     <?php } ?>
-                    <?php if (theme_get_setting('logo')) : ?>
+                    <?php if ($logo) : ?>
                         <a href="/" title="<?php print t('Home'); ?>" rel="home" class="site-logo">
-                         <img src="<?php print theme_get_setting('logo'); ?>" alt="<?php print t('Home'); ?>" />
+                         <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
                         </a>
                     <?php endif; ?>
                     <?php if (isset($page['header_bottom'])) { ?>
@@ -130,7 +130,7 @@
         </div>
     <?php } ?>
 
-    <?php if ($tabs) { ?>
+    <?php if (!empty($tabs)) { ?>
         <div class="row tabs-row">
             <div class="section-outer-wrapper full">
                 <div class="section-inner-wrapper">
