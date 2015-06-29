@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Default theme implementation to display the basic html structure of a single
@@ -47,58 +48,21 @@
   <!--[if lte IE 6]><html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"><![endif]-->
   <!--[if (IE 7)&(!IEMobile)]><html class="no-js ie lt-ie9 lt-ie8" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"><![endif]-->
   <!--[if IE 8]><html class="no-js ie lt-ie9" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"><![endif]-->
-  
-  <!--[if (gt IE 9)|(gt IEMobile 7)]><html class="no-js ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>><![endif]-->
+  <!--[if (gte IE 9)|(gt IEMobile 7)]><html class="no-js ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>><![endif]-->
   <!--[if !IE]><!--><html class="no-js" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>><!--<![endif]-->
 <?php else: ?>
   <html class="no-js" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 <?php endif; ?>
-<!--[if IE 9]><html class="no-js ie ie9" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"><![endif]-->
 <head>
-  <title><?php print $head_title; ?></title>
   <?php print $head; ?>
-  <meta charset="utf-8">
-  <meta name="apple-mobile-web-app-title" content="SITE NAME">
-  <meta name="description" content="">
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta http-equiv="cleartype" content="on">
-  <script>
-    if ("-ms-user-select" in document.documentElement.style && (navigator.userAgent.match(/IEMobile/) || navigator.userAgent.match(/ZuneWP7/) || navigator.userAgent.match(/WPDesktop/))) {
-      var msViewportStyle = document.createElement('style');
-      msViewportStyle.appendChild(
-        document.createTextNode(
-          '@-ms-viewport{width:auto!important}'
-        )
-      )
-      document.querySelector('head').appendChild(msViewportStyle);
-    }
-  </script>
-  <!--[if lte IE 8]>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <![endif]-->
-  <!--[if lt IE 9]>
-    <script src="<?php print '/' . conf_path() . "/libraries/html5shiv.js"; ?>"></script>
-  <![endif]-->
-  <!-- Only load library if not IE8 -->
-  <!--[if !(IE 8)]><!-->
-    <!--<script src="/libraries/tappable.js"></script>-->
-  <!--<![endif]-->
+  <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
- 
 </head>
-<body<?php print $attributes;?> data-widget="globalScriptsWidget">
-<?php
-//Google tag manager code.
-if (isset($google_tag)) { 
- print render($google_tag);
-}
-?>
-<div class="campbodybg">
+<body<?php print $attributes;?>>
+  <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
- </div>
 </body>
 </html>
