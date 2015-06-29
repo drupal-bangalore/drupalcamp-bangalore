@@ -1,4 +1,3 @@
-/* No files to import found in abstractions/**\/* */
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +15,7 @@ input[type="submit"] {
   margin-bottom: 10px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"], select {
   width: 50%;
   color: #999999;
   padding: 10px 20px;
@@ -25,53 +24,8 @@ input[type="text"] {
   border: solid 2px #e2e2e2;
   border-radius: 5px;
 }
-
-input[type="text"]:focus {
-  width: 50%;
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2583c;
-  border-radius: 5px;
-}
-
-input[type="password"] {
-  width: 50%;
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2e2e2;
-  border-radius: 5px;
-}
-
-input[type="password"]:focus {
-  width: 50%;
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2583c;
-  border-radius: 5px;
-}
-
-select {
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2e2e2;
-  border-radius: 5px;
-}
-
-select:focus {
-  color: #999999;
-  padding: 10px 20px;
-  font-size: 18px;
-  outline: none;
-  border: solid 2px #e2583c;
-  border-radius: 5px;
+input[type="text"]:focus, input[type="password"]:focus, select:focus {
+  border-color: #e2583c;
 }
 
 .ticket-register-form {
@@ -139,26 +93,11 @@ header {
   min-height: 170px;
   text-align: center;
 }
-header .header-row .sharebuttons {
-  float: right;
-  margin-right: 10%;
-}
-header .header-row .sharebuttons div {
-  display: inline-block;
-  margin-left: 10px;
-}
-header .header-row .site-logo {
+header .site-logo {
   background-color: #ffffff;
-  margin: auto auto;
+  margin: auto;
 }
-header .header-row .site-logo a {
-  display: block;
-}
-header .header-row .site-logo a img {
-  height: 150px;
-}
-
-.social-links {
+header .social-links {
   text-align: left;
   float: right;
   width: 300px;
@@ -166,8 +105,16 @@ header .header-row .site-logo a img {
   right: 10px;
   top: 5px;
 }
-.social-links .sharebuttons {
+header .social-links .sharebuttons {
   width: 41%;
+}
+header .sharebuttons {
+  float: right;
+  margin-right: 10%;
+}
+header .sharebuttons div {
+  display: inline-block;
+  margin-left: 10px;
 }
 
 img, media {
@@ -716,50 +663,36 @@ a:hover {
 }
 
 /* --- End of Silver Sponsors  -- */
-ul li {
-  list-style: none !important;
-}
-
-.navigation_wrapper {
-  background: #3c9dfc;
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+.navigation-row {
+  display: inline;
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
-  display: inline;
   float: left;
   width: 100%;
+  background: #3c9dfc;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
-.navigation_wrapper ul.menu {
-  text-align: center;
-}
-.navigation_wrapper ul.menu li {
+.navigation-row ul.menu li a {
   display: inline-block;
-  text-align: center;
   padding: 15px 30px;
-}
-.navigation_wrapper ul.menu li a {
   text-decoration: none;
   color: white;
 }
-.navigation_wrapper ul.menu li a:hover {
+.navigation-row ul.menu li a:hover {
   transition: all 0.3s linear;
   opacity: 0.8;
   text-decoration: none;
   color: #ffffff;
   text-shadow: 0 0 15px #fff;
 }
-.navigation_wrapper ul.menu li.expanded ul {
-  display: none;
-}
 
 /* Menu Styling */
-#block-superfish-1 * {
+#block-superfish-1 .block__content {
   text-align: center;
 }
 
-ul#superfish-1 {
+#superfish-1 {
   display: inline-block;
-  float: none;
 }
 
 .sf-sub-indicator {

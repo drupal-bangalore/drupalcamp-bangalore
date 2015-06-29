@@ -1,10 +1,4 @@
 <?php
-global $base_url;
-$window_safari = false;
-if (strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') && !strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') && strpos($_SERVER['HTTP_USER_AGENT'], 'Window')) {
-	$window_safari = true;
-}
-
 /**
  * @file
  * Default theme implementation to display the basic html structure of a single

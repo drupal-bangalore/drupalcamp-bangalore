@@ -1,6 +1,4 @@
 <?php
-/* global $user;
-$user = user_load(1); */
 /**
  * @file
  * Default theme implementation to display a single Drupal page.
@@ -71,7 +69,6 @@ $user = user_load(1); */
  * @see template_process()
  * @see omega_preprocess_page()
  */
- global $user;
 ?>
 
 <div class="snap-content content-outer-wrapper page layout" id="content">
@@ -106,10 +103,8 @@ $user = user_load(1); */
     </header>
 
     <?php if (isset($page['navigation'])) { ?>
-    <div class="navigation_wrapper">
-        <div class="row navigation-row hidden">
-            <?php print render($page['navigation']); ?>
-        </div>
+    <div class="row navigation-row hidden">
+        <?php print render($page['navigation']); ?>
     </div>
     <?php } ?>
 
@@ -135,7 +130,7 @@ $user = user_load(1); */
         </div>
     <?php } ?>
 
-    <?php if ($tabs && $user -> uid == 1) { ?>
+    <?php if ($tabs) { ?>
         <div class="row tabs-row">
             <div class="section-outer-wrapper full">
                 <div class="section-inner-wrapper">
