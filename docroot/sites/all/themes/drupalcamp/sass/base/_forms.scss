@@ -29,8 +29,9 @@ input[type="text"], input[type="password"], select {
 }
 
 .ticket-register-form {
-    margin-left: 20%;
-    margin-right: 20%;
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
 
     label {
         padding-bottom: 10px;
@@ -93,4 +94,19 @@ legend {
         padding-bottom: 10px;
         color: rgba(1, 1, 1, 0.7);
     }
+}
+
+.user-pass{
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.user-register-form,.user-register-form--2{
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+  .description{
+    width: 50%;
+  }
 }
