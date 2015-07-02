@@ -141,7 +141,7 @@ legend {
   color: #fff;
   font-size: 1.4em;
   text-transform: uppercase;
-  text-shadow: 3px 3px 4px #969696;
+  text-shadow: 0 0 10px #1A1A1A;
 }
 .l-header .l-branding .view-drupal-camp-sponsors .view-content {
   margin: 0 auto;
