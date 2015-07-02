@@ -1,0 +1,6 @@
+name = DCB CoD Customizations
+description = Customizations for DCB 2015
+core = 7.x
+package = DCB
+
+dependencies[] = ticket

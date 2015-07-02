@@ -1,0 +1,43 @@
+<?php
+/**
+ * @file
+ * Customizations for DCB 2015 for CoD.
+ */
+
+define('DCB_COD_EVENT_ID', 23);
+define('DCB_COD_TICKET_TYPE_ID', 2);
+
+/**
+ * Implements hook_block_info().
+ */
+function dcb_cod_block_info() {
+  $blocks['dcb_cod_register_block'] = array(
+    'info' => t('DCB Registration Block'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function dcb_cod_block_view($delta = '') {
+  switch ($delta) {
+    case 'dcb_cod_register_block':
+      $ticket_types = array(DCB_COD_TICKET_TYPE_ID => ticket_type_load(DCB_COD_TICKET_TYPE_ID));
+      $vars = array(
+        'entity_type' => 'node',
+        'entity' => node_load(DCB_COD_EVENT_ID),
+        'ticket_types' => $ticket_types,
+        'submit_text' => t('Register'),
+        'langcode' => LANGUAGE_NONE,
+      );
+      $block = array(
+        'subject' => '',
+        'content' => drupal_get_form('ticket_field_formatter_view_form', $vars),
+      );
+      return $block;
+  }
+
+  return NULL;
+}
