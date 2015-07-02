@@ -24,10 +24,15 @@ function dcb_misc_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '21600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '21600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Nid */
@@ -80,7 +85,7 @@ function dcb_misc_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'sponsor' => 'sponsor',
   );
-  /* Filter criterion: Field: Sponsorship Level (field_sponsor_sponsorship_level) */
+  /* Filter criterion: Content: Sponsorship Level (field_sponsor_sponsorship_level) */
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['id'] = 'field_sponsor_sponsorship_level_tid';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['table'] = 'field_data_field_sponsor_sponsorship_level';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['field'] = 'field_sponsor_sponsorship_level_tid';
@@ -121,7 +126,7 @@ function dcb_misc_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'sponsor' => 'sponsor',
   );
-  /* Filter criterion: Field: Sponsorship Level (field_sponsor_sponsorship_level) */
+  /* Filter criterion: Content: Sponsorship Level (field_sponsor_sponsorship_level) */
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['id'] = 'field_sponsor_sponsorship_level_tid';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['table'] = 'field_data_field_sponsor_sponsorship_level';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['field'] = 'field_sponsor_sponsorship_level_tid';
@@ -164,7 +169,7 @@ function dcb_misc_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'sponsor' => 'sponsor',
   );
-  /* Filter criterion: Field: Sponsorship Level (field_sponsor_sponsorship_level) */
+  /* Filter criterion: Content: Sponsorship Level (field_sponsor_sponsorship_level) */
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['id'] = 'field_sponsor_sponsorship_level_tid';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['table'] = 'field_data_field_sponsor_sponsorship_level';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['field'] = 'field_sponsor_sponsorship_level_tid';
@@ -174,6 +179,22 @@ function dcb_misc_views_default_views() {
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['vocabulary'] = 'sponsorship_level';
   $handler->display->display_options['filters']['field_sponsor_sponsorship_level_tid']['hierarchy'] = 1;
+
+  /* Display: Diamond Sponsors (Block) */
+  $handler = $view->new_display('block', 'Diamond Sponsors (Block)', 'block_diamond');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Text area */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'Block Title';
+  $handler->display->display_options['footer']['area']['empty'] = TRUE;
+  $handler->display->display_options['footer']['area']['content'] = 'Diamond Sponsors';
+  $handler->display->display_options['footer']['area']['format'] = 'filtered_html';
   $export['drupal_camp_sponsors'] = $view;
 
   return $export;
