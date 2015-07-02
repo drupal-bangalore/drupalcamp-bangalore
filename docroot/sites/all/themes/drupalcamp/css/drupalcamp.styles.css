@@ -215,6 +215,10 @@ a:hover {
   text-align: center;
 }
 
+.page-node-23 .l-content h1 {
+  display: none;
+}
+
 .panel-display > .center-wrapper {
   display: none;
 }
