@@ -82,47 +82,6 @@
         font-weight: bold;
     }
 
-    .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-1 {
-        margin-left: 25%;
-        @include breakpoint($mob) {
-            margin-left: 0;
-            position: static;
-            width: 100%;
-            background: #b2d9ff;
-            text-align: center;
-            float: left;
-
-        }
-        @include breakpoint($tab) {
-            top: 85px;
-            margin-left: 30%;
-        }
-        position: absolute;
-        top: 100px;
-        width: 50%;
-        z-index: 99;
-        div.view-content {
-            .views-row-1, .views-row-2 {
-                display: inline-block;
-                @include breakpoint($mob) {
-                    padding: 0 20px;
-                    float: left;
-                    width: 50%;
-                }
-            }
-            .views-row-2 {
-                float: right;
-                @include breakpoint($mob) {
-                    background: #b2d9ff;
-                    float: none;
-                    clear: both;
-                    display: inline-block;
-                    // width:100%;
-
-                }
-            }
-        }
-    }
     .bx-controls {
         position: absolute;
         bottom: 20px;
@@ -286,20 +245,6 @@
                 }
             }
         }
-    }
-}
-
-.footer_wrapper {
-    background: #3c9dfc;
-    padding-bottom: 5%;
-    float: left;
-    width: 100%;
-    color: #ffffff;
-    height: 125px;
-    letter-spacing: 1px;
-    footer {
-        padding: 1%;
-        text-align: center;
     }
 }
 

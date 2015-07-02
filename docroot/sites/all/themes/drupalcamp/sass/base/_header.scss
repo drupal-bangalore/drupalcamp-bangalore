@@ -1,31 +1,57 @@
-header {
+.l-header {
     position: relative;
     min-height: 170px;
     text-align: center;
 
     .site-logo {
-        background-color: #ffffff;
         margin: auto;
     }
 
-    .social-links {
-        text-align: left;
-        float: right;
-        width: 300px;
-        position: absolute;
-        right: 10px;
-        top: 5px;
-        .sharebuttons {
-            width: 41%;
-        }
+    .site-name {
+        display: none;
     }
 
-    .sharebuttons {
-        float: right;
-        margin-right: 10%;
-        div {
-            display: inline-block;
-            margin-left: 10px;
+    .l-header-inner {
+        background: url(../images/banner-bg.png) center top repeat-x;
+        background-size: auto 100%;
+    }
+
+    .l-branding {
+        background: url(../images/banner-back.jpg) transparent center top no-repeat;
+        background-size: auto 100%;
+        min-height: 800px;
+
+        .block--dcb-cod {
+            margin-top: -110px;
+            .ticket-type-ticket-type {
+                display: none;
+            }
+            .form-submit {
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+        }
+
+        .view-drupal-camp-sponsors {
+            .view-footer {
+                margin-top: -1.6em;
+                color: #fff;
+                font-size: 1.4em;
+                text-transform: uppercase;
+                text-shadow: 3px 3px 4px rgba(150, 150, 150, 1);
+            }
+            .view-content {
+                margin: 0 auto;
+                .views-row {
+                    display: inline-block;
+                }
+                .views-row-1 {
+                    margin-right: 10%;
+                }
+                .views-row-2 {
+                    margin-left: 10%;
+                }
+            }
         }
     }
 }
