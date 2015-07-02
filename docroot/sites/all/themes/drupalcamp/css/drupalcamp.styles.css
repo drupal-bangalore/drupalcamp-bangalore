@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Poppins:400,700|Eczar|Pacifico);
 * {
   margin: 0;
   padding: 0;
@@ -182,10 +183,18 @@ img, media {
 }
 
 body {
-  font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
+  font-family: "Poppins", "Open Sans", "Segoe UI", "Helvetica", sans-serif;
   overflow-x: hidden;
   color: #25242a;
   font-size: 16px;
+}
+
+h1, h2, h3 {
+  font-family: "Eczar", serif;
+}
+
+.front h1 {
+  font-family: "Pacifico", cursive;
 }
 
 p {
@@ -215,10 +224,6 @@ a:hover {
 .l-footer .l-region--footer {
   padding: 1%;
   text-align: center;
-}
-
-.page-node-23 .l-content h1 {
-  display: none;
 }
 
 .panel-display > .center-wrapper {
@@ -359,11 +364,11 @@ a:hover {
 
 .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 {
   padding-bottom: 6%;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmYjkwZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffb90f), color-stop(30%, #ffffff), color-stop(100%, #ffffff));
-  background: -moz-linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
-  background: -webkit-linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
-  background: linear-gradient(#ffb90f 0%, #ffffff 30%, #ffffff 100%);
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZDk2ZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffd96f), color-stop(30%, #ffffff), color-stop(100%, #ffffff));
+  background: -moz-linear-gradient(#ffd96f 0%, #ffffff 30%, #ffffff 100%);
+  background: -webkit-linear-gradient(#ffd96f 0%, #ffffff 30%, #ffffff 100%);
+  background: linear-gradient(#ffd96f 0%, #ffffff 30%, #ffffff 100%);
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
 }

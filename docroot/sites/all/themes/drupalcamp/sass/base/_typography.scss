@@ -1,8 +1,23 @@
+@import url(http://fonts.googleapis.com/css?family=Poppins:400,700|Eczar|Pacifico);
+
+$header-font: 'Eczar', serif;
+$fancy-header-font: 'Pacifico', cursive;
+$text-font: 'Poppins', "Open Sans", "Segoe UI", "Helvetica", sans-serif;
+
+
 body {
-    font-family: "Open Sans", "Segoe UI", "Helvetica", sans-serif;
+    font-family: $text-font;
     overflow-x: hidden;
     color: #25242a;
     font-size: 16px;
+}
+
+h1, h2, h3 {
+    font-family: $header-font;
+}
+
+.front h1 {
+    font-family: $fancy-header-font;
 }
 
 p {
