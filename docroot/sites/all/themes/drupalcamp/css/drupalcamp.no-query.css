@@ -131,6 +131,8 @@ legend {
   display: none;
 }
 .l-header .l-branding .block--dcb-cod .form-submit {
+  background: linear-gradient(#ffb90f 0%, #ff920e 100%);
+  border: 3px double #fff;
   font-size: 1.2em;
   font-weight: bold;
 }
