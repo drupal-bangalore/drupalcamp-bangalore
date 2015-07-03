@@ -11,6 +11,11 @@ h1, h2, h3 {
     font-family: $header-font;
 }
 
+.page-title {
+    padding-top: 2em;
+    padding-bottom: 0.5em;
+}
+
 .front h1 {
     font-family: $fancy-header-font;
     color: $fancy-header-color;

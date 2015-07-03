@@ -11,3 +11,7 @@
         }
     }
 }
+
+.webform-confirmation p {
+    @include dropcaps;
+}
