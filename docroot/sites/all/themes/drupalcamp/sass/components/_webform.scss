@@ -1,0 +1,13 @@
+.node-type-webform {
+    .webform-container-inline {
+        @include clearfix;
+        & > label {
+            display: block;
+            float: left;
+            width: 10%;
+        }
+        input[type="text"], input[type="email"], & > div, textarea {
+            float: left;
+        }
+    }
+}
