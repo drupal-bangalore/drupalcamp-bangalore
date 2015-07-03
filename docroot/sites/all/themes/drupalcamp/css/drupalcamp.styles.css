@@ -29,80 +29,9 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
   border-color: #e2583c;
 }
 
-.ticket-register-form {
-  width: 100%;
-  margin-left: 25%;
-  margin-right: 25%;
-}
-.ticket-register-form label {
-  padding-bottom: 10px;
-  color: rgba(1, 1, 1, 0.7);
-}
-.ticket-register-form .description {
-  width: 50%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.ticket-register-form #edit-field-speakers .description {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.ticket-register-form .field--name-ticket-type-label {
-  font-size: 20px;
-  font-weight: 100;
-}
-.ticket-register-form .form-item-ticket-quantity-1 label {
-  font-weight: 100;
-}
-.ticket-register-form .ticket-type-ticket-type {
-  text-align: center;
-}
-.ticket-register-form #ticket-field-formatter-view-form {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
 legend {
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.form-wrapper {
-  border-style: none;
-}
-
-#user-login {
-  width: 100%;
-  margin-left: 25%;
-  margin-right: 25%;
-}
-#user-login label {
-  padding-bottom: 10px;
-  color: rgba(1, 1, 1, 0.7);
-}
-
-.contact-site-form {
-  margin-right: 10%;
-  margin-left: 10%;
-}
-.contact-site-form label {
-  padding-bottom: 10px;
-  color: rgba(1, 1, 1, 0.7);
-}
-
-.user-pass {
-  width: 100%;
-  margin-left: 25%;
-  margin-right: 25%;
-}
-
-.user-register-form, .user-register-form--2 {
-  width: 100%;
-  margin-left: 25%;
-  margin-right: 25%;
-}
-.user-register-form .description, .user-register-form--2 .description {
-  width: 50%;
 }
 
 .l-header {
@@ -214,8 +143,10 @@ a:hover {
 }
 
 /* Copied from Barcelona site for now. TODO: Break it up later into manageable chunks. */
-.l-main-wrapper .container-inner,
-.node-type-event .page-title,
+.not-front .l-main article,
+.l-content > form,
+.l-main .tabs,
+.page-title,
 .l-region--footer,
 .action-links,
 .l-navigation .l-constrained,
@@ -712,5 +643,9 @@ a:hover {
 }
 
 .sf-sub-indicator {
+  display: none;
+}
+
+.breadcrumb {
   display: none;
 }
