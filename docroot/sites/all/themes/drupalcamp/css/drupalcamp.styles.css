@@ -100,27 +100,6 @@ img, media {
   max-width: 100%;
 }
 
-.messages.messages--error {
-  text-align: center;
-  border-style: none;
-  color: #e74c3c;
-}
-
-.messages.messages--error ul li {
-  padding-top: 5px;
-}
-
-.messages.messages--status {
-  text-align: center;
-  border-style: none;
-  font-size: 24px;
-  color: #40d47e;
-}
-
-.messages.messages--status {
-  padding-top: 20px;
-}
-
 body {
   font-family: "Poppins", "Open Sans", "Segoe UI", "Helvetica", sans-serif;
   overflow-x: hidden;
@@ -161,6 +140,7 @@ a:hover {
 .not-front .l-main article,
 .l-content > form,
 .l-main .tabs,
+.l-main .messages,
 .page-title,
 .l-region--footer,
 .action-links,
