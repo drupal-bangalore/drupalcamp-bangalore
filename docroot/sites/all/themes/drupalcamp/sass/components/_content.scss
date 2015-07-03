@@ -1,7 +1,6 @@
 /* Copied from Barcelona site for now. TODO: Break it up later into manageable chunks. */
 .l-main-wrapper .container-inner,
-.panels-layout .page-title,
-.panels-ipe .page-title,
+.node-type-event .page-title,
 .l-region--footer,
 .action-links,
 .l-navigation .l-constrained,
@@ -9,6 +8,7 @@
 .page-node-sessions-accepted .l-content .preface .view-display-id-track_session_filter,
 .page-node-sessions-proposed .view-display-id-track_session_summary > .view-content,
 .page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track {
-    max-width: 1100px;
+    max-width: $wide;
+    width: 94%;
     margin: 0 auto;
 }

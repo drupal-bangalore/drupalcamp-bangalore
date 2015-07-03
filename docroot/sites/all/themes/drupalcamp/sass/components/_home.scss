@@ -1,25 +1,28 @@
 /* There needs to be a lot of work done on the styles below. */
 
-.panel-display > .center-wrapper {
-    display: none;
-}
+.front .panelizer-view-mode {
+    .pane-node-body {
+        max-width: $wide;
+        width: 94%;
+        margin: 0 auto;
 
-.panel-display > .center-wrapper ~ .center-wrapper {
-    display: block !important;
-}
-
-.panel-pane.pane-node-body {
-    margin-top: -13px;
-
-    div.field {
-        padding: 4%;
-        .camp-summary {
-            p {
-                text-indent: 2%;
+        p {
+            text-indent: 2em;
+            &:first-child {
+                text-indent: 0;
+            }
+            &:first-child::first-letter {
+                float: left;
+                font-family: $header-font;
+                font-size: 2.5rem;
+                color: #ffb90f;
+                line-height: 2rem;
+                padding-top: 4px;
+                padding-right: 8px;
+                padding-left: 3px;
             }
         }
     }
-
 }
 
 .panel-panel.panel-col-top {
@@ -123,15 +126,8 @@
     }
 }
 
-.panels-ipe-paneid-8 {
-    background: #ffb90f;
-
-}
-
 .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 {
-    padding-bottom: 6%;
     @include background(linear-gradient(#ffd96f 0%, #ffffff 30%, #fff 100%));
-    @include pie-element();
     .view-content {
         display: table;
         float: none;
@@ -164,7 +160,10 @@
 }
 
 .center-wrapper {
-    padding: 4%;
+    max-width: $wide;
+    width: 94%;
+    margin: 0 auto;
+
     .panel-col-first {
         width: 70%;
         @include breakpoint($mob) {
