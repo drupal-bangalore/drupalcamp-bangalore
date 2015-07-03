@@ -46,13 +46,13 @@ legend {
   display: none;
 }
 .l-header .l-header-inner {
-  background: url(../images/banner-bg.png) center top repeat-x;
+  background: url(../images/banner-bg.png) center bottom repeat-x;
   background-size: auto 100%;
 }
 .l-header .l-branding {
-  background: url(../images/banner.jpg) transparent center top no-repeat;
+  background: url(../images/banner.jpg) transparent center bottom no-repeat;
   background-size: auto 100%;
-  min-height: 800px;
+  min-height: 550px;
 }
 .l-header .l-branding .block--dcb-cod {
   margin-top: -10px;
@@ -84,6 +84,16 @@ legend {
 }
 .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-2 {
   margin-left: 10%;
+}
+
+.node-type-event .l-header .l-header-inner {
+  background: url(../images/banner-bg.png) center top repeat-x;
+  background-size: auto 100%;
+}
+.node-type-event .l-header .l-branding {
+  background: url(../images/banner.jpg) transparent center top no-repeat;
+  background-size: auto 100%;
+  min-height: 800px;
 }
 
 img, media {
