@@ -620,7 +620,7 @@ a:hover {
 }
 
 /* --- End of Silver Sponsors  -- */
-.l-region--navigation {
+.l-navigation {
   display: inline;
   behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
   position: relative;
@@ -629,27 +629,38 @@ a:hover {
   background: #3c9dfc;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
-.l-region--navigation ul.menu li a {
+.l-navigation .l-region--navigation:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.l-navigation ul.menu {
   display: inline-block;
+}
+.l-navigation ul.menu li {
+  list-style: none;
+  display: inline-block;
+  line-height: 1em;
+}
+.l-navigation ul.menu li a {
+  position: relative;
+  display: block;
   padding: 15px 30px;
   text-decoration: none;
   color: white;
 }
-.l-region--navigation ul.menu li a:hover {
+.l-navigation ul.menu li a:hover {
   transition: all 0.3s linear;
   opacity: 0.8;
   text-decoration: none;
   color: #ffffff;
   text-shadow: 0 0 15px #fff;
 }
-
-/* Menu Styling */
-#block-superfish-1 .block__content {
-  text-align: center;
+.l-navigation #block-superfish-1 {
+  float: left;
 }
-
-#superfish-1 {
-  display: inline-block;
+.l-navigation .block--system-user-menu, .l-navigation .block--menu-menu-anonymous-user-menu {
+  float: right;
 }
 
 .sf-sub-indicator {

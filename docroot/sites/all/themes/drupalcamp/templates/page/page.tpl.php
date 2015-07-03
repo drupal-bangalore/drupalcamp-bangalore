@@ -89,7 +89,11 @@
     </div>
 
     <?php print render($page['header']); ?>
-    <?php print render($page['navigation']); ?>
+    <div class="l-navigation">
+      <div class="l-constrained">
+        <?php print render($page['navigation']); ?>
+      </div>
+    </div>
   </header>
 
   <div class="l-main">
