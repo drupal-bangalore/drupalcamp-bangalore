@@ -41,3 +41,10 @@ function dcb_cod_block_view($delta = '') {
 
   return NULL;
 }
+
+/**
+ * Implements hook_ticket_registered().
+ */
+function dcb_cod_ticket_registered($registrations) {
+  drupal_set_message(t("Thank you for registering for DrupalCamp Bangalore 2015. Please check your email for further instructions. We can't wait to meet you."));
+}
