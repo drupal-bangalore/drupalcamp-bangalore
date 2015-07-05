@@ -12,7 +12,8 @@
 .page-node-sessions-proposed .view-display-id-track_session_summary > .view-content,
 .page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track,
 .webform-confirmation,
-.node-type-session .node-session{
+.l-content > .node,
+.l-content > block{
     max-width: $wide;
     width: 94%;
     margin: 0 auto;
