@@ -162,14 +162,14 @@ a:hover {
   width: 94%;
   margin: 0 auto; }
 
-/* line 25, ../sass/components/_content.scss */
-.node--full .node__content .field--name-body p {
+/* line 24, ../sass/components/_content.scss */
+.node--full .field--name-body p, .panelizer-view-mode.node-full .field--name-body p {
   text-indent: 2em; }
   /* line 3, ../sass/abstractions/_dropcaps.scss */
-  .node--full .node__content .field--name-body p:first-child {
+  .node--full .field--name-body p:first-child, .panelizer-view-mode.node-full .field--name-body p:first-child {
     text-indent: 0; }
   /* line 6, ../sass/abstractions/_dropcaps.scss */
-  .node--full .node__content .field--name-body p:first-child::first-letter {
+  .node--full .field--name-body p:first-child::first-letter, .panelizer-view-mode.node-full .field--name-body p:first-child::first-letter {
     float: left;
     font-family: "Eczar", serif;
     font-size: 3.75rem;
