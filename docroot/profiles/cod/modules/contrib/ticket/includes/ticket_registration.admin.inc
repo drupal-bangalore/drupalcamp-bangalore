@@ -260,7 +260,7 @@ function ticket_register_form_submit($form, &$form_state) {
 
     $registrations[$entity->trid] = $entity;
 
-    drupal_set_message(t('Registration created - !label', array('!label' => $form[$form_key]['#title'])));
+    drupal_set_message(t('Registration created - !label. Further instructions are sent to your e-mail address.', array('!label' => $form[$form_key]['#title'])));
   }
 
   // Provide external module access, so they can react to the registrations.
