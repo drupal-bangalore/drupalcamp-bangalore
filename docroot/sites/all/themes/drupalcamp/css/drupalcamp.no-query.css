@@ -156,12 +156,13 @@ a:hover {
 .page-node-sessions-proposed .view-display-id-track_session_summary > .view-content,
 .page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track,
 .webform-confirmation,
-.l-content .node-session {
+.l-content .node-session,
+.l-content .node-page {
   max-width: 1100px;
   width: 94%;
   margin: 0 auto; }
 
-/* line 24, ../sass/components/_content.scss */
+/* line 25, ../sass/components/_content.scss */
 .node--full .node__content .field--name-body p {
   text-indent: 2em; }
   /* line 3, ../sass/abstractions/_dropcaps.scss */
@@ -467,16 +468,8 @@ a:hover {
     border: solid 1px white;
     border-radius: 10px; }
 
-/* line 354, ../sass/components/_home.scss */
-.node-page {
-  width: 1024px;
-  margin: 0 auto; }
-  /* line 355, ../sass/components/_home.scss */
-  .node-page h2 {
-    display: none; }
-
 /* Silver Sponsors */
-/* line 363, ../sass/components/_home.scss */
+/* line 355, ../sass/components/_home.scss */
 .pane-drupal-camp-sponsors-panel-pane-3 {
   display: block;
   min-height: 150px;
@@ -490,10 +483,10 @@ a:hover {
   behavior: url("/sites/all/themes/drupalcamp/js/PIE.htc");
   position: relative; }
   @media (min-width: 320px) and (max-width: 640px) {
-    /* line 363, ../sass/components/_home.scss */
+    /* line 355, ../sass/components/_home.scss */
     .pane-drupal-camp-sponsors-panel-pane-3 {
       background: none; } }
-  /* line 378, ../sass/components/_home.scss */
+  /* line 370, ../sass/components/_home.scss */
   .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
     text-align: center;
     table-layout: fixed;
@@ -503,32 +496,32 @@ a:hover {
     padding-top: 2%;
     width: 75%; }
     @media (min-width: 320px) and (max-width: 640px) {
-      /* line 378, ../sass/components/_home.scss */
+      /* line 370, ../sass/components/_home.scss */
       .pane-drupal-camp-sponsors-panel-pane-3 .view-content {
         width: 94%; } }
-    /* line 389, ../sass/components/_home.scss */
+    /* line 381, ../sass/components/_home.scss */
     .pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
       display: table-cell;
       padding-left: 20px; }
       @media (min-width: 320px) and (max-width: 640px) {
-        /* line 389, ../sass/components/_home.scss */
+        /* line 381, ../sass/components/_home.scss */
         .pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
           float: left;
           width: 154px;
           margin-left: 15px; } }
       @media (min-width: 768px) and (max-width: 1023px) {
-        /* line 389, ../sass/components/_home.scss */
+        /* line 381, ../sass/components/_home.scss */
         .pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row {
           display: inline-block; } }
-    /* line 401, ../sass/components/_home.scss */
+    /* line 393, ../sass/components/_home.scss */
     .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap {
       padding: 12px; }
-      /* line 403, ../sass/components/_home.scss */
+      /* line 395, ../sass/components/_home.scss */
       .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap div {
         display: inline-block;
         margin: 0 6px; }
         @media (min-width: 320px) and (max-width: 640px) {
-          /* line 403, ../sass/components/_home.scss */
+          /* line 395, ../sass/components/_home.scss */
           .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap div {
             margin-top: 10px; } }
 
