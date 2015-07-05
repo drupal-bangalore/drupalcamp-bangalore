@@ -30,6 +30,11 @@ input[type="text"], input[type="email"], input[type="password"], select {
     border-color: #e2583c; }
 
 /* line 31, ../sass/base/_forms.scss */
+input[type="text"].form-autocomplete {
+  padding: 0;
+  font-size: 13px; }
+
+/* line 36, ../sass/base/_forms.scss */
 legend {
   padding-top: 10px;
   padding-bottom: 10px; }
@@ -616,7 +621,7 @@ a:hover {
   width: 100%;
   background: #3c9dfc;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; }
-  /* line 13, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
+  /* line 13, ../../../../../../../../../usr/local/rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
   .l-navigation .l-region--navigation:after {
     content: "";
     display: table;
@@ -658,7 +663,7 @@ a:hover {
 .breadcrumb {
   display: none; }
 
-/* line 13, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
+/* line 13, ../../../../../../../../../usr/local/rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
 .node-type-webform .webform-container-inline:after {
   content: "";
   display: table;
