@@ -92,6 +92,7 @@ function cod_community_views_default_views() {
   $handler->display->display_options['fields']['field_profile_job_title']['id'] = 'field_profile_job_title';
   $handler->display->display_options['fields']['field_profile_job_title']['table'] = 'field_data_field_profile_job_title';
   $handler->display->display_options['fields']['field_profile_job_title']['field'] = 'field_profile_job_title';
+  $handler->display->display_options['fields']['field_profile_job_title']['relationship'] = 'user_uid';
   $handler->display->display_options['fields']['field_profile_job_title']['label'] = '';
   $handler->display->display_options['fields']['field_profile_job_title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_profile_job_title']['type'] = 'text_plain';
@@ -99,6 +100,7 @@ function cod_community_views_default_views() {
   $handler->display->display_options['fields']['field_profile_org']['id'] = 'field_profile_org';
   $handler->display->display_options['fields']['field_profile_org']['table'] = 'field_data_field_profile_org';
   $handler->display->display_options['fields']['field_profile_org']['field'] = 'field_profile_org';
+  $handler->display->display_options['fields']['field_profile_org']['relationship'] = 'user_uid';
   $handler->display->display_options['fields']['field_profile_org']['label'] = '';
   $handler->display->display_options['fields']['field_profile_org']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_profile_org']['type'] = 'text_plain';

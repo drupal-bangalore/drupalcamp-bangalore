@@ -114,6 +114,52 @@ function cod_sponsors_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-sponsor-field_sponsor_module_level'
+  $field_instances['node-sponsor-field_sponsor_module_level'] = array(
+    'bundle' => 'sponsor',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_sponsor_module_level',
+    'label' => 'Module Level',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 31,
+    ),
+  );
+
   // Exported field_instance: 'node-sponsor-field_sponsor_related_attendees'
   $field_instances['node-sponsor-field_sponsor_related_attendees'] = array(
     'bundle' => 'sponsor',
@@ -305,6 +351,7 @@ function cod_sponsors_field_default_field_instances() {
     'settings' => array(
       'behaviors' => array(
         'og_widget' => array(
+          'access_override' => 0,
           'admin' => array(
             'widget_type' => 'entityreference_autocomplete',
           ),
@@ -317,7 +364,10 @@ function cod_sponsors_field_default_field_instances() {
           'action' => 'hide',
           'action_on_edit' => 0,
           'fallback' => 'none',
-          'og_context' => 0,
+          'providers' => array(
+            'og_context' => 1,
+            'url' => 1,
+          ),
           'skip_perm' => 0,
           'status' => 1,
         ),
@@ -338,6 +388,7 @@ function cod_sponsors_field_default_field_instances() {
   t('Conference');
   t('Description');
   t('Logo');
+  t('Module Level');
   t('Related Attendees');
   t('Sponsor URL');
   t('Sponsorship Level');

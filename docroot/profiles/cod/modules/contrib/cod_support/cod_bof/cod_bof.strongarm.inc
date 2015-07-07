@@ -123,6 +123,7 @@ function cod_bof_strongarm() {
   $strongarm->value = array(
     0 => 'status',
     1 => 'revision',
+    2 => 'panelizer',
   );
   $export['node_options_bof_session'] = $strongarm;
 

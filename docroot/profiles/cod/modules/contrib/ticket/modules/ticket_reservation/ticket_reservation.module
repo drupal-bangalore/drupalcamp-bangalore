@@ -199,7 +199,7 @@ function ticket_reservation_form_ticket_register_form_alter(&$form, &$form_state
 
         $form['ticket_registration:new_'.$i]['skip_details_'.$i] = array(
           '#type' => 'checkbox',
-          '#title' => 'Email registration code to above address and this person will complete registration later.',
+          '#title' => 'Email redemption code to above address and this person will complete registration later.',
           '#description' => "Note: Registration is not complete until user fills out registration form",
           '#default_value' => $ttid_count > 1 ? 1 : 0,
           '#states' => array(

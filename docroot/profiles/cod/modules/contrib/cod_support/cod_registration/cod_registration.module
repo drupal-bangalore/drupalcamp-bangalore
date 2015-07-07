@@ -34,6 +34,15 @@ function cod_registration_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_registration_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_registration'),
+  );
+}
+
 /*
  * TODO: Make this secure.
  */

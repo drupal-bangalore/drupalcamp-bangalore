@@ -3,9 +3,9 @@ description = Associate coupons with specific users
 core = 7.x
 dependencies[] = commerce_coupon
 
-; Information added by drush on 2015-05-05
-version = "7.x-2.0-beta4+13-dev"
+; Information added by drush on 2015-07-07
+version = "7.x-2.0-beta4+19-dev"
 core = "7.x"
 project = "commerce_coupon"
-datestamp = "1430784200"
+datestamp = "1436228673"
 

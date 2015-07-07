@@ -163,7 +163,11 @@ function cod_events_pages_panelizer_defaults() {
     $pane->subtype = 'cod_news-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'gid' => '%node:nid',
+      ),
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -264,36 +268,7 @@ function cod_events_pages_panelizer_defaults() {
     $pane->uuid = '786f2e6c-ca2b-49d0-a2bb-7e38c2215f59';
     $display->content['new-786f2e6c-ca2b-49d0-a2bb-7e38c2215f59'] = $pane;
     $display->panels['right_content'][0] = 'new-786f2e6c-ca2b-49d0-a2bb-7e38c2215f59';
-    $pane = new stdClass();
-    $pane->pid = 'new-db1e96da-ba91-4d5c-b546-3fdad29cfe70';
-    $pane->panel = 'right_header';
-    $pane->type = 'entity_field';
-    $pane->subtype = 'node:field_event_program';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'label' => 'title',
-      'formatter' => 'text_default',
-      'delta_limit' => 0,
-      'delta_offset' => '0',
-      'delta_reversed' => FALSE,
-      'formatter_settings' => array(),
-      'context' => 'panelizer',
-      'override_title' => 0,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = 'db1e96da-ba91-4d5c-b546-3fdad29cfe70';
-    $display->content['new-db1e96da-ba91-4d5c-b546-3fdad29cfe70'] = $pane;
-    $display->panels['right_header'][0] = 'new-db1e96da-ba91-4d5c-b546-3fdad29cfe70';
-  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:event:default:default'] = $panelizer;

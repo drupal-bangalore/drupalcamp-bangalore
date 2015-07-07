@@ -20,3 +20,12 @@ function cod_wysiwyg_process_filter_format($element) {
   }
   return $element;
 }
+
+/**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_wysiwyg_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_wysiwyg'),
+  );
+}

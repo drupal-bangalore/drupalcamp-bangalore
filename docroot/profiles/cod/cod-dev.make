@@ -3,9 +3,9 @@
 ; the dev version of COD and its dependencies, including patches, before
 ; a new full release of the distribution is rolled.
 api = 2
-core = 7.36
+core = 7.38
 
-projects[drupal] = 7.36
+projects[drupal] = 7.38
 
 projects[cod][type] = "module"
 projects[cod][download][type] = "git"

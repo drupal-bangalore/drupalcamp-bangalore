@@ -9,9 +9,9 @@ dependencies[] = system (>7.10)
 files[] = tests/admin_menu.test
 
 
-; Information added by drush on 2015-05-05
+; Information added by drush on 2015-07-07
 version = "7.x-3.0-rc4+4-dev"
 core = "7.x"
 project = "admin_menu"
-datestamp = "1430784203"
+datestamp = "1436228676"
 

@@ -220,14 +220,12 @@ function og_context($group_type = 'node', $group = NULL, $account = NULL, $check
     $context[$cache_key] = FALSE;
   }
 
+  // We cannot assume that the context doesn't exist if it is empty. Sometimes
+  // menu callbacks will recurse og contexts, giving a false impression that the
+  // context is empty, when in fact it is not.
   if (empty($group) && $context[$cache_key] !== FALSE) {
     // Determine if we can return cached values.
-    if (empty($context[$cache_key])) {
-      // We already tried to find a context, but couldn't.
-      return FALSE;
-    }
-
-    if ($context[$cache_key]['group_type'] == $group_type) {
+    if (isset($context[$cache_key]['group_type']) && $context[$cache_key]['group_type'] == $group_type) {
       // Return the cached values.
       return $context[$cache_key];
     }

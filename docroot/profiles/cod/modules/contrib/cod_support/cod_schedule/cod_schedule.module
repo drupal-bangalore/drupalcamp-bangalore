@@ -20,6 +20,22 @@ function cod_schedule_ctools_plugin_directory($module, $plugin) {
   if ($module == 'ctools' && $plugin == 'content_types') {
     return 'plugins/content_types';
   }
+  if ($module == 'ctools' && $plugin == 'contexts') {
+    return 'plugins/contexts';
+  }
+  if ($module == 'ctools' && $plugin == 'arguments') {
+    return 'plugins/arguments';
+  }
+}
+
+/**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_schedule_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_schedule'),
+    'og_permission' => array('cod_schedule'),
+  );
 }
 
 /**
@@ -185,33 +201,19 @@ function cod_schedule_form_node_form_alter(&$form, &$form_state) {
     $form['field_event_timeslots']['#access'] = FALSE;
   }
 
-  if (isset($form['field_session_timeslot']) && !empty($form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'])) {
-    $form = _cod_schedule_timeslot_view_widget($form, $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'][0], $form['#bundle']);
+  if (isset($form['field_session_timeslot']) && !empty($form['og_group_ref'][LANGUAGE_NONE]['#default_value'])) {
+    $form = _cod_schedule_timeslot_view_widget($form, $form['og_group_ref'][LANGUAGE_NONE]['#default_value'][0], $form['#bundle']);
   }
 
   if (isset($form['field_session_timeslot']) && $form['og_group_ref']['#access'] == TRUE) {
      if (isset($form_state['entityreference_prepopulate']['node'][$form['#bundle']]['og_group_ref'])) {
        $form['field_session_timeslot']['#states'] = array(
-         'invisible' => array(
-           'xor',
-           array(':input[name="og_group_ref[und][0][default]"]' => array('value' => '_none')),
-           // This sort of works, but would be better if it fired after
-           // the autocomplete. Note that this field is only available
-           // to administrators.
-           array(':input[name="og_group_ref[und][0][admin][0][target_id]"]' => array('empty' => TRUE)),
-         ),
+         'invisible' => array(':input[name="og_group_ref[und]"]' => array('value' => '_none')),
        );
      }
      else {
        $form['field_session_timeslot']['#states'] = array(
-         'visible' => array(
-           'xor',
-           array(':input[name="og_group_ref[und][0][default]"]' => array('!value' => '_none')),
-           // This sort of works, but would be better if it fired after
-           // the autocomplete. Note that this field is only available
-           // to administrators.
-           array(':input[name="og_group_ref[und][0][admin][0][target_id]"]' => array('empty' => FALSE)),
-         ),
+         'visible' => array(':input[name="og_group_ref[und]"]' => array('!value' => '_none')),
        );
      }
 
@@ -271,7 +273,51 @@ function cod_schedule_update_session() {
 /**
  * Helper function determines days there are time slots for.
  */
-function cod_schedule_days($node) {
+function cod_schedule_days($node, $content_type = NULL) {
+  if (empty($node)) {
+    return array();
+  }
+
+  if (is_numeric($node)) {
+    $node = node_load($node);
+  }
+
+  // Dates must exist for this page to work
+  if (empty($node->field_dates)) {
+    return array();
+  }
+
+  if (!empty($content_type)) {
+    $content_type = explode('+', $content_type);
+  }
+
+  if (!empty($content_type)) {
+    // Grab relevant days for a particular content type.
+    // I think this kills kittens, puppies, and all that is holy.
+    // TODO: Convert into a db_select statement.
+    $result = db_query("SELECT cod_event_time_field_data_field_timeslot_time.evttid AS evttid
+    FROM
+    {field_collection_item} field_collection_item
+    LEFT JOIN {field_data_field_timeslot_time} field_data_field_timeslot_time ON field_collection_item.item_id = field_data_field_timeslot_time.entity_id AND (field_data_field_timeslot_time.entity_type = 'field_collection_item' AND field_data_field_timeslot_time.deleted = '0')
+    INNER JOIN {cod_event_time} cod_event_time_field_data_field_timeslot_time ON field_data_field_timeslot_time.field_timeslot_time_target_id = cod_event_time_field_data_field_timeslot_time.evttid
+    INNER JOIN {field_data_field_event_timeslots} field_data_field_event_timeslots ON field_collection_item.item_id = field_data_field_event_timeslots.field_event_timeslots_value
+    INNER JOIN {node} field_event_timeslots_field_collection_item ON field_data_field_event_timeslots.entity_id = field_event_timeslots_field_collection_item.nid
+    LEFT JOIN {field_data_field_timeslot_allowed_types} field_data_field_timeslot_allowed_types ON field_collection_item.item_id = field_data_field_timeslot_allowed_types.entity_id AND (field_data_field_timeslot_allowed_types.entity_type = 'field_collection_item' AND field_data_field_timeslot_allowed_types.deleted = '0')
+    WHERE (( (field_data_field_timeslot_allowed_types.field_timeslot_allowed_types_value IN (:content_type)) AND (field_event_timeslots_field_collection_item.nid = :event_id) ))", array(
+      ':content_type' => $content_type,
+      ':event_id' => $node->nid
+    ));
+
+    $ids = array_keys($result->fetchAllAssoc('evttid'));
+    // Once we fetch all of the event ids for a particular content type, filter to
+    // the individual datetimes for each.
+    //$evttids = implode(',', array_map('intval', $ids));
+    $result = db_query("SELECT DISTINCT FROM_UNIXTIME((UNIX_TIMESTAMP(field_evttime_date_value)+field_evttime_date_offset), '%Y-%m-%d') AS datetime FROM field_data_field_evttime_date ed, cod_event_time ctime
+       WHERE ed.entity_id = ctime.evttid AND ctime.evttid IN (:evttid) ORDER BY datetime", array(':evttid' => $ids));
+
+    if ($times = array_keys($result->fetchAllKeyed()))
+      return $times;
+  }
 
   if(!empty($node->field_dates)) {
     $tz = $node->field_dates[LANGUAGE_NONE][0]['timezone'];

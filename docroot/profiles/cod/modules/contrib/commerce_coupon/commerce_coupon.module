@@ -1021,7 +1021,7 @@ function commerce_coupon_commerce_coupon_discount_value_display_alter(&$text, $d
           foreach ($condition['condition_settings']['sku'] as $data) {
             if (isset($order_product_ids[$data['product_id']])) {
               $product = commerce_product_load($data['product_id']);
-              if ($product) {
+              if ($product && empty($condition['condition_negate'])) {
                 $product_names[] = check_plain($product->title);
               }
             }
@@ -1210,6 +1210,39 @@ function commerce_coupon_module_implements_alter(&$implementations, $hook) {
     $group = $implementations['commerce_coupon'];
     unset($implementations['commerce_coupon']);
     $implementations['commerce_coupon'] = $group;
+  }
+}
+
+/*
+ * Implements hook_commerce_checkout_router().
+ */
+function commerce_coupon_commerce_checkout_router($order) {
+  // Rollback transactions if the cancel URL was hit. This must be done before
+  // the refresh happens so the checkout_router hook is used.
+  if (arg(3) == 'back' && arg(4) == $order->data['payment_redirect_key']) {
+    commerce_coupon_rollback_order_transactions($order);
+  }
+}
+
+/**
+ * Rollback coupon-related transactions found within an order.
+ *
+ * @param $order
+ * @param bool $save
+ */
+function commerce_coupon_rollback_order_transactions($order, $save = FALSE) {
+  foreach (module_implements('commerce_coupon_final_checkout_transaction_rollback') as $module) {
+    if (!empty($order->data['coupon_transaction_ids'][$module])) {
+      foreach ($order->data['coupon_transaction_ids'][$module] as $key => $transaction_id) {
+        // Hand off the rollback to each module's hook implementation.
+        module_invoke($module, 'commerce_coupon_final_checkout_transaction_rollback', $transaction_id);
+        unset($order->data['coupon_transaction_ids'][$module][$key]);
+      }
+
+      if ($save) {
+        commerce_order_save($order);
+      }
+    }
   }
 }
 
@@ -1492,7 +1525,8 @@ function commerce_coupon_form_attach_coupons(&$form, &$form_state) {
         $coupon_wrapper = entity_metadata_wrapper('commerce_coupon', $coupon);
         if (!commerce_coupon_coupon_has_discount($coupon_wrapper, $form_state['commerce_discount']->name)) {
           $delta = !$coupon_wrapper->commerce_discount_reference->value() ? 0 : $coupon_wrapper->commerce_discount_reference->count();
-          $coupon->commerce_discount_reference[LANGUAGE_NONE][$delta]['target_id'] = $form_state['commerce_discount']->discount_id;
+          $language = field_language('commerce_coupon', $coupon, 'commerce_discount_reference');
+          $coupon->commerce_discount_reference[$language][$delta]['target_id'] = $form_state['commerce_discount']->discount_id;
         }
 
         // Save coupon.
@@ -1512,22 +1546,31 @@ function commerce_coupon_form_attach_coupons(&$form, &$form_state) {
         // attached to no other discounts, delete it completely.
         $remove_coupon = commerce_coupon_load_by_code($original_coupon->code);
         $wrapper = entity_metadata_wrapper('commerce_coupon', $remove_coupon);
-        $delete = TRUE;
 
         if (!empty($form_state['commerce_discount']->discount_id)) {
-          foreach ($wrapper->commerce_discount_reference->value() as $discount) {
-            if ($discount->discount_id != $form_state['commerce_discount']->discount_id) {
-              $delete = FALSE;
+          foreach ($wrapper->commerce_discount_reference->value() as $delta => $discount) {
+            if ($discount->discount_id == $form_state['commerce_discount']->discount_id) {
+              // Break the reference from this coupon to the discount currently
+              // being edited in the form. @TODO: why is the wrapper not working
+              // here?
+              $language = field_language('commerce_coupon', $remove_coupon, 'commerce_discount_reference');
+              unset($remove_coupon->commerce_discount_reference[$language][$delta]);
             }
           }
         }
 
-        if ($delete) {
+        // If no discounts remain, delete the coupon.
+        if (empty($remove_coupon->commerce_discount_reference[$language])) {
           commerce_coupon_delete($original_coupon->coupon_id);
-
-          // Force rules rebuild.
-          $rebuild_rules = TRUE;
         }
+        else {
+          // If we are not deleting, save the coupon since we eliminated one or
+          // more of its discount references.
+          $wrapper->save();
+        }
+
+        // Force rules rebuild.
+        $rebuild_rules = TRUE;
       }
     }
   }
@@ -1761,11 +1804,15 @@ function commerce_coupon_attach_coupon_entity_form(&$form, &$form_state, $coupon
     '#default_value' => FALSE,
   );
 
+  // Set user id.
+  $uid = !empty($coupon->is_new) ? $user->uid : $coupon->uid;
+
   $form['uid'] = array(
     '#type' => 'value',
-    '#value' => !empty($coupon->is_new) ? $user->uid : $coupon->uid
+    '#value' => $uid
   );
 
+  $coupon->uid = $uid;
   $field_parents = !empty($form['#parents']) ? $form['#parents'] : array();
   $field_parents[] = 'commerce_coupon_fields';
 
@@ -1921,17 +1968,16 @@ function _commerce_coupon_install_inline_conditions_field() {
  * Implements hook_form_FORM_ID_alter().
  */
 function commerce_coupon_form_commerce_checkout_form_alter(&$form, &$form_state) {
-  // We want to target whichever page has the payment pane.
+  // Whenever the payment pane loads, check the order for any transactions that
+  // might need to be rolled back. This is to handle when giftcard validation
+  // was successful but the payment method or some other form element has thrown
+  // an error.
   if (isset($form['commerce_payment'])) {
+    $order = commerce_order_load($form_state['order']->order_id);
 
-    // If the form did not validate, cancel any pending transactions.
-    foreach (module_implements('commerce_coupon_final_checkout_transaction_rollback') as $module) {
-      if (!empty($form_state['coupon_transaction_ids'][$module])) {
-        foreach ($form_state['coupon_transaction_ids'][$module] as $transaction_id) {
-          module_invoke($module, 'commerce_coupon_final_checkout_transaction_rollback', $transaction_id);
-        }
-      }
-    }
+    // Rollback any transactions if necessary. Pass the "save" argument so that
+    // if a rollback is done, it saves the order.
+    commerce_coupon_rollback_order_transactions($order, TRUE);
 
     // Add our handler as the first validate handler.
     array_unshift($form['buttons']['continue']['#validate'], 'commerce_coupon_commerce_checkout_form_review_validate');
@@ -1939,7 +1985,7 @@ function commerce_coupon_form_commerce_checkout_form_alter(&$form, &$form_state)
 }
 
 /*
- * Form validate callback: validate and record giftcard transactions at the end
+ * Form validate callback: validate and record coupon transactions at the end
  * of checkout.
  */
 function commerce_coupon_commerce_checkout_form_review_validate(&$form, &$form_state) {
@@ -1948,18 +1994,18 @@ function commerce_coupon_commerce_checkout_form_review_validate(&$form, &$form_s
     $order = commerce_order_load($form_state['order']->order_id);
     $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
 
-    // Allow modules to perform a final validation after checkout is done, but
-    // before the review checkout panes (most importantly the payment module
-    // panes) fire their checkout validate/submit functions. This is for the
-    // benefit of modules that do coupon-related transactions such as usage and
-    // giftcards.
-    foreach (module_implements('commerce_coupon_final_checkout_validate') as $module) {
-      $transaction_ids = module_invoke($module, 'commerce_coupon_final_checkout_validate', $form, $form_state, $order_wrapper);
-      if (!empty($transaction_ids)) {
-        // We need to prepare the form to roll back any coupon-related
-        // transactions if it rebuilds again due to errors in future
-        // validate/submit events such as requests to the payment gateway.
-        $form_state['coupon_transaction_ids'][$module] = $transaction_ids;
+     // Allow modules to perform a final validation after checkout is done, but
+     // before the payment module processes payment.
+     foreach (module_implements('commerce_coupon_final_checkout_validate') as $module) {
+       // If a module successfully creates a transaction, it must return any
+       // new transaction ids. We store them on the order mostly so that if the
+       // payment form loads again, we can do a rollback. Modules implementing
+       // this hook must do their own error generation using form_set_error.
+       $transaction_ids = module_invoke($module, 'commerce_coupon_final_checkout_validate', $form, $form_state, $order_wrapper);
+       if (!empty($transaction_ids)) {
+         $order->data['coupon_transaction_ids'][$module] = $transaction_ids;
+
+         commerce_order_save($order);
       }
     }
   }

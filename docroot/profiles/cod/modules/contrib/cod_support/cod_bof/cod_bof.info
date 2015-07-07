@@ -28,12 +28,6 @@ features[field_instance][] = node-bof_session-body
 features[field_instance][] = node-bof_session-field_session_timeslot
 features[field_instance][] = node-bof_session-og_group_ref
 features[node][] = bof_session
-features[user_permission][] = create bof_session content
-features[user_permission][] = delete any bof_session content
-features[user_permission][] = delete own bof_session content
-features[user_permission][] = edit any bof_session content
-features[user_permission][] = edit own bof_session content
-features[user_permission][] = view bofs
 features[variable][] = cod_unique_bof_session
 features[variable][] = comment_anonymous_bof_session
 features[variable][] = comment_bof_session
@@ -56,9 +50,10 @@ features[views_view][] = cod_bof_schedule_content
 features[views_view][] = cod_bof_schedule_timeslots
 install_option = cod
 
-; Information added by Drupal.org packaging script on 2015-05-01
-version = "7.x-1.0-beta9"
+
+; Information added by drush on 2015-07-07
+version = "7.x-1.0-beta10+42-dev"
 core = "7.x"
 project = "cod_support"
-datestamp = "1430468586"
+datestamp = "1436228675"
 

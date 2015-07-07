@@ -48,3 +48,13 @@ function cod_bof_update_7004() {
 
   return array();
 }
+
+/**
+ * Change the og_group_ref select widget to a plain select widget
+ */
+function cod_bof_update_7005() {
+  $revert = array(
+    'cod_bof' => array('field_instance', 'views_view'),
+  );
+  features_revert($revert);
+}

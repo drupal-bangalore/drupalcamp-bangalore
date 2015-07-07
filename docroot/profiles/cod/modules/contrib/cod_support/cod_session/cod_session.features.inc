@@ -17,13 +17,6 @@ function cod_session_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
- * Implements hook_views_api().
- */
-function cod_session_views_api($module = NULL, $api = NULL) {
-  return array("api" => "3.0");
-}
-
-/**
  * Implements hook_flag_default_flags().
  */
 function cod_session_flag_default_flags() {
@@ -80,9 +73,16 @@ function cod_session_flag_default_flags() {
     'link_type' => 'toggle',
     'weight' => 0,
     'show_in_links' => array(
-      'full' => TRUE,
+      'full' => 0,
+      'teaser' => 0,
+      'rss' => 0,
+      'search_index' => 0,
+      'search_result' => 0,
+      'listing' => 0,
+      'diff_standard' => 0,
+      'token' => 0,
     ),
-    'show_as_field' => FALSE,
+    'show_as_field' => 0,
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,

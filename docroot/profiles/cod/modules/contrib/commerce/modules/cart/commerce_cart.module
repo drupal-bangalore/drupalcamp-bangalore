@@ -1599,6 +1599,92 @@ function commerce_cart_field_instance_is_attribute($instance) {
 }
 
 /**
+ * Returns an array of attribute fields instances with their settings and options.
+ *
+ * @param $product_type
+ *   The info array of the field instance whose attribute settings should be
+ *   retrieved.
+ * @param $default_product
+ *   A product entity object for getting the attribute fields options.
+ *
+ * @return
+ *   An array of attribute fields with their settings including:
+ *   - field: field definition data;
+ *   - instance: field instance definition data;
+ *   - commerce_cart_settings: field instance (attribute) cart settings;
+ *   - options: field instance options;
+ *   - weight: field instance weight;
+ *   - required: field instance required setting.
+ */
+function commerce_cart_product_type_attributes($product_type, $default_product = NULL) {
+  $attributes = array();
+  // Use initialized product object if it is not defined.
+  if (!$default_product) {
+    $default_product = commerce_product_new();
+  }
+  // Loop through all the field instances on that product type.
+  foreach (field_info_instances('commerce_product', $product_type) as $field_name => $instance) {
+    // A field qualifies if it is single value, required and uses a widget
+    // with a definite set of options. For the sake of simplicity, this is
+    // currently restricted to fields defined by the options module.
+    $field = field_info_field($field_name);
+
+    // If the instance is of a field type that is eligible to function as
+    // a product attribute field and if its attribute field settings
+    // specify that this functionality is enabled...
+    if (commerce_cart_field_attribute_eligible($field) && commerce_cart_field_instance_is_attribute($instance)) {
+      // Get the options properties from the options module for the
+      // attribute widget type selected for the field, defaulting to the
+      // select list options properties.
+      $commerce_cart_settings = commerce_cart_field_instance_attribute_settings($instance);
+
+      switch ($commerce_cart_settings['attribute_widget']) {
+        case 'checkbox':
+          $widget_type = 'onoff';
+          break;
+        case 'radios':
+          $widget_type = 'buttons';
+          break;
+        default:
+          $widget_type = 'select';
+      }
+
+      $properties = _options_properties($widget_type, FALSE, TRUE, TRUE);
+
+      // Try to fetch localized names.
+      $allowed_values = NULL;
+
+      // Prepare translated options if using the i18n_field module.
+      if (module_exists('i18n_field')) {
+        if (($translate = i18n_field_type_info($field['type'], 'translate_options'))) {
+          $allowed_values = $translate($field);
+          _options_prepare_options($allowed_values, $properties);
+        }
+      }
+
+      // Otherwise just use the base language values.
+      if (empty($allowed_values) && $default_product) {
+        $allowed_values = _options_get_options($field, $instance, $properties, 'commerce_product', $default_product);
+      }
+
+      // Only consider this field a qualifying attribute field if we could
+      // derive a set of options for it.
+      if (!empty($allowed_values)) {
+        $attributes[$field_name] = array(
+          'field' => $field,
+          'instance' => $instance,
+          'commerce_cart_settings' => $commerce_cart_settings,
+          'options' => $allowed_values,
+          'weight' => $instance['widget']['weight'],
+          'required' => $instance['required'],
+        );
+      }
+    }
+  }
+  return $attributes;
+}
+
+/**
  * Returns an array of cart form field access settings for a field instance.
  *
  * Fields attached to line item types can be included on the Add to Cart form so
@@ -1719,6 +1805,9 @@ function commerce_cart_forms($form_id, $args) {
  *   - $line_item->data['context']['show_single_product_attributes']: a boolean
  *     indicating whether or not product attribute fields with single options
  *     should be shown on the Add to Cart form.
+ *   - $line_item->data['context']['button_text']: a text field setting from the
+ *     formatter options field that can override the default Add to cart button
+ *     text
  *   - $line_item->quantity: the default value for the quantity widget if
  *     included (determined by the $show_quantity parameter).
  *   - $line_item->commerce_product: the value of this field will be used as the
@@ -1939,65 +2028,7 @@ function commerce_cart_add_to_cart_form($form, &$form_state, $line_item, $show_q
 
       // If all the products are of the same type...
       if ($same_type) {
-        // Loop through all the field instances on that product type.
-        foreach (field_info_instances('commerce_product', $type) as $field_name => $instance) {
-          // A field qualifies if it is single value, required and uses a widget
-          // with a definite set of options. For the sake of simplicity, this is
-          // currently restricted to fields defined by the options module.
-          $field = field_info_field($field_name);
-
-          // If the instance is of a field type that is eligible to function as
-          // a product attribute field and if its attribute field settings
-          // specify that this functionality is enabled...
-          if (commerce_cart_field_attribute_eligible($field) && commerce_cart_field_instance_is_attribute($instance)) {
-            // Get the options properties from the options module for the
-            // attribute widget type selected for the field, defaulting to the
-            // select list options properties.
-            $commerce_cart_settings = commerce_cart_field_instance_attribute_settings($instance);
-
-            switch ($commerce_cart_settings['attribute_widget']) {
-              case 'checkbox':
-                $widget_type = 'onoff';
-                break;
-              case 'radios':
-                $widget_type = 'buttons';
-                break;
-              default:
-                $widget_type = 'select';
-            }
-
-            $properties = _options_properties($widget_type, FALSE, TRUE, TRUE);
-
-            // Try to fetch localized names.
-            $allowed_values = NULL;
-
-            // Prepare translated options if using the i18n_field module.
-            if (module_exists('i18n_field')) {
-              if (($translate = i18n_field_type_info($field['type'], 'translate_options'))) {
-                $allowed_values = $translate($field);
-                _options_prepare_options($allowed_values, $properties);
-              }
-            }
-
-            // Otherwise just use the base language values.
-            if (empty($allowed_values)) {
-              $allowed_values = _options_get_options($field, $instance, $properties, 'commerce_product', $default_product);
-            }
-
-            // Only consider this field a qualifying attribute field if we could
-            // derive a set of options for it.
-            if (!empty($allowed_values)) {
-              $qualifying_fields[$field_name] = array(
-                'field' => $field,
-                'instance' => $instance,
-                'commerce_cart_settings' => $commerce_cart_settings,
-                'options' => $allowed_values,
-                'weight' => $instance['widget']['weight'],
-                'required' => $instance['required'],
-              );
-            }
-          }
-        }
+        $qualifying_fields = commerce_cart_product_type_attributes($type, $default_product);
       }
 
       // Otherwise for products of varying types, display a simple select list
@@ -2034,19 +2065,35 @@ function commerce_cart_add_to_cart_form($form, &$form_state, $line_item, $show_q
             if ($product_wrapper->{$field_name}->raw() != NULL) {
               $field_has_options[$field_name] = TRUE;
             }
-            $used_options[$field_name][] = $product_wrapper->{$field_name}->raw();
+
+            // Build the options.
+            $field_value = $product_wrapper->{$field_name}->raw();
+            // Use tokens if token formatter specified and there is only attribute defined.
+            if ((empty($qualifying_fields) || count($qualifying_fields) == 1) && $line_item->data['context']['product_select_options_use_tokens'] && !empty($line_item->data['context']['product_select_options_tokens_formatter'])) {
+              if (module_exists('token')) {
+                $token_type = token_get_entity_mapping('entity', 'commerce_product');
+                $options[$field_name][$field_value] = token_replace($line_item->data['context']['product_select_options_tokens_formatter'], array($token_type => $product, 'entity' => $product, 'entity_type' => 'commerce_product'), array('clear'  => TRUE));
+              }
+              else {
+                $options[$field_name][$field_value] = token_replace($line_item->data['context']['product_select_options_tokens_formatter'], array('commerce-product' => $product), array('clear'  => TRUE));
+              }
+            }
+            // Use the default field options.
+            else {
+              $options[$field_name][$field_value] = $data['options'][$field_value];
+            }
           }
 
           // If for some reason no options for this field are used, remove it
           // from the qualifying fields array.
-          if (empty($field_has_options[$field_name]) || empty($used_options[$field_name])) {
+          if (empty($field_has_options[$field_name]) || empty($options[$field_name])) {
             unset($qualifying_fields[$field_name]);
           }
           else {
             $form['attributes'][$field_name] = array(
               '#type' => $data['commerce_cart_settings']['attribute_widget'],
               '#title' => commerce_cart_attribute_widget_title($data['instance']),
-              '#options' => array_intersect_key($data['options'], drupal_map_assoc($used_options[$field_name])),
+              '#options' => $options[$field_name],
               '#default_value' => $default_product_wrapper->{$field_name}->raw(),
               '#weight' => $data['instance']['widget']['weight'],
               '#ajax' => array(
@@ -2056,7 +2103,7 @@ function commerce_cart_add_to_cart_form($form, &$form_state, $line_item, $show_q
 
             // Add the empty value if the field is not required and products on
             // the form include the empty value.
-            if (!$data['required'] && in_array('', $used_options[$field_name])) {
+            if (!$data['required']  && !empty($used_options) && in_array('', $used_options[$field_name])) {
               $form['attributes'][$field_name]['#empty_value'] = '';
             }
 
@@ -2104,7 +2151,20 @@ function commerce_cart_add_to_cart_form($form, &$form_state, $line_item, $show_q
             $options = array();
 
             foreach ($matching_products as $product_id => $product) {
-              $options[$product_id] = $product->title;
+              // Use tokens if token formatter specified and there is only attribute defined.
+              if ($line_item->data['context']['product_select_options_use_tokens'] && !empty($line_item->data['context']['product_select_options_tokens_formatter'])) {
+                if (module_exists('token')) {
+                  $token_type = token_get_entity_mapping('entity', 'commerce_product');
+                  $options[$product_id] = token_replace($line_item->data['context']['product_select_options_tokens_formatter'], array($token_type => $product, 'entity' => $product, 'entity_type' => 'commerce_product'), array('clear'  => TRUE));
+                }
+                else {
+                  $options[$product_id] = token_replace($line_item->data['context']['product_select_options_tokens_formatter'], array('commerce-product' => $product), array('clear'  => TRUE));
+                }
+              }
+              // Use the default field options.
+              else {
+                $options[$product_id] = $product->title;
+              }
             }
 
             // Note that this element by default is a select list, so its
@@ -2136,7 +2196,8 @@ function commerce_cart_add_to_cart_form($form, &$form_state, $line_item, $show_q
       // any qualifying attribute fields...
       if (!$same_type || empty($qualifying_fields)) {
         // For a single product form, just add the hidden product_id field.
-        if (count($products) == 1) {
+        // and the "show_single_product_attributes" is not checked.
+        if (count($products) == 1 && empty($line_item->data['context']['show_single_product_attributes'])) {
           $form['product_id'] = array(
             '#type' => 'hidden',
             '#value' => $default_product->product_id,
@@ -2147,7 +2208,20 @@ function commerce_cart_add_to_cart_form($form, &$form_state, $line_item, $show_q
           $options = array();
 
           foreach ($products as $product_id => $product) {
-            $options[$product_id] = $product->title;
+            // Use tokens if token formatter specified and there is only attribute defined.
+            if ($line_item->data['context']['product_select_options_use_tokens'] && !empty($line_item->data['context']['product_select_options_tokens_formatter'])) {
+              if (module_exists('token')) {
+                $token_type = token_get_entity_mapping('entity', 'commerce_product');
+                $options[$product_id] = token_replace($line_item->data['context']['product_select_options_tokens_formatter'], array($token_type => $product, 'entity' => $product, 'entity_type' => 'commerce_product'), array('clear'  => TRUE));
+              }
+              else {
+                $options[$product_id] = token_replace($line_item->data['context']['product_select_options_tokens_formatter'], array('commerce-product' => $product), array('clear'  => TRUE));
+              }
+            }
+            // Use the default field options.
+            else {
+              $options[$product_id] = $product->title;
+            }
           }
 
           // Note that this element by default is a select list, so its #options
@@ -2226,7 +2300,7 @@ function commerce_cart_add_to_cart_form($form, &$form_state, $line_item, $show_q
     else {
       $form['submit'] = array(
         '#type' => 'submit',
-        '#value' => t('Add to cart'),
+        '#value' => !empty($line_item->data['context']['button_text']) ? $line_item->data['context']['button_text'] : t('Add to cart'),
         '#weight' => 50,
       );
     }
@@ -2456,11 +2530,14 @@ function commerce_cart_field_formatter_info() {
       'description' => t('Display an Add to Cart form for the referenced product.'),
       'field types' => array('commerce_product_reference', 'entityreference'),
       'settings' => array(
+        'button_text' => t('Add to cart'),
         'show_quantity' => FALSE,
         'default_quantity' => 1,
         'combine' => TRUE,
         'show_single_product_attributes' => FALSE,
         'line_item_type' => 'product',
+        'product_select_options_use_tokens' => FALSE,
+        'product_select_options_tokens_formatter' => FALSE,
       ),
     ),
   );
@@ -2476,6 +2553,14 @@ function commerce_cart_field_formatter_settings_form($field, $instance, $view_mo
   $element = array();
 
   if ($display['type'] == 'commerce_cart_add_to_cart_form') {
+    $button_text = !empty($settings['button_text']) ? check_plain($settings['button_text']) : t('Add to cart');
+    $element['button_text'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Button text'),
+      '#default_value' => $button_text,
+      '#description' => t('Text to use in the Add to cart button. Default: %default', array('%default' => 'Add to cart')),
+    );
+
     $element['show_quantity'] = array(
       '#type' => 'checkbox',
       '#title' => t('Display a textfield quantity widget on the add to cart form.'),
@@ -2499,8 +2584,8 @@ function commerce_cart_field_formatter_settings_form($field, $instance, $view_mo
 
     $element['show_single_product_attributes'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Show attribute widgets even if the Add to Cart form only represents one product.'),
-      '#description' => t('If enabled, attribute widgets will be shown on the form with the only available options selected.'),
+      '#title' => t('Show attribute widgets or product selection even if the Add to Cart form only represents one product.'),
+      '#description' => t('If enabled, attribute widgets or product selection will be shown on the form with the only available options selected.'),
       '#default_value' => $settings['show_single_product_attributes'],
     );
 
@@ -2520,6 +2605,90 @@ function commerce_cart_field_formatter_settings_form($field, $instance, $view_mo
         '#type' => 'hidden',
         '#value' => reset($types),
       );
+    }
+  }
+
+  // Token formatter, display alternative for the product select options.
+  // Only for multiple product reference, except for single referenced product type
+  // with multiple attributes defined.
+  if ($field['cardinality'] != 1) {
+    $referenceable_product_types = $instance['settings']['referenceable_types'];
+    $product_types = array_filter($referenceable_product_types);
+    // If there is no product type selected, use all product types.
+    if (empty($product_types)) {
+      $product_types = array_keys($referenceable_product_types);
+    }
+
+    $token_formatter = TRUE;
+    // Check for single referenced product type with multiple attributes defined.
+    if (count($product_types) == 1) {
+      $product_type = reset($product_types);
+      // Get product type attributes.
+      $attributes = commerce_cart_product_type_attributes($product_type);
+      if (count($attributes) > 1) {
+        $token_formatter = FALSE;
+      }
+    }
+
+    if ($token_formatter) {
+      $use_tokens_descripton = t('If enabled, togheter with the replacement text, it will change the display values for the product select options.');
+      $use_tokens_descripton .= '<br />';
+      $use_tokens_descripton .= t('Exception: it will not work for single referenced product type with multiple attributes defined.');
+      $element['product_select_options_use_tokens'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Use tokens for product select options display values.'),
+        '#description' => $use_tokens_descripton,
+        '#default_value' => isset($settings['product_select_options_use_tokens']) ? $settings['product_select_options_use_tokens'] : FALSE,
+      );
+
+      $tokens_formatter_description = t('Use tokens available for customize the display values of the product select options.');
+      $tokens_formatter_description .= '<br />';
+      $tokens_formatter_description .= t('For multiple referenced product types, be sure you are using the right tokens. A good practice in this case is usage of tokens of the mutual fields.');
+      $element['product_select_options_tokens_formatter'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Replacement text with token support'),
+        '#description' => $tokens_formatter_description,
+        '#default_value' => $settings['product_select_options_tokens_formatter'],
+        '#states' => array(
+          'visible' => array(
+            ':input[name="fields[' . $field['field_name'] . '][settings_edit_form][settings][product_select_options_use_tokens]"]' => array('checked' => TRUE),
+          ),
+        ),
+      );
+      $element['product_select_options_tokens_help'] = array(
+        '#type' => 'container',
+        '#states' => array(
+          'visible' => array(
+            ':input[name="fields[' . $field['field_name'] . '][settings_edit_form][settings][product_select_options_use_tokens]"]' => array('checked' => TRUE),
+          ),
+        ),
+      );
+      if (module_exists('token')) {
+        $token_type = token_get_entity_mapping('entity', 'commerce_product');
+        $element['product_select_options_tokens_help']['token_tree'] = array(
+          '#theme' => 'token_tree',
+          '#token_types' => array($token_type, 'entity'),
+        );
+        $element['product_select_options_tokens_formatter']['#element_validate'] = array('token_element_validate');
+      }
+      else {
+        $token_info = array(
+          'site' => array(
+            'type' => 'site',
+            'label' => t('Site information'),
+            'description' => t('Site-wide settings and other global information.'),
+          ),
+          'commerce_product' => array(
+            'label' => t('Product'),
+            'type' => 'commerce_product',
+          ),
+        );
+
+        $element['product_select_options_tokens_help']['token_tree'] = RulesTokenEvaluator::help($token_info);
+        $element['product_select_options_tokens_help']['token_extra'] = array(
+          '#markup' => '<p>' . t("Optional: Install <a href='@token-url'>Token</a> module to improve tokens.", array('@token-url' => 'http://drupal.org/project/token')) . '</p>',
+        );
+      }
     }
   }
 
@@ -2545,7 +2714,13 @@ function commerce_cart_field_formatter_settings_summary($field, $instance, $view
   $summary = array();
 
   if ($display['type'] == 'commerce_cart_add_to_cart_form') {
+    $button_text = !empty($settings['button_text']) ? check_plain($settings['button_text']) : t('Add to cart');
+    $translated_instance = commerce_i18n_object('field_instance', $instance);
+    if (!empty($translated_instance['add_to_cart_form-button_text-' . $view_mode])) {
+      $button_text = $translated_instance['add_to_cart_form-button_text-' . $view_mode] . ' (' . t('translated') . ')';
+    }
     $summary = array(
+      t('Button text: !text', array('!text' => $button_text)),
       t('Quantity widget: !status', array('!status' => !empty($settings['show_quantity']) ? t('Enabled') : t('Disabled'))),
       t('Default quantity: @quantity', array('@quantity' => $settings['default_quantity'])),
       t('Combine like items: !status', array('!status' => !empty($settings['combine']) ? t('Enabled') : t('Disabled'))),
@@ -2554,6 +2729,27 @@ function commerce_cart_field_formatter_settings_summary($field, $instance, $view
 
     if (count(commerce_product_line_item_types()) > 1) {
       $summary[] = t('Add to Cart line item type: @type', array('@type' => commerce_line_item_type_get_name($settings['line_item_type'])));
+    }
+
+    // Token formatter setting if available.
+    $referenceable_product_types = $instance['settings']['referenceable_types'];
+    // If there is only one product type available, use it.
+    if (count($referenceable_product_types) == 1) {
+      $product_types = array_keys($referenceable_product_types);
+    }
+    // For more then one product type available, check the ones selected.
+    else {
+      $product_types = array_filter($referenceable_product_types);
+    }
+    // Only for single product type available for the product reference field instance.
+    if (count($product_types) == 1) {
+      foreach ($product_types as $product_type) {
+        // Get product type attributes.
+        $attributes = commerce_cart_product_type_attributes($product_type);
+        if (count($attributes) == 1) {
+          $summary[] = t('Tokens replacement: !token_formatter', array('!token_formatter' => !empty($settings['product_select_options_tokens_formatter']) ? $settings['product_select_options_tokens_formatter'] : t('Empty (not set).')));
+        }
+      }
     }
   }
 
@@ -2587,9 +2783,12 @@ function commerce_cart_field_formatter_view($entity_type, $entity, $field, $inst
     if (!empty($products)) {
       $type = !empty($settings['line_item_type']) ? $settings['line_item_type'] : 'product';
       $line_item = commerce_product_line_item_new(commerce_product_reference_default_product($products), $settings['default_quantity'], 0, array(), $type);
+      $line_item->data['context']['button_text'] = !empty($settings['button_text']) ? check_plain($settings['button_text']) : t('Add to cart');;
       $line_item->data['context']['product_ids'] = array_keys($products);
       $line_item->data['context']['add_to_cart_combine'] = !empty($settings['combine']);
       $line_item->data['context']['show_single_product_attributes'] = !empty($settings['show_single_product_attributes']);
+      $line_item->data['context']['product_select_options_use_tokens'] = isset($settings['product_select_options_use_tokens']) ? $settings['product_select_options_use_tokens'] : FALSE;
+      $line_item->data['context']['product_select_options_tokens_formatter'] = isset($settings['product_select_options_tokens_formatter']) ? $settings['product_select_options_tokens_formatter'] : FALSE;
 
       $result[] = array(
         '#arguments' => array(
@@ -2622,6 +2821,10 @@ function commerce_cart_field_attach_view_alter(&$output, $context) {
     if (!empty($element['#formatter']) && $element['#formatter'] == 'commerce_cart_add_to_cart_form') {
       // Prepare the context information needed by the cart form.
       $cart_context = $context;
+      // Add the entity bundle to form context.
+      $cart_context['bundle'] = $element['#bundle'];
+      // Add the product reference field name to form context.
+      $cart_context['field'] = $field_name;
 
       // Remove the full entity from the context array and put the ID in instead.
       list($entity_id, $vid, $bundle) = entity_extract_ids($context['entity_type'], $context['entity']);
@@ -2664,6 +2867,21 @@ function commerce_cart_field_attach_view_alter(&$output, $context) {
         // referencing multiple products.
         if (count($arguments['line_item']->data['context']['product_ids']) > 1) {
           $arguments['line_item']->data['context']['product_ids'] = 'entity';
+        }
+
+        // Translate button text.
+        $instance = field_info_instance($element['#entity_type'], $element['#field_name'], $element['#bundle']);
+        $translated_instance = commerce_i18n_object('field_instance', $instance);
+        $view_mode = $element['#view_mode'];
+        // Special case for full view mode.
+        if ($view_mode == 'full') {
+          $view_modes = field_view_mode_settings($element['#entity_type'], $element['#bundle']);
+          if (!empty($view_modes['full']) && !$view_modes['full']['custom_settings']) {
+            $view_mode = 'default';
+          }
+        }
+        if (!empty($translated_instance['add_to_cart_form-button_text-' . $view_mode])) {
+          $arguments['line_item']->data['context']['button_text'] = $translated_instance['add_to_cart_form-button_text-' . $view_mode];
         }
 
         // Replace the array containing the arguments with the return value of
@@ -2733,6 +2951,19 @@ function commerce_cart_preprocess_views_view(&$vars) {
  * Implements hook_i18n_string_list_TEXTGROUP_alter().
  */
 function commerce_cart_i18n_string_list_field_alter(&$strings, $type = NULL, $object = NULL) {
+  // Add to cart button text translatable strings.
+  $field = field_info_field($object['field_name']);
+  if (in_array($field['type'], array('commerce_product_reference', 'entityreference')) && !empty($object['display'])) {
+    foreach ($object['display'] as $display_name => $display) {
+      if (!empty($display['settings']['button_text'])) {
+        $strings['field'][$object['field_name']][$object['bundle']]['add_to_cart_form-button_text-' . $display_name] = array(
+          'string' => $display['settings']['button_text'],
+          'title' => t('Add to cart button text') . ' (view mode: ' . $display_name . ')',
+        );
+      }
+    }
+  }
+  // Attribute widget title translatable string.
   if (!isset($strings['field']) || !is_array($object) || !commerce_cart_field_instance_is_attribute($object)) {
     return;
   }

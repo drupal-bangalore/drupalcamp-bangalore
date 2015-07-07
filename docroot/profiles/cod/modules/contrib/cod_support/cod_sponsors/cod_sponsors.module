@@ -39,6 +39,17 @@ function cod_sponsors_form_sponsor_node_form_alter(&$form, &$form_state, $form_i
 }
 
 /**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_sponsors_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_sponsors'),
+    'user_role' => array('cod_sponsors'),
+    'og_role' => array('cod_sponsors'),
+  );
+}
+
+/**
  * Implements hook_menu().
  */
 function cod_sponsors_menu() {
@@ -84,4 +95,36 @@ function cod_sponsors_permission() {
     'description' => t('Allows users to view published sponsors'),
   );
   return $perms;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function cod_sponsors_block_info() {
+  $blocks = array();
+  // Get all of the current sponsorship types
+  $myvoc = taxonomy_vocabulary_machine_name_load('sponsorship_level');
+  $sponsorship_types = taxonomy_get_tree($myvoc->vid);
+  foreach ($sponsorship_types AS $sponsorship_type) {
+    $blocks[$sponsorship_type->machine_name] = array(
+      'info' => t('Sponsors: @type_name ', array('@type_name' => $sponsorship_type->name)),
+    );
+  }
+  return $blocks;
+}
+
+function cod_sponsors_block_view($delta = '') {
+  $block = array();
+  // Get all of the current sponsorship types
+  $event = og_context();
+  if (isset($event['gid']) && $term = taxonomy_term_machine_name_load($delta, 'sponsorship_level')) {
+    $view = views_get_view('cod_sponsors');
+    $view->set_display('sponsor_block_pane');
+    $view->set_arguments(array($event['gid'], $term->tid));
+    $view->pre_execute();
+    $view->execute();
+    $block['title'] = t('@type_name Sponsors', array('@type_name' => $term->name));
+    $block['content'] = $view->render();
+  }
+  return $block;
 }

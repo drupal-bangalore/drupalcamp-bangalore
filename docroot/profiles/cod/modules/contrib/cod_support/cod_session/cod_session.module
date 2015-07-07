@@ -16,6 +16,33 @@ function cod_session_ctools_plugin_directory($module, $plugin) {
   if ($module == 'ctools' && $plugin == 'content_types') {
     return 'plugins/content_types';
   }
+  if ($module == 'ctools' && $plugin == 'contexts') {
+    return 'plugins/contexts';
+  }
+  if ($module == 'ctools' && $plugin == 'arguments') {
+    return 'plugins/arguments';
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function cod_session_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'cod_session') . '/views',
+  );
+}
+
+/**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_session_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_session'),
+    'user_role' => array('cod_session'),
+    'og_role' => array('cod_session'),
+  );
 }
 
 /**
@@ -32,6 +59,14 @@ function cod_session_menu() {
     'page arguments' => array(1, 3),
     'access callback' => 'node_access',
     'access arguments' => array('create', 'session'),
+  );
+  $items['node/%node/add/schedule-item'] = array(
+    'title' => t('Add Session'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'cod_events_add_content',
+    'page arguments' => array(1, 3),
+    'access callback' => 'node_access',
+    'access arguments' => array('create', 'schedule_item'),
   );
   $items['admin/conference/%node/sessions/add/session'] = array(
     'title' => t('Add Session'),
@@ -58,6 +93,18 @@ function cod_session_menu() {
   );
 
   return $items;
+}
+
+function cod_session_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'views_data_alter') {
+    // Move views_pre_render() to the end of the list. module_implements()
+    // iterates through $implementations with a foreach loop which PHP iterates
+    // in the order that the items were added, so to move an item to the end of
+    // the array, we remove it and then add it.
+    $group = $implementations['cod_session'];
+    unset($implementations['cod_session']);
+    $implementations['cod_session'] = $group;
+  }
 }
 
 /**
@@ -217,29 +264,16 @@ function cod_session_form_session_node_form_alter(&$form, &$form_state, $form_id
   $form['#validate'][] = 'cod_session_session_node_form_validate';
 
   if ($form['og_group_ref']['#access'] == TRUE) {
-    if (isset($form_state['entityreference_prepopulate']['node'][$form['#bundle']]['og_group_ref'])) {
+    if (isset($form_state['entityreference_prepopulate']['node'][$form['#bundle']]['og_group_ref']) ||
+        isset($form['#node']->og_group_ref[LANGUAGE_NONE][0]['target_id'])) {
       $form['og_vocabulary']['#states'] = array(
-        'invisible' => array(
-          'xor',
-          array(':input[name="og_group_ref[und][0][default]"]' => array('value' => '_none')),
-          // This sort of works, but would be better if it fired after
-          // the autocomplete. Note that this field is only available
-          // to administrators.
-          array(':input[name="og_group_ref[und][0][admin][0][target_id]"]' => array('empty' => TRUE)),
-        ),
+        'invisible' => array(':input[name="og_group_ref[und]"]' => array('value' => '_none')),
       );
     }
     else {
       // Make the session track and timeslot fields conditional on the event field.
       $form['og_vocabulary']['#states'] = array(
-        'visible' => array(
-          'xor',
-          array(':input[name="og_group_ref[und][0][default]"]' => array('!value' => '_none')),
-          // This sort of works, but would be better if it fired after
-          // the autocomplete. Note that this field is only available
-          // to administrators.
-          array(':input[name="og_group_ref[und][0][admin][0][target_id]"]' => array('empty' => FALSE)),
-        ),
+        'visible' => array(':input[name="og_group_ref[und]"]' => array('!value' => '_none')),
       );
     }
 
@@ -254,11 +288,31 @@ function cod_session_form_session_node_form_alter(&$form, &$form_state, $form_id
         if (is_array($event_vocab) && isset($event_vocab['#og_vocab'])) {
           $form['og_vocabulary'][LANGUAGE_NONE][0][$key]['#states'] = array(
             'visible' => array(
-              ':input[name="og_group_ref[und][0][default]"]' => array(
-                'value' => $event_vocab['#og_vocab']->id,
+              ':input[name="og_group_ref[und]"]' => array(
+                'value' => $event_vocab['#gid']->gid,
               ),
             ),
           );
+          // You must set this to FALSE and do required checks in the validation
+          // Function. Otherwise, if JS is turned off, you'll have to select every
+          // Field, even though there is no associated event.
+          $form['og_vocabulary'][LANGUAGE_NONE][0][$key]['#required'] = FALSE;
+        }
+      }
+    }
+  }
+  // If you don't have access to the og_group_ref field, then you should only be
+  // Getting one group, which means we can manually set the og_vocabulary field.
+  else {
+    if (isset($form['og_vocabulary'][LANGUAGE_NONE][0]) && isset($form['og_group_ref'])) {
+      foreach ($form['og_vocabulary'][LANGUAGE_NONE][0] as $key => &$event_vocab) {
+        if (is_numeric($key) && isset($event_vocab['#og_vocab'])) {
+          if ($form['og_vocabulary'][LANGUAGE_NONE][0][$key]['#gid']->gid == $form['og_group_ref'][LANGUAGE_NONE]['#default_value'][0]) {
+            $form['og_vocabulary'][LANGUAGE_NONE][0][$key]['#required'] = FALSE;
+          }
+          else {
+            $form['og_vocabulary'][LANGUAGE_NONE][0][$key]['#access'] = FALSE;
+          }
         }
       }
     }
@@ -276,7 +330,7 @@ function cod_session_form_node_form_alter(&$form, &$form_state, $form_id) {
   if ((isset($form['field_session_timeslot']) || isset($form['og_vocabulary'])) && $form['og_group_ref']['#access'] == TRUE) {
 
     // Make the level field filtered on the event field.
-    $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#ajax'] = array(
+    $form['og_group_ref'][LANGUAGE_NONE]['#ajax'] = array(
       'callback' => 'cod_session_events_filter',
       'wrapper' => 'field-cod-events-filter',
       'method' => 'replace',
@@ -293,17 +347,14 @@ function cod_session_form_node_form_alter(&$form, &$form_state, $form_id) {
 function cod_session_events_filter($form, &$form_state) {
 
   if (isset($form_state['values']['og_group_ref']) &&
-      isset($form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['default']) &&
-      $form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['default'] == '_none') {
+      isset($form_state['values']['og_group_ref'][LANGUAGE_NONE][0]) &&
+      $form_state['values']['og_group_ref'][LANGUAGE_NONE][0] == '_none') {
     return;
   }
   // Get the event node id.
   $nid = FALSE;
   if (isset($form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['target_id']) && is_numeric($form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['target_id'])) {
     $nid = $form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['target_id'];
-  }
-  elseif (isset($form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['admin'][0]['target_id']) && is_numeric($form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['admin'][0]['target_id'])) {
-    $nid = $form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['admin'][0]['target_id'];
   }
 
   if ($nid && isset($form['#bundle'])) {
@@ -327,6 +378,9 @@ function cod_session_cod_event_ajax_elements($form, $nid, $bundle = NULL) {
         if (is_numeric($key) && isset($element['#og_vocab'])) {
           if ($key != $vocab->vid) {
             unset($form['og_vocabulary'][LANGUAGE_NONE][0][$key]);
+          }
+          else {
+            $form['og_vocabulary'][LANGUAGE_NONE][0][$key]['#required'] = TRUE;
           }
         }
       }
@@ -696,5 +750,22 @@ function cod_session_custom_theme() {
     $path = drupal_get_path('module', 'cod_session');
     drupal_add_css($path . '/css/sign-style.css');
     return 'seven';
+  }
+}
+
+/**
+ * Create a block for filtered session tracks
+ * Implements hook_form_FORM_ID_alter().
+ */
+function cod_session_form_views_exposed_form_alter(&$form, &$form_state) {
+  $view = $form_state['view'];
+
+  // Only react on block Views specifically configured with exposed form blocks.
+  if ($view->name == 'cod_session_sessions' && $view->current_display == 'panel_pane_2') {
+    if ($view->display_handler->get_option('exposed_block')) {
+      // Ensure that the fallback form action is the current page.
+      $form['#action'] = url(drupal_get_path_alias(), array('absolute' => TRUE));
+
+    }
   }
 }

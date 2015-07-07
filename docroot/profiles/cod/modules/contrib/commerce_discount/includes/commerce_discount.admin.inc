@@ -38,6 +38,7 @@ class CommerceDiscountUIController extends EntityDefaultUIController {
       }
     }
     field_attach_submit('commerce_discount', $entity, $form['commerce_discount_fields'], $form_state);
+
     return $entity;
   }
 
@@ -119,9 +120,14 @@ function commerce_discount_overview_form() {
 /**
  * Form callback: create or edit a discount.
  *
- * @param $discount
- *   The discount type array to edit or for a create form an empty discount
- *   type array with properties instantiated but not populated.
+ * @param array $form
+ *   Standard Drupal $form.
+ * @param array $form_state
+ *   Standard Drupal $form_state.
+ * @param CommerceDiscount $commerce_discount
+ *   Comment me.
+ * @param string $op
+ *   Current operation.
  */
 function commerce_discount_form($form, &$form_state, CommerceDiscount $commerce_discount, $op = 'edit') {
   // We might have gotten the commerce discount type via ajax, so set it
@@ -198,6 +204,7 @@ function commerce_discount_form($form, &$form_state, CommerceDiscount $commerce_
     '#tree' => TRUE,
     '#parents' => array('commerce_discount_fields'),
   );
+
   field_attach_form('commerce_discount', $commerce_discount, $form['commerce_discount_fields'], $form_state);
   // Remove the title and surrounding fieldset from the offer reference field.
   $form['commerce_discount_fields']['commerce_discount_offer'][LANGUAGE_NONE]['#title'] = NULL;
@@ -234,7 +241,7 @@ function commerce_discount_form($form, &$form_state, CommerceDiscount $commerce_
       '#value' => t('Delete discount'),
       '#weight' => 45,
       '#limit_validation_errors' => array(),
-      '#submit' => array('commerce_discount_form_submit_delete')
+      '#submit' => array('commerce_discount_form_submit_delete'),
     );
   }
 

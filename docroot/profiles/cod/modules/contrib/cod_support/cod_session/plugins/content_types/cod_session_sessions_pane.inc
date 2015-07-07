@@ -35,7 +35,7 @@ function cod_session_sessions_pane_render($subtype, $conf, $context = NULL) {
 
 function cod_session_sessions_quicktabs($event) {
   // Use '+' so that we can display Proposed/Declined and Accepted/Featured.
-  $allowed_values = array('unprocessed+declined+backup' => 'Proposed', 'accepted+featured' => 'Accepted', 'cancelled' => 'Cancelled');
+  $allowed_values = array('proposed+declined+backup' => 'Proposed', 'accepted+featured' => 'Accepted', 'cancelled' => 'Cancelled');
   $content_tabs = array();
   $weight = 0;
   foreach ($allowed_values AS $key => $status) {

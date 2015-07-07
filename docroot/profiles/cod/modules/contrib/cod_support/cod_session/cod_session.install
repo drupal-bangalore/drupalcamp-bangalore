@@ -188,7 +188,7 @@ function cod_session_update_7013() {
 
   // Update the values for each field.
   db_update('field_data_field_accepted')
-    ->fields(array('field_accepted_value' => 'unprocessed'))
+    ->fields(array('field_accepted_value' => 'proposed'))
     ->condition('field_accepted_value', '0', '=')
     ->execute();
   db_update('field_data_field_accepted')
@@ -200,6 +200,23 @@ function cod_session_update_7013() {
     ->condition('field_accepted_value', '2', '=')
     ->execute();
   db_update('field_data_field_accepted')
+    ->fields(array('field_accepted_value' => 'featured'))
+    ->condition('field_accepted_value', '3', '=')
+    ->execute();
+  // Update the values for each field.
+  db_update('field_revision_field_accepted')
+    ->fields(array('field_accepted_value' => 'proposed'))
+    ->condition('field_accepted_value', '0', '=')
+    ->execute();
+  db_update('field_revision_field_accepted')
+    ->fields(array('field_accepted_value' => 'accepted'))
+    ->condition('field_accepted_value', '1', '=')
+    ->execute();
+  db_update('field_revision_field_accepted')
+    ->fields(array('field_accepted_value' => 'declined'))
+    ->condition('field_accepted_value', '2', '=')
+    ->execute();
+  db_update('field_revision_field_accepted')
     ->fields(array('field_accepted_value' => 'featured'))
     ->condition('field_accepted_value', '3', '=')
     ->execute();
@@ -215,16 +232,8 @@ function cod_session_update_7013() {
 }
 
 /**
- * Reset the session menu weight to order correctly on the admin tabs
+ * Update 7014 doesn't exist anymore because it didn't do anything
  */
-function cod_session_update_7014() {
-  $revert = array(
-    'cod_session' => array('page_manager_pages'),
-  );
-  features_revert($revert);
-
-  return array();
-}
 
 /**
  * Update session views to fix an issue with broken handlers for session confirmation.
@@ -263,4 +272,119 @@ function cod_session_update_7017() {
   features_revert($revert);
 
   return array();
+}
+
+/**
+ * Update 'unprocessed' to 'proposed' for session submissions.
+ */
+function cod_session_update_7018() {
+  // Change the field configuration manually.
+  $result = db_select('field_config', 'fc')
+    ->fields('fc', array('data'))
+    ->condition('field_name', 'field_accepted', '=')
+    ->execute()
+    ->fetchField();
+  $data = unserialize($result);
+  $data['settings']['allowed_values'] = array(
+    'proposed' => 'Proposed',
+    'accepted' => 'Accepted',
+    'declined' => 'Declined',
+    'featured' => 'Featured',
+    'cancelled' => 'Speaker(s) Cancelled',
+    'backup' => 'Backup'
+  );
+
+  db_update('field_config')
+    ->fields(array('data' => serialize($data)))
+    ->condition('field_name', 'field_accepted', '=')
+    ->execute();
+
+  // Change the field configuration manually.
+  $result = db_select('field_config', 'fc')
+    ->fields('fc', array('data'))
+    ->condition('field_name', 'field_event_default_session_view', '=')
+    ->execute()
+    ->fetchField();
+  $data = unserialize($result);
+  $data['settings']['allowed_values'] = array(
+    'proposed' => 'Proposed',
+    'accepted' => 'Accepted',
+  );
+
+  db_update('field_config')
+    ->fields(array('data' => serialize($data)))
+    ->condition('field_name', 'field_event_default_session_view', '=')
+    ->execute();
+
+  $revert = array(
+    'cod_session_pages' => array('page_manager_pages'),
+    'cod_session' => array('field_base', 'field_instance', 'views_view'),
+  );
+  features_revert($revert);
+
+  // Re-run cod_session_update_7013 again just in case.
+  cod_session_update_7013();
+
+  $field_values_to_change = array(
+    'unprocessed' => 'proposed',
+  );
+  // Run a DB query to alter the fields
+  foreach ($field_values_to_change AS $existing => $new) {
+    db_update('field_data_field_accepted')
+      ->fields(array(
+        'field_accepted_value' => $new,
+      ))
+      ->condition('field_accepted_value', $existing, '=')
+      ->execute();
+    db_update('field_revision_field_accepted')
+      ->fields(array(
+        'field_accepted_value' => $new,
+      ))
+      ->condition('field_accepted_value', $existing, '=')
+      ->execute();
+  }
+  if (!module_exists('cod_session_pages')) {
+    module_enable(array('cod_session_pages'));
+  }
+  return array();
+}
+
+/**
+ * Update session to change processed/accepted key from 0/1
+ */
+function cod_session_update_7019() {
+  $field_values_to_change = array(
+    0 => 'proposed',
+    1 => 'accepted',
+  );
+  // Run a DB query to alter the fields
+  foreach ($field_values_to_change AS $existing => $new) {
+    db_update('field_data_field_event_default_session_view')
+      ->fields(array(
+        'field_event_default_session_view_value' => $new,
+      ))
+      ->condition('field_event_default_session_view_value', $existing, '=')
+      ->execute();
+    db_update('field_revision_field_event_default_session_view')
+      ->fields(array(
+        'field_event_default_session_view_value' => $new,
+      ))
+      ->condition('field_event_default_session_view_value', $existing, '=')
+      ->execute();
+  }
+  return array();
+}
+
+/**
+ * Change the og_group_ref select widget to a plain select widget
+ */
+function cod_session_update_7020() {
+  if (!module_exists('taxonomy_machine_name')) {
+    module_enable(array('taxonomy_machine_name'));
+  }
+  $revert = array(
+    'cod_session' => array('field_base', 'field_instance', 'user_permission', 'field_group', 'views_view'),
+    'cod_session_pages' => array('page_manager_pages'),
+  );
+  features_revert($revert);
 }

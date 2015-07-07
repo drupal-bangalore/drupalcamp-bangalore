@@ -272,6 +272,10 @@ function ticket_permission() {
       'description' => t('Edit all ticket registrations.'),
       'restrict access' => TRUE,
     ),
+    'delete own ticket registration' => array(
+      'title' => t('Delete own registrations'),
+      'description' => t('Delete own ticket registration(s).'),
+    ),
   );
 }
 

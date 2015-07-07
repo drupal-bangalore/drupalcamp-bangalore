@@ -15,3 +15,13 @@ function cod_basic_page_install() {
   );
   features_revert($revert);
 }
+
+/**
+ * Change the og_group_ref select widget to a plain select widget
+ */
+function cod_basic_page_update_7001() {
+  $revert = array(
+    'cod_basic_page' => array('field_instance'),
+  );
+  features_revert($revert);
+}

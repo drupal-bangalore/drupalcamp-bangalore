@@ -20,6 +20,9 @@ function omega_status_messages($variables) {
     'warning' => t('Warning message'),
   );
   foreach (drupal_get_messages($display) as $type => $messages) {
+    if (empty($messages)) {
+      continue;
+    }
     $output .= '<div class="messages messages--' . $type . '">';
     if (!empty($status_heading[$type])) {
       $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>";

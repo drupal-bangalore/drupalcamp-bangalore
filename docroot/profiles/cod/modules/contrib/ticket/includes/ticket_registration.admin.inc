@@ -64,6 +64,45 @@ function ticket_registration_view($entity_type, $entity) {
  */
 function ticket_registration_form($form, &$form_state, $entity, $op = 'edit') {
   // Attach the fields for this ticket registration.
+  if (user_access('edit all ticket registrations')) {
+    $ticket_type = ticket_type_load($entity->bundle);
+    if (!empty($entity->trid) && $host = $ticket_type->entity) {
+      $form['admin_settings'] = array(
+        '#type' => 'fieldset',
+        '#weight' => -99,
+        '#title' => t('Administrative Settings'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+      );
+      $options = array();
+      foreach($host->{$ticket_type->field_name}[LANGUAGE_NONE] AS $tt) {
+        $type = ticket_type_load($tt['value']);
+        $options[$tt['value']] = ticket_type_label($type);
+      }
+      $form['admin_settings']['bundle'] = array(
+        '#type' => 'select',
+        '#title' => 'Ticket Type',
+        '#description' => 'This selector is potentially dangerous. Only change the ticket type if both types have similar fields.',
+        '#options' => $options,
+        '#default_value' => $ticket_type->ttid,
+        '#weight' => -99,
+      );
+      $form['admin_settings']['author_uid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Author UID'),
+        '#default_value' => $entity->author_uid,
+        '#size' => 32,
+        '#maxlength' => 32,
+      );
+      $form['admin_settings']['user_uid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Registered User'),
+        '#default_value' => $entity->user_uid,
+        '#size' => 32,
+        '#maxlength' => 32,
+      );
+    }
+  }
   field_attach_form('ticket_registration', $entity, $form, $form_state);
 
   // TODO: Need to add the status checkbox here, but it should probably
@@ -76,7 +115,7 @@ function ticket_registration_form($form, &$form_state, $entity, $op = 'edit') {
     '#weight' => 40,
   );
 
-  if ($op != 'add' && $op != 'clone') {
+  if (user_access('delete own ticket registration') && $op != 'add' && $op != 'clone') {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
       '#value' => t('Delete'),
@@ -119,7 +158,7 @@ function ticket_registration_form_submit($form, &$form_state) {
     $ticket_registration->is_new_revision = TRUE;
   }
 
-  $form_state['redirect'] = 'user/'. $user->uid .'/tickets';
+  $form_state['redirect'] = 'user/'. $ticket_registration->user_uid .'/tickets';
   drupal_set_message("Ticket Successfully Updated");
 
   $ticket_registration->save();

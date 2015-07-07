@@ -1,3 +1,19 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  *behavior: url('../../../behaviors/box-sizing/boxsizing.php'); }
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  *behavior: url('../../../behaviors/box-sizing/boxsizing.php'); }
+
+img, video {
+  max-width: 100%;
+  height: auto; }
+
 .site-branding__name {
   font-size: 1.6em;
   margin-bottom: 40px; }
@@ -15,7 +31,7 @@ p.button {
   height: 40px;
   padding: 10px 20px; }
   p.button a:link, p.button a:visited, p.button a.active-trail, p.button a:hover, p.button a:active {
-    color: #fff;
+    color: white;
     text-decoration: none; }
   p.button:hover {
     background-color: #386fa7;
@@ -34,10 +50,10 @@ body {
 
 .l-navigation {
   background-color: #326294;
-  color: #fff;
+  color: white;
   margin-bottom: 1em; }
   .l-navigation a {
-    color: #fff; }
+    color: white; }
     .l-navigation a:hover {
       color: #aec8e4; }
 
@@ -46,21 +62,21 @@ body {
   height: 300px; }
 
 .l-region--highlighted {
-  color: #fff;
+  color: white;
   padding: 30px; }
   .l-region--highlighted h2 {
     font-size: 2em;
     margin-bottom: 1.5em;
     text-align: center; }
   .l-region--highlighted p a {
-    color: #fff;
+    color: white;
     text-decoration: none; }
 
 .front .l-main-wrapper {
-  background-color: #fff; }
+  background-color: white; }
 
 .not-front .l-content, .not-front .l-region--sidebar .block {
-  background-color: #fff; }
+  background-color: white; }
 
 menu, ol, ul {
   padding-left: 18px; }
@@ -137,7 +153,7 @@ p.button {
   height: 40px;
   padding: 10px 20px; }
   p.button a:link, p.button a:visited, p.button a.active-trail, p.button a:hover, p.button a:active {
-    color: #fff;
+    color: white;
     text-decoration: none; }
   p.button:hover {
     background-color: #386fa7;
@@ -166,7 +182,7 @@ p.button {
   z-index: 999999; }
 
 .mean-container .mean-nav {
-  background: none repeat scroll 0 0 #fff;
+  background: none repeat scroll 0 0 white;
   float: left;
   margin-top: 40px;
   width: 100%; }
@@ -199,7 +215,7 @@ p.button {
 .mean-nav > ul > li:last-child {
   background-color: #326294; }
   .mean-nav > ul > li:last-child a {
-    color: #fff;
+    color: white;
     text-align: center; }
 
 .mean-container .l-region--preface .menu {
@@ -217,7 +233,7 @@ p.button {
     .l-region--preface .menu li:hover {
       background-color: #326294; }
       .l-region--preface .menu li:hover a:link, .l-region--preface .menu li:hover a:visited {
-        color: #fff; }
+        color: white; }
     .l-region--preface .menu li a {
       text-decoration: none; }
       .l-region--preface .menu li a:link, .l-region--preface .menu li a:visited {
@@ -243,7 +259,7 @@ p.button {
   .tabs--primary .active {
     color: #000000; }
   .tabs--primary a.active {
-    background-color: #fff;
+    background-color: white;
     -moz-border-radius: 6px 6px 0 0;
     -webkit-border-radius: 6px 6px 0 0;
     -o-border-radius: 6px 6px 0 0;
@@ -262,16 +278,16 @@ p.button {
       background: #615f5e; }
       .view-cod-session-schedule ul.quicktabs-tabs.quicktabs-style-zen li.active a, .view-cod-bof-schedule ul.quicktabs-tabs.quicktabs-style-zen li.active a, .view-cod-schedule ul.quicktabs-tabs.quicktabs-style-zen li.active a {
         background: none;
-        color: #fff;
+        color: white;
         padding-bottom: 4px; }
     .view-cod-session-schedule ul.quicktabs-tabs.quicktabs-style-zen li a, .view-cod-bof-schedule ul.quicktabs-tabs.quicktabs-style-zen li a, .view-cod-schedule ul.quicktabs-tabs.quicktabs-style-zen li a {
       background: none;
-      color: #fff;
+      color: white;
       padding-bottom: 4px; }
 .view-cod-session-schedule .views-field-field-slot-datetime-1, .view-cod-session-schedule .views-field-field-evttime-date-1, .view-cod-bof-schedule .views-field-field-slot-datetime-1, .view-cod-bof-schedule .views-field-field-evttime-date-1, .view-cod-schedule .views-field-field-slot-datetime-1, .view-cod-schedule .views-field-field-evttime-date-1 {
   background: #326294;
   clear: both;
-  color: #fff;
+  color: white;
   padding: 15px;
   font-weight: bold;
   text-align: center;
@@ -348,11 +364,11 @@ p.button {
   width: 650px; }
 
 #panels-dnd-main .grid-4 .width-25, #panels-dnd-main .grid-4 .width-33, #panels-dnd-main .grid-4 .width-50, #panels-dnd-main .grid-3 .width-25, #panels-dnd-main .grid-3 .width-33, #panels-dnd-main .grid-3 .width-50, #panels-dnd-main .grid-3 .width-66, #panels-dnd-main .grid-3 .width-75 {
-  background: #85231B; }
+  background: #85231b; }
 
 #page #panels-dnd-main .changed .grabber,
 #page #panels-dnd-main .ajax-changed .grabber {
-  background: #C56827; }
+  background: #c56827; }
 
 #page #panels-dnd-main .hidden .grabber {
   background: #dedede; }
@@ -382,7 +398,7 @@ p.button {
   float: none !important;
   display: inline-block;
   padding: 0 !important;
-  border: 1px solid #777;
+  border: 1px solid #777777;
   margin: 0 !important; }
   #panels-dnd-main .panel-pane.width-25 {
     width: 25% !important; }
@@ -408,13 +424,13 @@ p.button {
   color: crimson !important;
   letter-spacing: normal;
   line-height: 1;
-  background: #FFF;
+  background: white;
   display: inline-block;
   text-indent: 0;
   padding-left: 5px; }
 
 .page-manager-ajax-pad {
-  background: #DFDFDF; }
+  background: #dfdfdf; }
 
 #page-manager-edit .clearfix,
 #page-manager-edit .page-manager-tabs,
@@ -454,13 +470,22 @@ p.button {
   padding: 5px;
   margin: 0;
   border: white 2px dashed;
-  overflow: hidden;
+  /* for IE 6/7 */
+  *zoom: expression(this.runtimeStyle.zoom="1", this.appendChild(document.createElement("br")).style.cssText="clear:both;font:0/0 serif");
+  /* non-JS fallback */
   *zoom: 1;
   overflow: visible;
   background: rgba(248, 248, 248, 0.4);
   float: left;
   width: 100%;
   line-height: 0; }
+  #page #panels-dnd-main .panel-region:before, #page #panels-dnd-main .panel-region:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden; }
+  #page #panels-dnd-main .panel-region:after {
+    clear: both; }
   #page #panels-dnd-main .panel-region h2.label {
     line-height: 1.5;
     font-size: 1.3em;
@@ -473,6 +498,19 @@ p.button {
 #page #panels-dnd-main .container-inner.grid-12 {
   float: left;
   width: 100%; }
+#page #panels-dnd-main .panel-display {
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(210, 105, 30, 0.5)), color-stop(23.8806%, rgba(210, 105, 30, 0.5)), color-stop(23.8806%, rgba(210, 105, 30, 0.25)), color-stop(25.37313%, rgba(210, 105, 30, 0.25)), color-stop(25.37313%, rgba(210, 105, 30, 0.5)), color-stop(49.25373%, rgba(210, 105, 30, 0.5)), color-stop(49.25373%, rgba(210, 105, 30, 0.25)), color-stop(50.74627%, rgba(210, 105, 30, 0.25)), color-stop(50.74627%, rgba(210, 105, 30, 0.5)), color-stop(74.62687%, rgba(210, 105, 30, 0.5)), color-stop(74.62687%, rgba(210, 105, 30, 0.25)), color-stop(76.1194%, rgba(210, 105, 30, 0.25)), color-stop(76.1194%, rgba(210, 105, 30, 0.5)), color-stop(100%, rgba(210, 105, 30, 0.5)));
+  background-image: -webkit-linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 23.8806%, rgba(210, 105, 30, 0.25) 23.8806%, rgba(210, 105, 30, 0.25) 25.37313%, rgba(210, 105, 30, 0.5) 25.37313%, rgba(210, 105, 30, 0.5) 49.25373%, rgba(210, 105, 30, 0.25) 49.25373%, rgba(210, 105, 30, 0.25) 50.74627%, rgba(210, 105, 30, 0.5) 50.74627%, rgba(210, 105, 30, 0.5) 74.62687%, rgba(210, 105, 30, 0.25) 74.62687%, rgba(210, 105, 30, 0.25) 76.1194%, rgba(210, 105, 30, 0.5) 76.1194%, rgba(210, 105, 30, 0.5) 100%);
+  background-image: -moz-linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 23.8806%, rgba(210, 105, 30, 0.25) 23.8806%, rgba(210, 105, 30, 0.25) 25.37313%, rgba(210, 105, 30, 0.5) 25.37313%, rgba(210, 105, 30, 0.5) 49.25373%, rgba(210, 105, 30, 0.25) 49.25373%, rgba(210, 105, 30, 0.25) 50.74627%, rgba(210, 105, 30, 0.5) 50.74627%, rgba(210, 105, 30, 0.5) 74.62687%, rgba(210, 105, 30, 0.25) 74.62687%, rgba(210, 105, 30, 0.25) 76.1194%, rgba(210, 105, 30, 0.5) 76.1194%, rgba(210, 105, 30, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 23.8806%, rgba(210, 105, 30, 0.25) 23.8806%, rgba(210, 105, 30, 0.25) 25.37313%, rgba(210, 105, 30, 0.5) 25.37313%, rgba(210, 105, 30, 0.5) 49.25373%, rgba(210, 105, 30, 0.25) 49.25373%, rgba(210, 105, 30, 0.25) 50.74627%, rgba(210, 105, 30, 0.5) 50.74627%, rgba(210, 105, 30, 0.5) 74.62687%, rgba(210, 105, 30, 0.25) 74.62687%, rgba(210, 105, 30, 0.25) 76.1194%, rgba(210, 105, 30, 0.5) 76.1194%, rgba(210, 105, 30, 0.5) 100%);
+  background-image: linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 23.8806%, rgba(210, 105, 30, 0.25) 23.8806%, rgba(210, 105, 30, 0.25) 25.37313%, rgba(210, 105, 30, 0.5) 25.37313%, rgba(210, 105, 30, 0.5) 49.25373%, rgba(210, 105, 30, 0.25) 49.25373%, rgba(210, 105, 30, 0.25) 50.74627%, rgba(210, 105, 30, 0.5) 50.74627%, rgba(210, 105, 30, 0.5) 74.62687%, rgba(210, 105, 30, 0.25) 74.62687%, rgba(210, 105, 30, 0.25) 76.1194%, rgba(210, 105, 30, 0.5) 76.1194%, rgba(210, 105, 30, 0.5) 100%); }
+  @media (min-width: 768px) {
+    #page #panels-dnd-main .panel-display {
+      background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(210, 105, 30, 0.5)), color-stop(7.88177%, rgba(210, 105, 30, 0.5)), color-stop(7.88177%, rgba(210, 105, 30, 0.25)), color-stop(8.37438%, rgba(210, 105, 30, 0.25)), color-stop(8.37438%, rgba(210, 105, 30, 0.5)), color-stop(16.25616%, rgba(210, 105, 30, 0.5)), color-stop(16.25616%, rgba(210, 105, 30, 0.25)), color-stop(16.74877%, rgba(210, 105, 30, 0.25)), color-stop(16.74877%, rgba(210, 105, 30, 0.5)), color-stop(24.63054%, rgba(210, 105, 30, 0.5)), color-stop(24.63054%, rgba(210, 105, 30, 0.25)), color-stop(25.12315%, rgba(210, 105, 30, 0.25)), color-stop(25.12315%, rgba(210, 105, 30, 0.5)), color-stop(33.00493%, rgba(210, 105, 30, 0.5)), color-stop(33.00493%, rgba(210, 105, 30, 0.25)), color-stop(33.49754%, rgba(210, 105, 30, 0.25)), color-stop(33.49754%, rgba(210, 105, 30, 0.5)), color-stop(41.37931%, rgba(210, 105, 30, 0.5)), color-stop(41.37931%, rgba(210, 105, 30, 0.25)), color-stop(41.87192%, rgba(210, 105, 30, 0.25)), color-stop(41.87192%, rgba(210, 105, 30, 0.5)), color-stop(49.75369%, rgba(210, 105, 30, 0.5)), color-stop(49.75369%, rgba(210, 105, 30, 0.25)), color-stop(50.24631%, rgba(210, 105, 30, 0.25)), color-stop(50.24631%, rgba(210, 105, 30, 0.5)), color-stop(58.12808%, rgba(210, 105, 30, 0.5)), color-stop(58.12808%, rgba(210, 105, 30, 0.25)), color-stop(58.62069%, rgba(210, 105, 30, 0.25)), color-stop(58.62069%, rgba(210, 105, 30, 0.5)), color-stop(66.50246%, rgba(210, 105, 30, 0.5)), color-stop(66.50246%, rgba(210, 105, 30, 0.25)), color-stop(66.99507%, rgba(210, 105, 30, 0.25)), color-stop(66.99507%, rgba(210, 105, 30, 0.5)), color-stop(74.87685%, rgba(210, 105, 30, 0.5)), color-stop(74.87685%, rgba(210, 105, 30, 0.25)), color-stop(75.36946%, rgba(210, 105, 30, 0.25)), color-stop(75.36946%, rgba(210, 105, 30, 0.5)), color-stop(83.25123%, rgba(210, 105, 30, 0.5)), color-stop(83.25123%, rgba(210, 105, 30, 0.25)), color-stop(83.74384%, rgba(210, 105, 30, 0.25)), color-stop(83.74384%, rgba(210, 105, 30, 0.5)), color-stop(91.62562%, rgba(210, 105, 30, 0.5)), color-stop(91.62562%, rgba(210, 105, 30, 0.25)), color-stop(92.11823%, rgba(210, 105, 30, 0.25)), color-stop(92.11823%, rgba(210, 105, 30, 0.5)), color-stop(100%, rgba(210, 105, 30, 0.5)));
+      background-image: -webkit-linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 7.88177%, rgba(210, 105, 30, 0.25) 7.88177%, rgba(210, 105, 30, 0.25) 8.37438%, rgba(210, 105, 30, 0.5) 8.37438%, rgba(210, 105, 30, 0.5) 16.25616%, rgba(210, 105, 30, 0.25) 16.25616%, rgba(210, 105, 30, 0.25) 16.74877%, rgba(210, 105, 30, 0.5) 16.74877%, rgba(210, 105, 30, 0.5) 24.63054%, rgba(210, 105, 30, 0.25) 24.63054%, rgba(210, 105, 30, 0.25) 25.12315%, rgba(210, 105, 30, 0.5) 25.12315%, rgba(210, 105, 30, 0.5) 33.00493%, rgba(210, 105, 30, 0.25) 33.00493%, rgba(210, 105, 30, 0.25) 33.49754%, rgba(210, 105, 30, 0.5) 33.49754%, rgba(210, 105, 30, 0.5) 41.37931%, rgba(210, 105, 30, 0.25) 41.37931%, rgba(210, 105, 30, 0.25) 41.87192%, rgba(210, 105, 30, 0.5) 41.87192%, rgba(210, 105, 30, 0.5) 49.75369%, rgba(210, 105, 30, 0.25) 49.75369%, rgba(210, 105, 30, 0.25) 50.24631%, rgba(210, 105, 30, 0.5) 50.24631%, rgba(210, 105, 30, 0.5) 58.12808%, rgba(210, 105, 30, 0.25) 58.12808%, rgba(210, 105, 30, 0.25) 58.62069%, rgba(210, 105, 30, 0.5) 58.62069%, rgba(210, 105, 30, 0.5) 66.50246%, rgba(210, 105, 30, 0.25) 66.50246%, rgba(210, 105, 30, 0.25) 66.99507%, rgba(210, 105, 30, 0.5) 66.99507%, rgba(210, 105, 30, 0.5) 74.87685%, rgba(210, 105, 30, 0.25) 74.87685%, rgba(210, 105, 30, 0.25) 75.36946%, rgba(210, 105, 30, 0.5) 75.36946%, rgba(210, 105, 30, 0.5) 83.25123%, rgba(210, 105, 30, 0.25) 83.25123%, rgba(210, 105, 30, 0.25) 83.74384%, rgba(210, 105, 30, 0.5) 83.74384%, rgba(210, 105, 30, 0.5) 91.62562%, rgba(210, 105, 30, 0.25) 91.62562%, rgba(210, 105, 30, 0.25) 92.11823%, rgba(210, 105, 30, 0.5) 92.11823%, rgba(210, 105, 30, 0.5) 100%);
+      background-image: -moz-linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 7.88177%, rgba(210, 105, 30, 0.25) 7.88177%, rgba(210, 105, 30, 0.25) 8.37438%, rgba(210, 105, 30, 0.5) 8.37438%, rgba(210, 105, 30, 0.5) 16.25616%, rgba(210, 105, 30, 0.25) 16.25616%, rgba(210, 105, 30, 0.25) 16.74877%, rgba(210, 105, 30, 0.5) 16.74877%, rgba(210, 105, 30, 0.5) 24.63054%, rgba(210, 105, 30, 0.25) 24.63054%, rgba(210, 105, 30, 0.25) 25.12315%, rgba(210, 105, 30, 0.5) 25.12315%, rgba(210, 105, 30, 0.5) 33.00493%, rgba(210, 105, 30, 0.25) 33.00493%, rgba(210, 105, 30, 0.25) 33.49754%, rgba(210, 105, 30, 0.5) 33.49754%, rgba(210, 105, 30, 0.5) 41.37931%, rgba(210, 105, 30, 0.25) 41.37931%, rgba(210, 105, 30, 0.25) 41.87192%, rgba(210, 105, 30, 0.5) 41.87192%, rgba(210, 105, 30, 0.5) 49.75369%, rgba(210, 105, 30, 0.25) 49.75369%, rgba(210, 105, 30, 0.25) 50.24631%, rgba(210, 105, 30, 0.5) 50.24631%, rgba(210, 105, 30, 0.5) 58.12808%, rgba(210, 105, 30, 0.25) 58.12808%, rgba(210, 105, 30, 0.25) 58.62069%, rgba(210, 105, 30, 0.5) 58.62069%, rgba(210, 105, 30, 0.5) 66.50246%, rgba(210, 105, 30, 0.25) 66.50246%, rgba(210, 105, 30, 0.25) 66.99507%, rgba(210, 105, 30, 0.5) 66.99507%, rgba(210, 105, 30, 0.5) 74.87685%, rgba(210, 105, 30, 0.25) 74.87685%, rgba(210, 105, 30, 0.25) 75.36946%, rgba(210, 105, 30, 0.5) 75.36946%, rgba(210, 105, 30, 0.5) 83.25123%, rgba(210, 105, 30, 0.25) 83.25123%, rgba(210, 105, 30, 0.25) 83.74384%, rgba(210, 105, 30, 0.5) 83.74384%, rgba(210, 105, 30, 0.5) 91.62562%, rgba(210, 105, 30, 0.25) 91.62562%, rgba(210, 105, 30, 0.25) 92.11823%, rgba(210, 105, 30, 0.5) 92.11823%, rgba(210, 105, 30, 0.5) 100%);
+      background-image: -o-linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 7.88177%, rgba(210, 105, 30, 0.25) 7.88177%, rgba(210, 105, 30, 0.25) 8.37438%, rgba(210, 105, 30, 0.5) 8.37438%, rgba(210, 105, 30, 0.5) 16.25616%, rgba(210, 105, 30, 0.25) 16.25616%, rgba(210, 105, 30, 0.25) 16.74877%, rgba(210, 105, 30, 0.5) 16.74877%, rgba(210, 105, 30, 0.5) 24.63054%, rgba(210, 105, 30, 0.25) 24.63054%, rgba(210, 105, 30, 0.25) 25.12315%, rgba(210, 105, 30, 0.5) 25.12315%, rgba(210, 105, 30, 0.5) 33.00493%, rgba(210, 105, 30, 0.25) 33.00493%, rgba(210, 105, 30, 0.25) 33.49754%, rgba(210, 105, 30, 0.5) 33.49754%, rgba(210, 105, 30, 0.5) 41.37931%, rgba(210, 105, 30, 0.25) 41.37931%, rgba(210, 105, 30, 0.25) 41.87192%, rgba(210, 105, 30, 0.5) 41.87192%, rgba(210, 105, 30, 0.5) 49.75369%, rgba(210, 105, 30, 0.25) 49.75369%, rgba(210, 105, 30, 0.25) 50.24631%, rgba(210, 105, 30, 0.5) 50.24631%, rgba(210, 105, 30, 0.5) 58.12808%, rgba(210, 105, 30, 0.25) 58.12808%, rgba(210, 105, 30, 0.25) 58.62069%, rgba(210, 105, 30, 0.5) 58.62069%, rgba(210, 105, 30, 0.5) 66.50246%, rgba(210, 105, 30, 0.25) 66.50246%, rgba(210, 105, 30, 0.25) 66.99507%, rgba(210, 105, 30, 0.5) 66.99507%, rgba(210, 105, 30, 0.5) 74.87685%, rgba(210, 105, 30, 0.25) 74.87685%, rgba(210, 105, 30, 0.25) 75.36946%, rgba(210, 105, 30, 0.5) 75.36946%, rgba(210, 105, 30, 0.5) 83.25123%, rgba(210, 105, 30, 0.25) 83.25123%, rgba(210, 105, 30, 0.25) 83.74384%, rgba(210, 105, 30, 0.5) 83.74384%, rgba(210, 105, 30, 0.5) 91.62562%, rgba(210, 105, 30, 0.25) 91.62562%, rgba(210, 105, 30, 0.25) 92.11823%, rgba(210, 105, 30, 0.5) 92.11823%, rgba(210, 105, 30, 0.5) 100%);
+      background-image: linear-gradient(left, rgba(210, 105, 30, 0.5), rgba(210, 105, 30, 0.5) 7.88177%, rgba(210, 105, 30, 0.25) 7.88177%, rgba(210, 105, 30, 0.25) 8.37438%, rgba(210, 105, 30, 0.5) 8.37438%, rgba(210, 105, 30, 0.5) 16.25616%, rgba(210, 105, 30, 0.25) 16.25616%, rgba(210, 105, 30, 0.25) 16.74877%, rgba(210, 105, 30, 0.5) 16.74877%, rgba(210, 105, 30, 0.5) 24.63054%, rgba(210, 105, 30, 0.25) 24.63054%, rgba(210, 105, 30, 0.25) 25.12315%, rgba(210, 105, 30, 0.5) 25.12315%, rgba(210, 105, 30, 0.5) 33.00493%, rgba(210, 105, 30, 0.25) 33.00493%, rgba(210, 105, 30, 0.25) 33.49754%, rgba(210, 105, 30, 0.5) 33.49754%, rgba(210, 105, 30, 0.5) 41.37931%, rgba(210, 105, 30, 0.25) 41.37931%, rgba(210, 105, 30, 0.25) 41.87192%, rgba(210, 105, 30, 0.5) 41.87192%, rgba(210, 105, 30, 0.5) 49.75369%, rgba(210, 105, 30, 0.25) 49.75369%, rgba(210, 105, 30, 0.25) 50.24631%, rgba(210, 105, 30, 0.5) 50.24631%, rgba(210, 105, 30, 0.5) 58.12808%, rgba(210, 105, 30, 0.25) 58.12808%, rgba(210, 105, 30, 0.25) 58.62069%, rgba(210, 105, 30, 0.5) 58.62069%, rgba(210, 105, 30, 0.5) 66.50246%, rgba(210, 105, 30, 0.25) 66.50246%, rgba(210, 105, 30, 0.25) 66.99507%, rgba(210, 105, 30, 0.5) 66.99507%, rgba(210, 105, 30, 0.5) 74.87685%, rgba(210, 105, 30, 0.25) 74.87685%, rgba(210, 105, 30, 0.25) 75.36946%, rgba(210, 105, 30, 0.5) 75.36946%, rgba(210, 105, 30, 0.5) 83.25123%, rgba(210, 105, 30, 0.25) 83.25123%, rgba(210, 105, 30, 0.25) 83.74384%, rgba(210, 105, 30, 0.5) 83.74384%, rgba(210, 105, 30, 0.5) 91.62562%, rgba(210, 105, 30, 0.25) 91.62562%, rgba(210, 105, 30, 0.25) 92.11823%, rgba(210, 105, 30, 0.5) 92.11823%, rgba(210, 105, 30, 0.5) 100%); } }
 #page #panels-dnd-main .panel-region:after,
 #page #panels-dnd-main .container-inner:after,
 #page #panels-dnd-main .column-content-region:after {
@@ -556,8 +594,17 @@ body #page .panel-display .width-100 {
     .panel-layout .panel-pane .pane-content {
       padding: 0 10px;
       position: relative;
-      overflow: hidden;
+      /* for IE 6/7 */
+      *zoom: expression(this.runtimeStyle.zoom="1", this.appendChild(document.createElement("br")).style.cssText="clear:both;font:0/0 serif");
+      /* non-JS fallback */
       *zoom: 1; }
+      .panel-layout .panel-pane .pane-content:before, .panel-layout .panel-pane .pane-content:after {
+        content: ".";
+        display: block;
+        height: 0;
+        overflow: hidden; }
+      .panel-layout .panel-pane .pane-content:after {
+        clear: both; }
   .panel-layout .container {
     position: relative; }
     @media (max-width: 750px) {

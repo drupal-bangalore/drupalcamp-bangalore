@@ -516,3 +516,40 @@ function cod_events_update_7019() {
   }
   drupal_set_message("URL aliases have been updated to use the path of the conference instead of a title. Update your content accordingly.");
 }
+
+/**
+ * Update add og fields to the conference, now required by og_node_access strict
+ */
+function cod_events_update_7020() {
+  $revert = array(
+    'cod_events' => array('field_instance', 'variable', 'views_view'),
+  );
+  features_revert($revert);
+
+  return array();
+}
+
+/**
+ * Enable og_theme by default with events.
+ */
+function cod_events_update_7021() {
+  module_enable(array('og_theme'));
+}
+
+/**
+ * Use safeword module to create short words for conferences.
+ * IMPORTANT: Make sure to check your event urls after executing this update!
+ */
+function cod_events_update_7022() {
+  module_enable(array('safeword'));
+  // Revert the fields for safeword to work
+  if (module_exists('safeword')) {
+    $revert = array(
+      'cod_events' => array('field_base', 'field_instance', 'variable'),
+    );
+    features_revert($revert);
+    drupal_set_message("URL short path field created, IMPORTANT: Make sure to check your event urls after executing this update!");
+  } else {
+    throw new DrupalUpdateException('Safeword module could not be enabled. Please download it manually and re-apply this updated.');
+  }
+}

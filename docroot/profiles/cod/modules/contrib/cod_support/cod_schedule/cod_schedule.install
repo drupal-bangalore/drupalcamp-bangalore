@@ -85,3 +85,25 @@ function cod_schedule_update_7007() {
 
   return array();
 }
+
+/**
+ * Change the og_group_ref select widget to a plain select widget
+ */
+function cod_schedule_update_7008() {
+  $revert = array(
+    'cod_schedule' => array('field_instance'),
+  );
+  features_revert($revert);
+}
+
+/**
+ * Update the Cod Schedule Admin Pages to use the new schedule menu and remove quicktabs.
+ */
+function cod_schedule_update_7009() {
+  if (module_exists('cod_schedule_pages')){
+    $revert = array(
+      'cod_schedule_pages' => array('page_manager_pages'),
+    );
+    features_revert($revert);
+  }
+}

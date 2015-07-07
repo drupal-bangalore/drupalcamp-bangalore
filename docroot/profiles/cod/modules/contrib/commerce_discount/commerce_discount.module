@@ -29,8 +29,8 @@ function commerce_discount_commerce_cart_order_refresh($wrapper) {
       $line_items_to_delete[] = $wrapper_line_item->line_item_id->value();
       $wrapper->commerce_line_items->offsetUnset($delta);
     }
-    else {
-      $cloned_line_items[$wrapper_line_item->getIdentifier()] = clone($wrapper_line_item->value());
+    elseif (is_object($wrapper_line_item) && $line_item = $wrapper_line_item->value()) {
+      $cloned_line_items[$wrapper_line_item->getIdentifier()] = clone $line_item;
 
       // Remove discount components from the line item price fields; the line
       // item may be a discount (so the price will become 0) or another line
@@ -81,7 +81,7 @@ function commerce_discount_commerce_cart_order_refresh($wrapper) {
 /**
  * Remove discount components from a given price and recalculate the total.
  *
- * @param $price_wrapper
+ * @param object $price_wrapper
  *   Wrapped commerce price.
  */
 function commerce_discount_remove_discount_components($price_wrapper) {
@@ -284,11 +284,14 @@ function commerce_discount_commerce_price_formatted_components_alter(&$component
   if (isset($price['data']['components'])) {
     // Loop into price components and alter the component title if the discount
     // component label is found.
+    $weight = -40;
     foreach ($price['data']['components'] as $component) {
       if (!isset($component['price']['data']['discount_component_title'])) {
         continue;
       }
       $components[$component['name']]['title'] = $component['price']['data']['discount_component_title'];
+      $components[$component['name']]['weight'] = $weight;
+      $weight++;
     }
   }
 }
@@ -404,7 +407,7 @@ function commerce_discount_commerce_discount_type_info() {
 function commerce_discount_commerce_discount_offer_type_info() {
   $types = array();
   $types['fixed_amount'] = array(
-    'label' => t('$ off'),
+    'label' => t('@currency off', array('@currency' => commerce_currency_get_symbol(variable_get('commerce_default_currency', 'USD')))),
     'action' => 'commerce_discount_fixed_amount',
     'entity types' => array('commerce_order', 'commerce_line_item'),
   );
@@ -469,7 +472,7 @@ function commerce_discount_commerce_discount_rule_build($rule, $discount) {
 /**
  * Return an array of all defined discount types.
  *
- * @return
+ * @return array
  *   The array of types, keyed by type name.
  */
 function commerce_discount_types() {
@@ -498,10 +501,10 @@ function commerce_discount_types() {
 /**
  * Loads the data for a specific discount type.
  *
- * @param $discount_type
+ * @param string $discount_type
  *   The machine name of a discount type.
  *
- * @return
+ * @return mixed
  *   The requested array or FALSE if not found.
  */
 function commerce_discount_type($discount_type) {
@@ -513,10 +516,10 @@ function commerce_discount_type($discount_type) {
 /**
  * Returns the human readable name of any or all discount types.
  *
- * @param $type
+ * @param string $type
  *   Optional parameter specifying the type whose name to return.
  *
- * @return
+ * @return mixed
  *   Either an array of all discount type names keyed by the machine name or a
  *     string containing the human readable name for the specified type. If a
  *     type is specified that does not exist, this function returns FALSE.
@@ -546,7 +549,7 @@ function commerce_discount_type_get_name($type = NULL) {
 /**
  * Return an array of all defined discount offer types.
  *
- * @return
+ * @return array
  *   The array of types, keyed by type name.
  */
 function commerce_discount_offer_types() {
@@ -575,10 +578,10 @@ function commerce_discount_offer_types() {
 /**
  * Loads the data for a specific discount offer type.
  *
- * @param $offer_type
+ * @param string $offer_type
  *   The machine name of an offer type.
  *
- * @return
+ * @return mixed
  *   The requested array or FALSE if not found.
  */
 function commerce_discount_offer_type($offer_type) {
@@ -590,10 +593,10 @@ function commerce_discount_offer_type($offer_type) {
 /**
  * Returns the human readable name of any or all discount offer types.
  *
- * @param $type
+ * @param string $type
  *   Optional parameter specifying the offer type whose name to return.
  *
- * @return
+ * @return mixed
  *   Either an array of all discount offer type names keyed by the machine name
  *   or a string containing the human readable name for the specified type.
  *   If a type is specified that does not exist, this function returns FALSE.

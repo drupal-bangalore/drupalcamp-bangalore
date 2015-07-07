@@ -1773,13 +1773,13 @@ function panels_edit_configure_pane_css_form($form, &$form_state) {
     '#type' => 'textfield',
     '#default_value' => isset($pane->css['css_id']) ? $pane->css['css_id'] : '',
     '#title' => t('CSS ID'),
-    '#description' => t('CSS ID to apply to this pane. This may be blank.'),
+    '#description' => t('CSS ID to apply to this pane. This may be blank. Keywords from context are allowed.'),
   );
   $form['css_class'] = array(
     '#type' => 'textfield',
     '#default_value' => isset($pane->css['css_class']) ? $pane->css['css_class'] : '',
     '#title' => t('CSS class'),
-    '#description' => t('CSS class to apply to this pane. This may be blank.'),
+    '#description' => t('CSS class to apply to this pane. This may be blank. Keywords from context are allowed.'),
   );
 
   $form['next'] = array(

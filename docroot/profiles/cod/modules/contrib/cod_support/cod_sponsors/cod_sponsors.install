@@ -84,3 +84,34 @@ function cod_sponsors_update_7005() {
 
   return array();
 }
+
+/**
+ * Change the og_group_ref select widget to a plain select widget
+ */
+function cod_sponsors_update_7006() {
+  $revert = array(
+    'cod_sponsors' => array('field_instance'),
+  );
+  features_revert($revert);
+}
+
+/**
+ * Change Update the sponsors views blocks to panes.
+ */
+function cod_sponsors_update_7007() {
+  $revert = array(
+    'cod_sponsors' => array('views_view'),
+  );
+  features_revert($revert);
+}
+
+/**
+ * Make sure taxonomy_machine_name module is enabled if it isn't already.
+ */
+function cod_sponsors_update_7008() {
+  if (!module_exists('taxonomy_machine_name')) {
+    if (!module_enable(array('taxonomy_machine_name'))) {
+      throw new DrupalUpdateException('Taxonomy Machine Name module could not be found. Please enable it before using COD Sponsors.');
+    }
+  }
+}

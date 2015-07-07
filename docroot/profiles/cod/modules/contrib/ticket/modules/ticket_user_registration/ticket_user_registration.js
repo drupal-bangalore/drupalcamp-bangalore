@@ -31,7 +31,7 @@
             var targetNum = ('#'+optionName).split('edit-ticket-registrationnew-').pop();
 
             if(baseNum == '') {
-              baseEmailId = 'edit-ticket-user-registration-email';
+              baseEmailId = 'edit-ticket-registrant-ticket-user-registration-email';
             }
             else {
               var baseEmailId = 'edit-ticket-registrationnew-'+baseNum+'-ticket-user-registration-email'+baseNum;

@@ -126,6 +126,10 @@ function cod_paid_events_views_default_views() {
   $handler->display->display_options['fields']['view_registration']['table'] = 'ticket_registration';
   $handler->display->display_options['fields']['view_registration']['field'] = 'view_registration';
   $handler->display->display_options['fields']['view_registration']['label'] = 'Operations';
+  /* Field: Ticket registration: Reservation Code */
+  $handler->display->display_options['fields']['reservation_code']['id'] = 'reservation_code';
+  $handler->display->display_options['fields']['reservation_code']['table'] = 'ticket_registration';
+  $handler->display->display_options['fields']['reservation_code']['field'] = 'reservation_code';
   /* Field: Ticket registration: Edit link */
   $handler->display->display_options['fields']['edit_registration']['id'] = 'edit_registration';
   $handler->display->display_options['fields']['edit_registration']['table'] = 'ticket_registration';
@@ -134,6 +138,16 @@ function cod_paid_events_views_default_views() {
   $handler->display->display_options['fields']['cancel_registration']['id'] = 'cancel_registration';
   $handler->display->display_options['fields']['cancel_registration']['table'] = 'ticket_registration';
   $handler->display->display_options['fields']['cancel_registration']['field'] = 'cancel_registration';
+  /* Contextual filter: Ticket registration: Order (field_ticket_order) */
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['id'] = 'field_ticket_order_target_id';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['table'] = 'field_data_field_ticket_order';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['field'] = 'field_ticket_order_target_id';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['default_argument_options']['index'] = '3';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ticket_order_target_id']['summary_options']['items_per_page'] = '25';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

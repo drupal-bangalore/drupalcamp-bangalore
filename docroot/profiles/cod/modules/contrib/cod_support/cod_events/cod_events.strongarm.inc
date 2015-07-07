@@ -96,10 +96,10 @@ function cod_events_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
+          'weight' => '2',
         ),
         'path' => array(
-          'weight' => '5',
+          'weight' => '7',
         ),
         'redirect' => array(
           'weight' => '9',
@@ -132,6 +132,8 @@ function cod_events_strongarm() {
   $strongarm->name = 'node_options_event';
   $strongarm->value = array(
     0 => 'status',
+    1 => 'revision',
+    2 => 'panelizer',
   );
   $export['node_options_event'] = $strongarm;
 
@@ -204,14 +206,14 @@ function cod_events_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_event_pattern';
-  $strongarm->value = '[node:title]';
+  $strongarm->value = '[node:field_url_title]';
   $export['pathauto_node_event_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'subpathauto_depth';
-  $strongarm->value = '2';
+  $strongarm->value = '5';
   $export['subpathauto_depth'] = $strongarm;
 
   $strongarm = new stdClass();

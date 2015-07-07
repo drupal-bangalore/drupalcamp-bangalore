@@ -578,7 +578,9 @@ function ticket_views_default_views() {
     $handler->display->display_options['filters']['state']['id'] = 'state';
     $handler->display->display_options['filters']['state']['table'] = 'ticket_registration';
     $handler->display->display_options['filters']['state']['field'] = 'state';
-    $handler->display->display_options['filters']['state']['value'] = 'completed';
+    $handler->display->display_options['filters']['state']['value'] = array(
+        'completed' => 'completed',
+    );
   }
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');

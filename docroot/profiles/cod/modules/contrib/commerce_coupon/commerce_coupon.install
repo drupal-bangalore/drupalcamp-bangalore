@@ -231,6 +231,14 @@ function commerce_coupon_uninstall() {
 }
 
 /**
+ * Implements hook_enable().
+ */
+function commerce_coupon_enable() {
+  // Clear current entity property info cache.
+  entity_property_info_cache_clear();
+}
+
+/**
  * Upgrade a Coupons 1.x site to 2.x. MAKE A BACKUP BEFORE DOING THIS.
  */
 function commerce_coupon_update_7200(&$sandbox) {

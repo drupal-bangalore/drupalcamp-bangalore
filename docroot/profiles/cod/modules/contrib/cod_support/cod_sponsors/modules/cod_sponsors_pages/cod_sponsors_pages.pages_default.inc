@@ -256,6 +256,92 @@ function cod_sponsors_pages_default_page_manager_pages() {
   $page->default_handlers[$handler->name] = $handler;
   $pages['cod_sponsors_management_pages'] = $page;
 
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'cod_sponsors_page';
+  $page->task = 'page';
+  $page->admin_title = 'Sponsors Page';
+  $page->admin_description = '';
+  $page->path = 'node/%node/sponsors';
+  $page->access = array();
+  $page->menu = array();
+  $page->arguments = array(
+    'node' => array(
+      'id' => 1,
+      'identifier' => 'Conference',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_cod_sponsors_page__panel_context_b3d0976a-8c17-47dc-983a-9c296120aaae';
+  $handler->task = 'page';
+  $handler->subtask = 'cod_sponsors_page';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'ipe',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'cygnus';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'preface' => NULL,
+      'content' => NULL,
+      'footer' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Sponsors';
+  $display->uuid = '54a48063-68f0-47d6-ac0a-a86416d5f336';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-527cac2f-6398-470e-bcd5-97c3c4d1e5c4';
+    $pane->panel = 'content';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'cod_sponsors-cod_sponsors_main_view_pane';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'gid' => '%node:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '527cac2f-6398-470e-bcd5-97c3c4d1e5c4';
+    $display->content['new-527cac2f-6398-470e-bcd5-97c3c4d1e5c4'] = $pane;
+    $display->panels['content'][0] = 'new-527cac2f-6398-470e-bcd5-97c3c4d1e5c4';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-527cac2f-6398-470e-bcd5-97c3c4d1e5c4';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['cod_sponsors_page'] = $page;
+
   return $pages;
 
 }

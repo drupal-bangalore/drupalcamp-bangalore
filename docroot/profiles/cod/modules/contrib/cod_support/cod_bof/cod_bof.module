@@ -19,6 +19,15 @@ function cod_bof_permission() {
   return $perms;
 }
 
+/**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_bof_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_bof'),
+  );
+}
+
 function cod_bof_views_post_execute(&$view) {
 
   if ($view->name == 'cod_bof_schedule_content' && $view->current_display == 'default' && $view->args[1] == 'bof_session') {
@@ -70,7 +79,7 @@ function cod_bof_get_bof_link($time_slot_entity, $result, $capacity = 0, $event_
     $bof_allowed = TRUE;
   }
   if($bof_allowed) {
-    if(user_access('create bof_session content')) {
+    if(node_access('create', 'bof_session')) {
       return l('Create a BoF','node/add/bof-session',array('query' => array('og_group_ref' => $event_id, 'edit[field_session_timeslot][target_id]' => $time_slot_entity, 'destination' => 'node/'.$event_id.'/bofs')));
       //$footer['content'] =
       //$footer['display'] = TRUE;

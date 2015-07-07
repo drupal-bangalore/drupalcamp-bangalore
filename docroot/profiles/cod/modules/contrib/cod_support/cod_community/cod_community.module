@@ -88,3 +88,12 @@ function cod_community_attendee_registration_instance($bundle) {
 
   return $field_instance;
 }
+
+/**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_community_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_community'),
+  );
+}

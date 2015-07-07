@@ -25,6 +25,15 @@ function cod_paid_events_menu() {
 }
 
 /**
+ * Implements hook_cod_default_permissions().
+ */
+function cod_paid_events_cod_default_permissions() {
+  return array(
+    'user_permission' => array('cod_paid_events'),
+  );
+}
+
+/**
  * Form alter for cod registration to add a step to send the registrations to the cart.
  */
 function cod_paid_events_ticket_registered_redirect_alter(&$redirect, &$registrations) {

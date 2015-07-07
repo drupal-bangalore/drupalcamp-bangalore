@@ -208,7 +208,7 @@ function cod_session_management_pages_default_page_manager_pages() {
     $pane->pid = 'new-299bb228-0927-4f74-acf0-4f21b278101a';
     $pane->panel = 'right_sidebar';
     $pane->type = 'views_panes';
-    $pane->subtype = 'cod_session_tracks-panel_pane_1';
+    $pane->subtype = 'cod_session_tracks-track_session_admin';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

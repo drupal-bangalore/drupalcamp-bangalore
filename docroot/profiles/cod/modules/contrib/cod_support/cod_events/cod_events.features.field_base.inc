@@ -22,14 +22,6 @@ function cod_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -60,7 +52,6 @@ function cod_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -91,14 +82,6 @@ function cod_events_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_image',
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -118,6 +101,38 @@ function cod_events_field_default_field_bases() {
     'type_name' => 'product',
   );
 
+  // Exported field_base: 'field_url_title'
+  $field_bases['field_url_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_url_title',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'machine' => array(
+        0 => 'machine',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'safeword',
+    'settings' => array(
+      'allow_machine_changes' => 1,
+      'complete_path_label' => 'Complete path',
+      'machine_description' => 'A URL-safe version of the text. It may only contain lowercase letters, numbers and underscores. Leave blank to re-generate.',
+      'machine_label' => 'URL-safe',
+      'max_length' => 24,
+      'replace_pattern' => '(--|<[^<>]+>|[^/a-z0-9-])+',
+      'replace_value' => '-',
+      'show_complete_path' => 1,
+      'unique' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'safeword_title',
+  );
+
   // Exported field_base: 'group_access'
   $field_bases['group_access'] = array(
     'active' => 1,
@@ -128,7 +143,6 @@ function cod_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 1,
     ),
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -155,7 +169,6 @@ function cod_events_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'group_group',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -174,6 +187,32 @@ function cod_events_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'group_theme'
+  $field_bases['group_theme'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'group_theme',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'no_ui' => TRUE,
+    'settings' => array(
+      'allowed_values' => array(),
+      'allowed_values_function' => 'og_theme_field_allowed_values',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'og_group_ref'
   $field_bases['og_group_ref'] = array(
     'active' => 1,
@@ -184,14 +223,6 @@ function cod_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -200,7 +231,7 @@ function cod_events_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'og_events',
+      'handler' => 'og',
       'handler_settings' => array(
         'behaviors' => array(
           'og_behavior' => array(
@@ -236,7 +267,6 @@ function cod_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 1,
     ),
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',

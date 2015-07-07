@@ -11,3 +11,15 @@ function cod_schedule_pages_update_7001() {
 
   return array();
 }
+
+/**
+ * Add the my schedule panel.
+ */
+function cod_schedule_pages_update_7002() {
+  $revert = array(
+    'cod_schedule_pages' => array('page_manager_pages'),
+  );
+  features_revert($revert);
+
+  return array();
+}

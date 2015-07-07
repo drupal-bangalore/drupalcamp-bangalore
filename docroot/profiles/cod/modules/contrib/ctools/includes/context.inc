@@ -1127,9 +1127,12 @@ function ctools_context_get_context_from_context($context, $type = 'context', $a
  * @param $placeholders
  *   If true, placeholders are acceptable.
  */
-function ctools_context_get_context_from_contexts($contexts, $type = 'context', $placeholders = FALSE) {
+function ctools_context_get_context_from_contexts($contexts, $type = 'context', $placeholders = FALSE, $existing_contexts = array()) {
   $return = array();
   foreach ($contexts as $context) {
+    if (!empty($existing_contexts)) {
+      $context['existing contexts'] = $existing_contexts;
+    }
     $ctext = ctools_context_get_context_from_context($context, $type);
     if ($ctext) {
       if ($placeholders) {
@@ -1223,7 +1226,7 @@ function ctools_context_load_contexts($object, $placeholders = TRUE, $contexts =
   }
 
   if (!empty($object->contexts) && is_array($object->contexts)) {
-    $contexts += ctools_context_get_context_from_contexts($object->contexts, 'context', $placeholders);
+    $contexts += ctools_context_get_context_from_contexts($object->contexts, 'context', $placeholders, $contexts);
   }
 
   // add contexts from relationships

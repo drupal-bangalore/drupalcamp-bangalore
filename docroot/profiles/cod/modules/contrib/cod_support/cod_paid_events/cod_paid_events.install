@@ -48,3 +48,13 @@ function cod_paid_events_update_7001(&$sandbox) {
   }
   drupal_set_message("Ticket Checkout complete default state successfully updated, after verifying the ticket state, you can safely delete the 'field_complete_state' field from ticket types");
 }
+
+/**
+ * Change the og_group_ref select widget to a plain select widget and other minor updates.
+ */
+function cod_paid_events_7002() {
+  $revert = array(
+    'cod_news' => array('field_instance', 'views_view'),
+  );
+  features_revert($revert);
+}
