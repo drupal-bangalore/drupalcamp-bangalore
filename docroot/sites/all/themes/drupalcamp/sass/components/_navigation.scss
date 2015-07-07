@@ -34,6 +34,9 @@
 
     #block-superfish-1 {
         float: left;
+        @include breakpoint($mob){
+          width: 60%;
+        }
     }
     .block--system-user-menu, .block--menu-menu-anonymous-user-menu {
         float: right;
@@ -47,4 +50,19 @@
 // Breadcrumbs are more trouble than they are worth.
 .breadcrumb {
     display: none;
+}
+
+
+//Responsive Menus
+
+.responsive-menus.responsified span.toggler{
+  background: transparent;
+  box-shadow: none;
+  line-height: 45px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.responsive-menus.responsified .responsive-menus-simple{
+  background: #3c9dfc;
 }

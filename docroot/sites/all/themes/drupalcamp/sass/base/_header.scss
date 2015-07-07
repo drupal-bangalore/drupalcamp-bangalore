@@ -23,6 +23,9 @@
 
         .block--dcb-cod {
             margin-top: -10px;
+            @include breakpoint($mob){
+              margin-top: 0;
+            }
             .ticket-type-ticket-type {
                 display: none;
             }
@@ -41,7 +44,10 @@
                 font-size: 1.4em;
                 text-transform: uppercase;
                 text-shadow: 0 0 10px #1A1A1A;
-            }
+                @include breakpoint($mob){
+                  margin-top: 0;
+                }
+              }
             .view-content {
                 margin: 0 auto;
                 .views-row {
@@ -49,9 +55,15 @@
                 }
                 .views-row-1 {
                     margin-right: 10%;
+                    @include breakpoint($mob){
+                      margin-right: 0;
+                    }
                 }
                 .views-row-2 {
                     margin-left: 10%;
+                    @include breakpoint($mob){
+                      margin-left: 0;
+                    }
                 }
             }
         }

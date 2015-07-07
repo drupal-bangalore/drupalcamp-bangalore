@@ -25,12 +25,7 @@
         padding-top: 2%;
         width: 75%;
         @include breakpoint($mob) {
-            width: 94%;
-            .views-row {
-                float: left;
-                width: 154px;
-                margin-left: 15px;
-            }
+            width: 61%;
         }
         @include breakpoint($tab) {
             width: 100%;
@@ -42,8 +37,26 @@
         }
         .views-row {
             display: table-cell;
+            float: none;
+            width: 154px;
+            margin: 0 auto;
+            @include breakpoint($mob) {
+                display: inline-block;
+                width: auto;
+                margin-right: 1em;
+            }
             @include breakpoint($tab) {
                 display: inline-block;
+            }
+            &-even{
+                @include breakpoint($mob) {
+                  margin-right: 0;
+                }
+            }
+
+            img{
+                width: 100%;
+                height: auto;
             }
         }
     }
@@ -144,6 +157,10 @@
         background: url("/sites/default/files/images/hexagonal.png") no-repeat left top;
         height: 199px;
         width: 184px;
+        @include breakpoint($mob){
+          width: 165px;
+          height: 115px;
+        }
     }
 }
 
@@ -284,13 +301,21 @@
         .views-row {
             display: table-cell;
             padding-left: 20px;
-            @media (min-width: 320px) and (max-width: 640px) {
-                float: left;
-                width: 154px;
-                margin-left: 15px;
-            }
-            @media (min-width: 768px) and (max-width: 1023px) {
+            @include breakpoint($mob) {
+                float: none;
+                width: 128px;
+                margin: 0 auto;
                 display: inline-block;
+                padding: 0;
+                margin-right: 5px;
+            }
+            @include breakpoint($tab) {
+                display: inline-block;
+            }
+
+            img{
+                width: 100%;
+                height: auto;
             }
         }
         .silverspon-wrap {
