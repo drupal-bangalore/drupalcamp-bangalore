@@ -1,4 +1,5 @@
 var $ = jQuery.noConflict();
+//test commit
 $(document).ready(function() { 
   var window_width = parseInt($(window).width());
   if ($('.bxslider-wrap .view-content').length > 0) {
