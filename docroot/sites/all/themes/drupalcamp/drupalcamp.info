@@ -17,7 +17,6 @@ stylesheets[all][] = css/drupalcamp.no-query.css
 ; Scripts
 ; ========================================
 scripts[] = js/drupalcamp.behaviors.js
-scripts[] = js/jquery.bxslider.min.js
 scripts[] = js/scripts.js
 
 ; ========================================
