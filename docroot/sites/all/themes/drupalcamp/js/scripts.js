@@ -1,5 +1,5 @@
 var $ = jQuery.noConflict();
-$(document).ready(function() {
+$(document).ready(function() { 
   var window_width = parseInt($(window).width());
   if ($('.bxslider-wrap .view-content').length > 0) {
     var slide_length = parseInt($('.bxslider-wrap .view-content .views-row').length);
