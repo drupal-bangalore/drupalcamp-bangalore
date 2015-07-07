@@ -1,0 +1,41 @@
+th{
+  text-align: center;
+}
+
+thead{
+  th{
+    padding: 0.5%;
+    background: #3c9dfc;
+    color: #fff;
+    border-spacing: 0;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    .active{
+      color: white;
+    }
+  }
+}
+
+td{
+  padding: 15px;
+  text-align: left;
+  color: #34495E;
+  border: 2px solid #ffffff;
+  border-spacing: 0;
+  a{
+    text-decoration: none;
+    color: #6C7A89;
+    &:hover{
+      color: #ff6243;
+    }
+  }
+}
+
+tr.odd{
+  background: #ecf0f1;
+}
+
+tr.even{
+  background: #ECECEC;
+}
