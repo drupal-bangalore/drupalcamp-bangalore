@@ -15,7 +15,7 @@ class ViewsBlockFilterBlockBase extends DrupalWebTestCase {
     parent::setUp($modules + array('block', 'node', 'views', 'views_block_filter_block'));
 
     // Create and log in a user with administer views permission.
-    $this->adminUser = $this->drupalCreateUser(array('administer views', 'administer blocks', 'bypass node access', 'access user profiles', 'view revisions'));
+    $this->adminUser = $this->drupalCreateUser(array('administer modules', 'administer views', 'administer blocks', 'bypass node access', 'access user profiles', 'view revisions'));
     $this->drupalLogin($this->adminUser);
 
     variable_set('clean_url', TRUE);
@@ -155,4 +155,27 @@ class ViewsBlockFilterBlockExposedBlockCase extends ViewsBlockFilterBlockBase {
     // Ensure the value was changed.
     $this->assertFieldByName('status', 0, 'The exposed filter form worked as expected.');
   }
+
+  public function testModuleCleanup() {
+    // For sanity, ensure we have a block to begin with.
+    $select = db_select('block')
+      ->fields('block')
+      ->condition('delta', '-exp-test_view-block')
+      ->execute();
+    $rows = $select->fetchAllAssoc('delta');
+    $this->assertIdentical(count($rows), 1, t('Sanity check: exposed filter block exists in DB.'));
+
+    // Disable the module.
+    $edit = array('modules[Views][views_block_filter_block][enable]' => FALSE);
+    $this->drupalPost('admin/modules', $edit, t('Save configuration'));
+
+    // Ensure the exposed filter block was removed on module disable.
+    $select = db_select('block')
+      ->fields('block')
+      ->condition('delta', '-exp-test_view-block')
+      ->execute();
+    $rows = $select->fetchAllAssoc('delta');
+    $this->assertIdentical(count($rows), 0, t('Module disable removed exposed filter block.'));
+  }
+
 }

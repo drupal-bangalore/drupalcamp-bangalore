@@ -11,5 +11,5 @@ hidden = TRUE
 version = "7.x-3.0-alpha1+15-dev"
 core = "7.x"
 project = "conditional_fields"
-datestamp = "1436228672"
+datestamp = "1436310965"
 

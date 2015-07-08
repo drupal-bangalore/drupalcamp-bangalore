@@ -7,9 +7,9 @@ dependencies[] = views
 files[] = plugins/vbfb_plugin_display_block.inc
 files[] = tests/views_block_filter_block.test
 
-; Information added by Drupal.org packaging script on 2013-12-24
-version = "7.x-1.0-beta1"
+; Information added by Drupal.org packaging script on 2015-06-28
+version = "7.x-1.0-beta2"
 core = "7.x"
 project = "views_block_filter_block"
-datestamp = "1387925909"
+datestamp = "1435529881"
 

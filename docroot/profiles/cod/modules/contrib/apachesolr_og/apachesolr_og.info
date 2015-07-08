@@ -11,5 +11,5 @@ dependencies[] = og
 version = "7.x-1.0+2-dev"
 core = "7.x"
 project = "apachesolr_og"
-datestamp = "1436228675"
+datestamp = "1436310968"
 

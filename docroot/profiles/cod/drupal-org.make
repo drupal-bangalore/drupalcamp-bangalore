@@ -78,10 +78,10 @@ projects[ckeditor][patch][] = "http://drupal.org/files/issues/ckeditor-accomodat
 
 projects[cod_support][type] = "module"
 projects[cod_support][subdir] = "contrib"
-projects[cod_support][version] = "1.0-beta9"
+projects[cod_support][version] = "2.0-alpha1"
 projects[cod_support][download][type] = "git"
 projects[cod_support][download][url] = "http://git.drupal.org/project/cod_support.git"
-projects[cod_support][download][branch] = "7.x-1.x"
+projects[cod_support][download][branch] = "7.x-2.x"
 
 projects[commerce][type] = "module"
 projects[commerce][version] = "1.11"
@@ -157,11 +157,11 @@ projects[date][patch][] = "http://drupal.org/files/issues/date-views-filter-time
 
 projects[date_ical][type] = "module"
 projects[date_ical][subdir] = "contrib"
-projects[date_ical][version] = "3.3"
+projects[date_ical][version] = "3.4"
 
 ; Remove icalcreator library from the date_ical module
 ; https://drupal.org/node/2209165
-projects[date_ical][patch][] = "http://drupal.org/files/issues/date_ical_remove_makefile.patch"
+projects[date_ical][patch][] = "http://drupal.org/files/issues/date_ical_remove_makefile-3.patch"
 
 ; Keeping this to the latest version, since it should only be used for development.
 projects[devel][version] = "1.5"
@@ -503,7 +503,7 @@ projects[views_autorefresh][subdir] = "contrib"
 
 projects[views_block_filter_block][type] = "module"
 projects[views_block_filter_block][subdir] = "contrib"
-projects[views_block_filter_block][version] = "1.0-beta1"
+projects[views_block_filter_block][version] = "1.0-beta2"
 
 projects[views_datasource][type] = "module"
 projects[views_datasource][subdir] = "contrib"

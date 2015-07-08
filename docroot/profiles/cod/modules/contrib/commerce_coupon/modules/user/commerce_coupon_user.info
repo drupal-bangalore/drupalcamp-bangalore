@@ -7,5 +7,5 @@ dependencies[] = commerce_coupon
 version = "7.x-2.0-beta4+19-dev"
 core = "7.x"
 project = "commerce_coupon"
-datestamp = "1436228673"
+datestamp = "1436310966"
 

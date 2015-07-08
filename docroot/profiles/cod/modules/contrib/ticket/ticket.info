@@ -32,5 +32,5 @@ files[] = views/ticket_views_handler_field_registration_link_edit.inc
 version = "7.x-1.0-beta4+42-dev"
 core = "7.x"
 project = "ticket"
-datestamp = "1436228661"
+datestamp = "1436310953"
 

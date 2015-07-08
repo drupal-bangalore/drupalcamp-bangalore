@@ -17,8 +17,8 @@ regions[sidebar_first] = First sidebar
 regions_hidden[] = sidebar_first
 
 ; Information added by Drupal.org packaging script on 2015-07-07
-version = "7.x-1.0-beta10"
+version = "7.x-2.x-dev"
 core = "7.x"
 project = "cod"
-datestamp = "1436228640"
+datestamp = "1436310932"
 

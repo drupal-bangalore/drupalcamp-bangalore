@@ -13,5 +13,5 @@ files[] = tests/admin_menu.test
 version = "7.x-3.0-rc4+4-dev"
 core = "7.x"
 project = "admin_menu"
-datestamp = "1436228676"
+datestamp = "1436310969"
 

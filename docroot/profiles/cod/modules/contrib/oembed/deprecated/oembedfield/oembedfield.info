@@ -10,5 +10,5 @@ dependencies[] = link
 version = "7.x-1.0-rc2+15-dev"
 core = "7.x"
 project = "oembed"
-datestamp = "1436228665"
+datestamp = "1436310957"
 

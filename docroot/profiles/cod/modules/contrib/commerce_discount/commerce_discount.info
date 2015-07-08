@@ -35,5 +35,5 @@ test_dependencies[] = commerce_shipping
 version = "7.x-1.0-alpha5+0-dev"
 core = "7.x"
 project = "commerce_discount"
-datestamp = "1436228673"
+datestamp = "1436310966"
 
