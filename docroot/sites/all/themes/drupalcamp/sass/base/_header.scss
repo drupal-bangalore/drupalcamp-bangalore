@@ -44,6 +44,8 @@
                 font-size: 1.4em;
                 text-transform: uppercase;
                 text-shadow: 0 0 10px #1A1A1A;
+                position: relative;
+                top: -4em;
                 @include breakpoint($mob){
                   margin-top: 0;
                 }
