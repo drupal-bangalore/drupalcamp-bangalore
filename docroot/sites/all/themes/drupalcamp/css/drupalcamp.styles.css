@@ -325,7 +325,7 @@ a:hover {
           margin-right: 0; } }
       /* line 57, ../sass/components/_home.scss */
       .panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 .view-content .views-row img {
-        width: 100%;
+        width: auto;
         height: auto; }
 
 /* line 65, ../sass/components/_home.scss */
@@ -565,7 +565,7 @@ a:hover {
           display: inline-block; } }
       /* line 316, ../sass/components/_home.scss */
       .pane-drupal-camp-sponsors-panel-pane-3 .view-content .views-row img {
-        width: 100%;
+        width: auto;
         height: auto; }
     /* line 321, ../sass/components/_home.scss */
     .pane-drupal-camp-sponsors-panel-pane-3 .view-content .silverspon-wrap {
