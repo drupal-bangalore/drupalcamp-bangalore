@@ -229,6 +229,12 @@ a:hover {
   width: 30%;
   font-weight: bold; }
 
+/* line 41, ../sass/components/_content.scss */
+.ticket-register-form .already-registered-warning {
+  padding: 4px 10px;
+  border: 2px dashed #ff920e;
+  background-color: #ffb90f; }
+
 /* line 1, ../sass/components/_footer.scss */
 .l-footer {
   background: #3c9dfc;

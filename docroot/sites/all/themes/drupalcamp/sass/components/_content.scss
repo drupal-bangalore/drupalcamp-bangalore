@@ -36,3 +36,11 @@
         font-weight: bold;
     }
 }
+
+.ticket-register-form {
+    .already-registered-warning {
+        padding: 4px 10px;
+        border: 2px dashed #ff920e;
+        background-color: #ffb90f;
+    }
+}

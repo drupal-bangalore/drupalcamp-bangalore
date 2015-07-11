@@ -48,3 +48,32 @@ function dcb_cod_block_view($delta = '') {
 function dcb_cod_ticket_registered($registrations) {
   drupal_set_message(t("Thank you for registering for DrupalCamp Bangalore 2015. Please check your email for further instructions. We can't wait to meet you."));
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Show a warning message if the user is already registered for this event.
+ */
+function dcb_cod_form_ticket_register_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  $bundle = $form['ticket_registration:new_0']['#bundle'];
+
+  $efq = new EntityFieldQuery();
+  $efq->entityCondition('entity_type', 'ticket_registration')
+    ->entityCondition('bundle', $bundle)
+    ->propertyCondition('user_uid', $user->uid);
+  $tickets = $efq->execute();
+
+  if (!empty($tickets['ticket_registration'])) {
+    $form['ticket_already_registered'] = array(
+      '#type' => 'markup',
+      '#markup' => t('It looks like you have already registered for this event. <a href="@url">View Previous Registrations</a>.', array(
+          '@url' => url('user/' . $user->uid . '/tickets')
+        )),
+      '#prefix' => '<div class="already-registered-warning">',
+      '#suffix' => '</div>',
+      '#weight' => -1001,
+    );
+  }
+}
