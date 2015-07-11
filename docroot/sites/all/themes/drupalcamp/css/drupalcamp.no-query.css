@@ -189,6 +189,7 @@ a:hover {
 .l-content > form,
 .l-main .tabs,
 .l-main .messages,
+.l-main .container-inner,
 .page-title,
 .l-region--footer,
 .action-links,
@@ -199,12 +200,13 @@ a:hover {
 .page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track,
 .webform-confirmation,
 .l-content .node-session,
-.l-content .node-page {
+.l-content .node-page,
+.l-content .entity-ticket-registration {
   max-width: 1100px;
   width: 94%;
   margin: 0 auto; }
 
-/* line 24, ../sass/components/_content.scss */
+/* line 26, ../sass/components/_content.scss */
 .node--full .field--name-body p, .panelizer-view-mode.node-full .field--name-body p {
   text-indent: 2em; }
   /* line 3, ../sass/abstractions/_dropcaps.scss */
@@ -220,6 +222,12 @@ a:hover {
     padding-top: 8px;
     padding-right: 10px;
     padding-left: 3px; }
+
+/* line 33, ../sass/components/_content.scss */
+.entity-ticket-registration .field-label {
+  display: inline-block;
+  width: 30%;
+  font-weight: bold; }
 
 /* line 1, ../sass/components/_footer.scss */
 .l-footer {
@@ -508,7 +516,7 @@ a:hover {
   width: 100%;
   background: #3c9dfc;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; }
-  /* line 13, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
+  /* line 13, ../../../../../../../../../usr/local/rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
   .l-navigation .l-region--navigation:after {
     content: "";
     display: table;
@@ -562,7 +570,7 @@ a:hover {
 .responsive-menus.responsified .responsive-menus-simple {
   background: #3c9dfc; }
 
-/* line 13, ../../../../../../../../../.rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
+/* line 13, ../../../../../../../../../usr/local/rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
 .node-type-webform .webform-container-inline:after {
   content: "";
   display: table;

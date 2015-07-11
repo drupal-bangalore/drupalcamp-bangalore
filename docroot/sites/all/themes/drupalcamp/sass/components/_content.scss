@@ -3,6 +3,7 @@
 .l-content > form,
 .l-main .tabs,
 .l-main .messages,
+.l-main .container-inner,
 .page-title,
 .l-region--footer,
 .action-links,
@@ -13,7 +14,8 @@
 .page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track,
 .webform-confirmation,
 .l-content .node-session,
-.l-content .node-page {
+.l-content .node-page,
+.l-content .entity-ticket-registration {
     max-width: $wide;
     width: 94%;
     margin: 0 auto;
@@ -24,5 +26,13 @@
         p {
             @include dropcaps;
         }
+    }
+}
+
+.entity-ticket-registration {
+    .field-label {
+        display: inline-block;
+        width: 30%;
+        font-weight: bold;
     }
 }
