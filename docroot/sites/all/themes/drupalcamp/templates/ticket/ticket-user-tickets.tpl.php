@@ -12,7 +12,7 @@
  */
 ?>
 
-<div class="container-inner">
+<div class="user-tickets">
   <h2 class="ticket-user-tickets-title"><?php print $title; ?></h2>
   <div class="ticket-user-tickets-data"><?php print $data; ?></div>
 </div>

@@ -205,15 +205,11 @@ a:hover {
 .l-content > form,
 .l-main .tabs,
 .l-main .messages,
+.l-main .user-tickets,
 .page-title,
 .l-region--footer,
 .action-links,
 .l-navigation .l-constrained,
-.view-cod-session-user-presentations,
-.page-node-sessions-proposed .l-content .preface .view-display-id-track_session_filter,
-.page-node-sessions-accepted .l-content .preface .view-display-id-track_session_filter,
-.page-node-sessions-proposed .view-display-id-track_session_summary > .view-content,
-.page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track,
 .webform-confirmation,
 .l-content .node-session,
 .l-content .node-page,
@@ -222,7 +218,7 @@ a:hover {
   width: 94%;
   margin: 0 auto; }
 
-/* line 26, ../sass/components/_content.scss */
+/* line 20, ../sass/components/_content.scss */
 .node--full .field--name-body p, .panelizer-view-mode.node-full .field--name-body p {
   text-indent: 2em; }
   /* line 3, ../sass/abstractions/_dropcaps.scss */
@@ -239,13 +235,13 @@ a:hover {
     padding-right: 10px;
     padding-left: 3px; }
 
-/* line 33, ../sass/components/_content.scss */
+/* line 27, ../sass/components/_content.scss */
 .entity-ticket-registration .field-label {
   display: inline-block;
   width: 30%;
   font-weight: bold; }
 
-/* line 41, ../sass/components/_content.scss */
+/* line 35, ../sass/components/_content.scss */
 .ticket-register-form .already-registered-warning {
   padding: 4px 10px;
   border: 2px dashed #ff920e;
@@ -663,8 +659,18 @@ a:hover {
 .responsive-menus.responsified .responsive-menus-simple {
   background: #3c9dfc; }
 
+/* line 1, ../sass/components/_sessions.scss */
+.view-cod-session-user-presentations,
+.page-node-sessions-proposed .l-content .preface .view-display-id-track_session_filter,
+.page-node-sessions-accepted .l-content .preface .view-display-id-track_session_filter,
+.page-node-sessions-proposed .view-display-id-track_session_summary > .view-content,
+.page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track {
+  max-width: 1100px;
+  width: 94%;
+  margin: 0 auto; }
+
 /* My Sessions page */
-/* line 3, ../sass/components/_sessions.scss */
+/* line 11, ../sass/components/_sessions.scss */
 .view-cod-session-user-presentations .views-exposed-form {
   /* We don't need to filter sessions on this page. */
   display: none; }
