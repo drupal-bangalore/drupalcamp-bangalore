@@ -237,6 +237,11 @@ function og_vocab_uri($og_vocab) {
   $url = array();
 
   $vocab = taxonomy_vocabulary_load($og_vocab->vid);
+  if (!$vocab) {
+    // Return early if we don't have a valid vocabulary object.
+    return $url;
+  }
+
   if (user_access('administer taxonomy')) {
     // URL to taxonomy administration.
     $url = array(
@@ -245,7 +250,7 @@ function og_vocab_uri($og_vocab) {
   }
   else {
     $relation = og_vocab_relation_get($og_vocab->vid);
-    if (og_user_access($relation->group_type, $relation->gid, 'administer taxonomy')) {
+    if ($relation && og_user_access($relation->group_type, $relation->gid, 'administer taxonomy')) {
       // URL to taxonomy administration in the group context.
       $url = array(
         'path' => "group/$relation->group_type/$relation->gid/admin/taxonomy/$vocab->machine_name/edit",
