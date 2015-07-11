@@ -205,11 +205,11 @@ a:hover {
 .l-content > form,
 .l-main .tabs,
 .l-main .messages,
-.l-main .container-inner,
 .page-title,
 .l-region--footer,
 .action-links,
 .l-navigation .l-constrained,
+.view-cod-session-user-presentations,
 .page-node-sessions-proposed .l-content .preface .view-display-id-track_session_filter,
 .page-node-sessions-accepted .l-content .preface .view-display-id-track_session_filter,
 .page-node-sessions-proposed .view-display-id-track_session_summary > .view-content,
@@ -662,6 +662,12 @@ a:hover {
 /* line 66, ../sass/components/_navigation.scss */
 .responsive-menus.responsified .responsive-menus-simple {
   background: #3c9dfc; }
+
+/* My Sessions page */
+/* line 3, ../sass/components/_sessions.scss */
+.view-cod-session-user-presentations .views-exposed-form {
+  /* We don't need to filter sessions on this page. */
+  display: none; }
 
 /* line 13, ../../../../../../../../../usr/local/rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
 .node-type-webform .webform-container-inline:after {

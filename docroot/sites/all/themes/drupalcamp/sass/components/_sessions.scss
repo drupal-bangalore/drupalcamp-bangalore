@@ -1,0 +1,7 @@
+/* My Sessions page */
+.view-cod-session-user-presentations {
+    .views-exposed-form {
+        /* We don't need to filter sessions on this page. */
+        display: none;
+    }
+}
