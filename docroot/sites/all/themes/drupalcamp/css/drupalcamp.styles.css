@@ -75,45 +75,48 @@ legend {
         border: 3px double #fff;
         font-size: 1.2em;
         font-weight: bold; }
-    /* line 41, ../sass/base/_header.scss */
-    .l-header .l-branding .view-drupal-camp-sponsors .view-footer {
-      margin-top: -1.6em;
-      color: #fff;
-      font-size: 1.4em;
-      text-transform: uppercase;
-      text-shadow: 0 0 10px #1A1A1A;
-      position: relative;
-      top: -4em; }
-      @media (min-width: 320px) and (max-width: 667px) {
-        /* line 41, ../sass/base/_header.scss */
-        .l-header .l-branding .view-drupal-camp-sponsors .view-footer {
-          margin-top: 0; } }
-    /* line 53, ../sass/base/_header.scss */
-    .l-header .l-branding .view-drupal-camp-sponsors .view-content {
-      margin: 0 auto; }
-      /* line 55, ../sass/base/_header.scss */
-      .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row {
-        display: inline-block; }
-      /* line 58, ../sass/base/_header.scss */
-      .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-1 {
-        margin-right: 10%; }
+    /* line 40, ../sass/base/_header.scss */
+    .l-header .l-branding .view-drupal-camp-sponsors {
+      background: rgba(255, 255, 255, 0.7); }
+      /* line 42, ../sass/base/_header.scss */
+      .l-header .l-branding .view-drupal-camp-sponsors .view-footer {
+        margin-top: -1.6em;
+        color: #fff;
+        font-size: 1.4em;
+        text-transform: uppercase;
+        text-shadow: 0 0 10px #1A1A1A;
+        position: relative;
+        top: -4em; }
         @media (min-width: 320px) and (max-width: 667px) {
-          /* line 58, ../sass/base/_header.scss */
-          .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-1 {
-            margin-right: 0; } }
-      /* line 64, ../sass/base/_header.scss */
-      .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-2 {
-        margin-left: 10%; }
-        @media (min-width: 320px) and (max-width: 667px) {
-          /* line 64, ../sass/base/_header.scss */
-          .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-2 {
-            margin-left: 0; } }
+          /* line 42, ../sass/base/_header.scss */
+          .l-header .l-branding .view-drupal-camp-sponsors .view-footer {
+            margin-top: 0; } }
+      /* line 54, ../sass/base/_header.scss */
+      .l-header .l-branding .view-drupal-camp-sponsors .view-content {
+        margin: 0 auto; }
+        /* line 56, ../sass/base/_header.scss */
+        .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row {
+          display: inline-block; }
+        /* line 59, ../sass/base/_header.scss */
+        .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-1 {
+          margin-right: 10%; }
+          @media (min-width: 320px) and (max-width: 667px) {
+            /* line 59, ../sass/base/_header.scss */
+            .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-1 {
+              margin-right: 0; } }
+        /* line 65, ../sass/base/_header.scss */
+        .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-2 {
+          margin-left: 10%; }
+          @media (min-width: 320px) and (max-width: 667px) {
+            /* line 65, ../sass/base/_header.scss */
+            .l-header .l-branding .view-drupal-camp-sponsors .view-content .views-row-2 {
+              margin-left: 0; } }
 
-/* line 76, ../sass/base/_header.scss */
+/* line 77, ../sass/base/_header.scss */
 .node-type-event .l-header .l-header-inner {
   background: url(../images/banner-bg.png) center top repeat-x;
   background-size: auto 100%; }
-/* line 81, ../sass/base/_header.scss */
+/* line 82, ../sass/base/_header.scss */
 .node-type-event .l-header .l-branding {
   background: url(../images/banner.jpg) transparent center top no-repeat;
   background-size: auto 100%;
