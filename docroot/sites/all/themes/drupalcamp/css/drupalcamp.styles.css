@@ -253,13 +253,10 @@ a:hover {
 /* line 1, ../sass/components/_footer.scss */
 .l-footer {
   background: #3c9dfc;
-  padding-bottom: 5%;
-  float: left;
   width: 100%;
   color: #ffffff;
-  height: 125px;
   letter-spacing: 1px; }
-  /* line 9, ../sass/components/_footer.scss */
+  /* line 6, ../sass/components/_footer.scss */
   .l-footer .l-region--footer {
     padding: 1%;
     text-align: center; }
@@ -461,6 +458,14 @@ a:hover {
 .view-cod-session-user-presentations .views-exposed-form {
   /* We don't need to filter sessions on this page. */
   display: none; }
+
+/* Session page */
+/* line 22, ../sass/components/_sessions.scss */
+.node-type-session .panel-2col-stacked .center-wrapper .panel-col-first {
+  width: 75%; }
+/* line 25, ../sass/components/_sessions.scss */
+.node-type-session .panel-2col-stacked .center-wrapper .panel-col-last {
+  width: 24.9%; }
 
 /* line 13, ../../../../../../../../../usr/local/rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
 .node-type-webform .webform-container-inline:after {

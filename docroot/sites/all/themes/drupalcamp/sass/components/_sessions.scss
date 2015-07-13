@@ -13,3 +13,18 @@
         display: none;
     }
 }
+
+/* Session page */
+.node-type-session {
+    .panel-2col-stacked {
+        .center-wrapper {
+            // Override the widths of the center wrapper on the session page.
+            .panel-col-first {
+                width: 75%;
+            }
+            .panel-col-last {
+                width: 24.9%;
+            }
+        }
+    }
+}
