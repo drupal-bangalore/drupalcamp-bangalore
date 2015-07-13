@@ -1,133 +1,112 @@
 /* There needs to be a lot of work done on the styles below. */
 
-.front .panelizer-view-mode {
-    .pane-node-body {
+.front {
+    .panelizer-view-mode {
+        .pane-node-body {
+            max-width: $wide;
+            width: 94%;
+            margin: 0 auto;
+
+            p {
+                @include dropcaps;
+            }
+        }
+    }
+
+    .panel-panel.panel-col-top, .panel-panel.panel-col-bottom {
+        width: 100%;
+    }
+
+    .view-drupal-camp-sponsors {
+        &.view-display-id-panel_pane_2 {
+            background: #FFF0CF;
+        }
+        &.view-display-id-panel_pane_3 {
+            background: #d2d2d2;
+        }
+
+        .view-header h3 {
+            font-family: $text-font;
+            font-size: 1.4em;
+            font-weight: normal;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #1A1A1A;
+            text-align: center;
+            color: #fff;
+        }
+
+        .view-content {
+            text-align: center;
+            .views-row {
+                display: inline-block;
+                padding: 0 5px;
+            }
+        }
+    }
+
+    .center-wrapper {
         max-width: $wide;
         width: 94%;
         margin: 0 auto;
 
-        p {
-            @include dropcaps;
-        }
-    }
-}
-
-.panel-panel.panel-col-top {
-    position: relative;
-}
-
-.panel-pane.pane-views-panes.pane-drupal-camp-sponsors-panel-pane-2 {
-    @include background(linear-gradient(#ffd96f 0%, #ffffff 30%, #fff 100%));
-    .view-content {
-        display: table;
-        float: none;
-        margin: 0 auto;
-        padding-top: 2%;
-        width: 75%;
-        @include breakpoint($mob) {
-            width: 61%;
-        }
-        @include breakpoint($tab) {
-            width: 100%;
-            padding-top: 4%;
-            text-align: center;
-            img {
-                width: 75%;
-            }
-        }
-        .views-row {
-            display: table-cell;
-            float: none;
-            width: 154px;
-            margin: 0 auto;
+        .panel-col-first {
+            width: 70%;
             @include breakpoint($mob) {
-                display: inline-block;
-                width: auto;
-                margin-right: 1em;
+                width: 100%;
             }
-            @include breakpoint($tab) {
-                display: inline-block;
-            }
-            &-even{
-                @include breakpoint($mob) {
-                  margin-right: 0;
+            .view-related-articles {
+                .view-content {
+                    .views-row {
+                        //  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+                        padding: 2%;
+                        @include pie-element();
+                        behavior: url(/sites/all/themes/files/js/PIE.htc);
+                        .views-field-title {
+                            text-align: center;
+                            padding-bottom: 10px
+                        }
+                    }
                 }
             }
+            .views-field.views-field-view-node {
+                .field-content {
+                    a {
+                        padding: 1%;
+                        @include background(linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%));
+                        border-radius: 7px;
+                        color: white;
+                        font-size: 12px;
+                        display: inline-block;
+                        @include pie-element();
 
-            img{
-                width: auto;
-                height: auto;
-            }
-        }
-    }
-}
-
-.center-wrapper {
-    max-width: $wide;
-    width: 94%;
-    margin: 0 auto;
-
-    .panel-col-first {
-        width: 70%;
-        @include breakpoint($mob) {
-            width: 100%;
-        }
-        .view-related-articles {
-            .view-content {
-                .views-row {
-                    //  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-                    padding: 2%;
-                    @include pie-element();
-                    behavior: url(/sites/all/themes/files/js/PIE.htc);
-                    .views-field-title {
-                        text-align: center;
-                        padding-bottom: 10px
                     }
                 }
             }
         }
-        .views-field.views-field-view-node {
-            .field-content {
-                a {
-                    padding: 1%;
-                    @include background(linear-gradient(#33cfff 0%, #33b2ff 30%, #3392fe 100%));
-                    border-radius: 7px;
-                    color: white;
-                    font-size: 12px;
-                    display: inline-block;
-                    @include pie-element();
-
+        .panel-col-last {
+            width: 30%;
+            @include breakpoint($mob) {
+                width: 100%;
+                #twitter-widget-0 {
+                    width: 100%;
                 }
             }
+            .sharebuttons {
+                float: none;
+                margin-left: 2%;
+                padding-top: 1%;
+                div {
+                    display: inline-block;
+                    margin-left: 10px;
+                }
+            }
+
+            box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+            @include pie-element();
+            behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc);
+
         }
     }
-    .panel-col-last {
-        width: 30%;
-        @include breakpoint($mob) {
-            width: 100%;
-            #twitter-widget-0 {
-                width: 100%;
-            }
-        }
-        .sharebuttons {
-            float: none;
-            margin-left: 2%;
-            padding-top: 1%;
-            div {
-                display: inline-block;
-                margin-left: 10px;
-            }
-        }
-
-        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-        @include pie-element();
-        behavior: url(/sites/all/themes/files/drupalcamp/js/PIE.htc);
-
-    }
-}
-
-.panel-col-top, .panel-col-bottom {
-    width: 100%;
 }
 
 .field-content {
@@ -139,85 +118,3 @@
         text-align: left;
     }
 }
-
-.silverspon-wrap {
-    padding-top: 20px;
-    margin: 0 auto;
-    text-align: center;
-    width: 100%;
-    .odd, .even {
-        width: 154px;
-        @include breakpoint($mob) {
-            float: left;
-        }
-
-    }
-    &.gold-header, &.silver-header {
-        h3 {
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-    }
-}
-
-/* Silver Sponsors */
-.pane-drupal-camp-sponsors-panel-pane-3 {
-    display: block;
-    min-height: 150px;
-    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZDJkMmQyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODQ4NDg0Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(30%, #d2d2d2), color-stop(100%, #848484));
-    background: -webkit-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-    background: -moz-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-    background: -o-linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-    -pie-background: linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-    background: linear-gradient(#ffffff 0%, #d2d2d2 30%, #848484 100%);
-    behavior: url('/sites/all/themes/drupalcamp/js/PIE.htc');
-    position: relative;
-    @media (min-width: 320px) and (max-width: 640px) {
-        background: none;
-    }
-    .view-content {
-        text-align: center;
-        table-layout: fixed;
-        display: table;
-        float: none;
-        margin: 0 auto;
-        padding-top: 2%;
-        width: 75%;
-        @media (min-width: 320px) and (max-width: 640px) {
-            width: 94%;
-        }
-        .views-row {
-            display: table-cell;
-            padding-left: 20px;
-            @include breakpoint($mob) {
-                float: none;
-                width: 128px;
-                margin: 0 auto;
-                display: inline-block;
-                padding: 0;
-                margin-right: 5px;
-            }
-            @include breakpoint($tab) {
-                display: inline-block;
-            }
-
-            img{
-                width: auto;
-                height: auto;
-            }
-        }
-        .silverspon-wrap {
-            padding: 12px;
-            div {
-                display: inline-block;
-                margin: 0 6px;
-                @media (min-width: 320px) and (max-width: 640px) {
-                    margin-top: 10px;
-                }
-            }
-        }
-    }
-}
-
-/* --- End of Silver Sponsors  -- */
