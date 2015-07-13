@@ -1,0 +1,12 @@
+name = DCB Rules
+description = Misc Rules configuration for DCB
+core = 7.x
+package = DCB Features
+dependencies[] = entity
+dependencies[] = rules
+dependencies[] = slack
+dependencies[] = ticket
+features[features_api][] = api:2
+features[rules_config][] = rules_registration_for_event_while_signup
+features[rules_config][] = rules_send_slack_notification_on_session_submission
+project path = sites/all/modules/features
