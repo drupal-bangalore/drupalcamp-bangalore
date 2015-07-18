@@ -66,11 +66,17 @@
             float: right;
         }
 
+        .views-field-field-speakers {
+            a {
+                color: #000;
+            }
+        }
+
         .views-field-ops {
             font-size: 0.8em;
             font-style: italic;
             a {
-                color: #000;
+                color: #666;
             }
         }
     }
