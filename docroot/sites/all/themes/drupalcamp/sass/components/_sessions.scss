@@ -2,7 +2,9 @@
 .page-node-sessions-proposed .l-content .preface .view-display-id-track_session_filter,
 .page-node-sessions-accepted .l-content .preface .view-display-id-track_session_filter,
 .page-node-sessions-proposed .view-display-id-track_session_summary > .view-content,
-.page-node-sessions-accepted .view-display-id-track_session_summary > .view-content, .view-display-id-panel_sessions_by_track {
+.page-node-sessions-accepted .view-display-id-track_session_summary > .view-content,
+.view-display-id-panel_sessions_by_track,
+.page-node-schedule .panel-display {
     @include constrain_width;
 }
 
@@ -25,6 +27,48 @@
             .panel-col-last {
                 width: 24.9%;
             }
+        }
+    }
+}
+
+/* Schedule Page */
+.page-node-schedule {
+    .view-cod-schedule-content {
+        h3 {
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .views-row {
+            @include clearfix;
+            margin-bottom: 0.5em;
+            padding: 5px;
+            padding-left: 0.5em;
+            &.schedule-item {
+                background-color: #F0F0F0;
+                border-top: 1px dotted #333;
+                border-bottom: 1px dotted #333;
+            }
+            &.views-row-last {
+                margin-bottom: 2em;
+            }
+        }
+
+        .views-field-title {
+            font-family: $header-font;
+            font-size: 1.2em;
+            a {
+                color: #ffb90f;
+            }
+        }
+
+        .views-field-name {
+            float: right;
+        }
+
+        .views-field-ops {
+            font-size: 0.8em;
+            font-style: italic;
         }
     }
 }
