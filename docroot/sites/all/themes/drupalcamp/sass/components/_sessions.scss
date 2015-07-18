@@ -58,7 +58,7 @@
             font-family: $header-font;
             font-size: 1.2em;
             a {
-                color: #ffb90f;
+                color: #3c9dfc;
             }
         }
 
@@ -69,6 +69,9 @@
         .views-field-ops {
             font-size: 0.8em;
             font-style: italic;
+            a {
+                color: #000;
+            }
         }
     }
 }

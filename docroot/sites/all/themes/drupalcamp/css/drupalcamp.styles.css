@@ -498,7 +498,7 @@ a:hover {
   font-size: 1.2em; }
   /* line 60, ../sass/components/_sessions.scss */
   .page-node-schedule .view-cod-schedule-content .views-field-title a {
-    color: #ffb90f; }
+    color: #3c9dfc; }
 /* line 65, ../sass/components/_sessions.scss */
 .page-node-schedule .view-cod-schedule-content .views-field-name {
   float: right; }
@@ -506,6 +506,9 @@ a:hover {
 .page-node-schedule .view-cod-schedule-content .views-field-ops {
   font-size: 0.8em;
   font-style: italic; }
+  /* line 72, ../sass/components/_sessions.scss */
+  .page-node-schedule .view-cod-schedule-content .views-field-ops a {
+    color: #000; }
 
 /* line 13, ../../../../../../../../../usr/local/rvm/gems/ruby-1.9.3-p551@omega.drupalcamp/gems/toolkit-2.9.0/stylesheets/toolkit/_clearfix.scss */
 .node-type-webform .webform-container-inline:after {
