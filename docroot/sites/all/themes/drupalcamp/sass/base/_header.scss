@@ -22,7 +22,7 @@
         min-height: 550px;
 
         .block--dcb-cod {
-            margin-top: -10px;
+            margin-top: 20px;
             @include breakpoint($mob){
               margin-top: 0;
             }
@@ -38,7 +38,14 @@
         }
 
         .view-drupal-camp-sponsors {
+            margin-top: 12px;
+            padding-top: 20px;
             background: rgba(255, 255, 255, 0.7);
+
+            .front & {
+                padding-top: 10px;
+            }
+
             .view-footer {
                 margin-top: -1.6em;
                 color: #fff;
