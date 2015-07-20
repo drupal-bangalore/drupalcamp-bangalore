@@ -19,7 +19,7 @@
     .l-branding {
         background: url(../images/banner.jpg) transparent center bottom no-repeat;
         background-size: auto 100%;
-        min-height: 550px;
+        min-height: 500px;
 
         .block--dcb-cod {
             margin-top: 20px;
@@ -74,6 +74,16 @@
                     @include breakpoint($mob){
                       margin-left: 0;
                     }
+                }
+            }
+
+            .not-front & {
+                .view-footer {
+                    font-size: 1.1em;
+                }
+                img {
+                    height: 100px;
+                    width: auto;
                 }
             }
         }
